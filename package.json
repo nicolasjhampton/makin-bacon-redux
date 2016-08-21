@@ -1,0 +1,22 @@
+{
+  "name": "bacon-project-12",
+  "version": "1.0.0",
+  "description": "A web port of the classic seven degrees game",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "MODE=DEVELOPMENT nodemon",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["movies", "actors", "game"],
+  "author": "nicolasjhampton@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "mongoose": "^4.5.9",
+    "morgan": "^1.7.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.10.2"
+  }
+}
