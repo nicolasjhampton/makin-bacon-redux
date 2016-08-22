@@ -102,6 +102,7 @@ describe('the Card model', function() {
     var testData;
 
     var badData = {
+      type: 'something',
       name: 8784,
       moviedb_id: "Daniel Craig",
       image: 8784,
@@ -123,6 +124,17 @@ describe('the Card model', function() {
         return { name:item.name, moviedb_id:item.moviedb_id, image:item.image };
       });
       done();
+    });
+
+    it('should have a type of either movie or actor', function(done) {
+      testData.type = badData.type;
+      var badCard = new Card(testData);
+      badCard.save(function(err) {
+        expect(err).to.exist;
+        expect(err.name).to.equal('ValidationError');
+        expect(err.errors.type.name).to.equal('ValidatorError');
+        done();
+      });
     });
 
     it('should have a string for a name', function(done) {
@@ -165,6 +177,19 @@ describe('the Card model', function() {
       });
     });
 
+    it('should require a unique moviedb_id', function(done) {
+      var firstCard = new Card(testData);
+      firstCard.save(function(err) {
+        expect(err).to.not.exist;
+        var secondCard = new Card(testData);
+        secondCard.save(function(err2) {
+          expect(err2).to.exist;
+          expect(err2.name).to.equal('MongoError');
+          done();
+        });
+      });
+    });
+
     it('should have a string for an image', function(done) {
       testData.image = badData.image;
       var badCard = new Card(testData);
@@ -174,6 +199,17 @@ describe('the Card model', function() {
 
     it('should require an image', function(done) {
       testData.image = '';
+      var badCard = new Card(testData);
+      badCard.save(function(err) {
+        expect(err).to.exist;
+        expect(err.name).to.equal('ValidationError');
+        expect(err.errors.image.name).to.equal('ValidatorError');
+        done();
+      });
+    });
+
+    it('should require a proper image url', function(done) {
+      testData.image = 'window@george.com';
       var badCard = new Card(testData);
       badCard.save(function(err) {
         expect(err).to.exist;
@@ -214,6 +250,17 @@ describe('the Card model', function() {
 
     it('should require an image for each credit', function(done) {
       testData.credits[0].image = '';
+      var badCard = new Card(testData);
+      badCard.save(function(err) {
+        expect(err).to.exist;
+        expect(err.name).to.equal('ValidationError');
+        expect(err.errors['credits.0.image'].name).to.equal('ValidatorError');
+        done();
+      });
+    });
+
+    it('should require a proper image url for the credit', function(done) {
+      testData.credits[0].image = 'window@george.com';
       var badCard = new Card(testData);
       badCard.save(function(err) {
         expect(err).to.exist;

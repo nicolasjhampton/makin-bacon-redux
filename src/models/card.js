@@ -4,7 +4,19 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var apiObject = require('./api_object.js');
 
-var cardObject = Object.assign({}, { type: String }, apiObject);
+var cardObject = Object.assign(
+  {},
+  {
+    type: {
+      type: String,
+      validate: {
+        validator: function(value) {
+          return /^(actor|movie)$/.test(value);
+        }
+      }
+    }
+  },
+  apiObject);
 
 var CardSchema = new Schema(cardObject);
 

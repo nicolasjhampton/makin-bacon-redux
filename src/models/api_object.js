@@ -7,11 +7,17 @@ module.exports = {
   },
   moviedb_id: {
     type: Number,
+    unique: true,
     required: true
   },
   image: {
     type: String,
-    required: true
+    required: true,
+    validate: {
+      validator: function(value) {
+        return /^\/[a-zA-Z0-9]+\.jpg$/.test(value);
+      }
+    }
   },
   credits: {
     type: [{
@@ -25,7 +31,12 @@ module.exports = {
       },
       image: {
         type: String,
-        required: true
+        required: true,
+        validate: {
+          validator: function(value) {
+            return /^\/[a-zA-Z0-9]+\.jpg$/.test(value);
+          }
+        }
       }
     }]
   }

@@ -157,6 +157,19 @@ describe('the Actor model', function() {
       });
     });
 
+    it('should require a unique moviedb_id', function(done) {
+      var firstActor = new Actor(testData);
+      firstActor.save(function(err) {
+        expect(err).to.not.exist;
+        var secondActor = new Actor(testData);
+        secondActor.save(function(err2) {
+          expect(err2).to.exist;
+          expect(err2.name).to.equal('MongoError');
+          done();
+        });
+      });
+    });
+
     it('should have a string for an image', function(done) {
       testData.image = badData.image;
       var badActor = new Actor(testData);
@@ -166,6 +179,17 @@ describe('the Actor model', function() {
 
     it('should require an image', function(done) {
       testData.image = '';
+      var badActor = new Actor(testData);
+      badActor.save(function(err) {
+        expect(err).to.exist;
+        expect(err.name).to.equal('ValidationError');
+        expect(err.errors.image.name).to.equal('ValidatorError');
+        done();
+      });
+    });
+
+    it('should require a proper image url', function(done) {
+      testData.image = 'window@george.com';
       var badActor = new Actor(testData);
       badActor.save(function(err) {
         expect(err).to.exist;
@@ -206,6 +230,17 @@ describe('the Actor model', function() {
 
     it('should require an image for each credit', function(done) {
       testData.credits[0].image = '';
+      var badActor = new Actor(testData);
+      badActor.save(function(err) {
+        expect(err).to.exist;
+        expect(err.name).to.equal('ValidationError');
+        expect(err.errors['credits.0.image'].name).to.equal('ValidatorError');
+        done();
+      });
+    });
+
+    it('should require a valid image url for the credit', function(done) {
+      testData.credits[0].image = 'window@george.com';
       var badActor = new Actor(testData);
       badActor.save(function(err) {
         expect(err).to.exist;
