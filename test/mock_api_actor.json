@@ -1,0 +1,585 @@
+{
+    "adult": false,
+    "also_known_as": [
+        "다니엘 크레이그"
+    ],
+    "biography": "Daniel Wroughton Craig (born 2 March 1968) is an English actor, best known for playing British secret agent James Bond since 2006. Craig is an alumnus of the National Youth Theatre and graduated from the Guildhall School of Music and Drama in London and began his career on stage. His early on screen appearances were in the films Elizabeth, The Power of One and A Kid in King Arthur's Court, and on Sharpe's Eagle and Zorro in television. His appearances in the British films Love Is the Devil, The Trench and Some Voices attracted the industry's attention, leading to roles in bigger productions such as Lara Croft: Tomb Raider, Road to Perdition, Layer Cake and Munich.",
+    "birthday": "1968-03-02",
+    "deathday": "",
+    "gender": 2,
+    "homepage": "",
+    "id": 8784,
+    "imdb_id": "nm0185819",
+    "name": "Daniel Craig",
+    "place_of_birth": "Chester, Cheshire, England, UK",
+    "popularity": 19.508046,
+    "profile_path": "/rFuETZeyOAfIqBahOObF7Soq5Dh.jpg",
+    "movie_credits": {
+        "cast": [
+            {
+                "adult": false,
+                "character": "Alex",
+                "credit_id": "52fe432ac3a36847f803f3a1",
+                "id": 1995,
+                "original_title": "Lara Croft: Tomb Raider",
+                "poster_path": "/m6aodY7SrvlTRiUFkxClaNAIQT.jpg",
+                "release_date": "2001-06-11",
+                "title": "Lara Croft: Tomb Raider"
+            },
+            {
+                "adult": false,
+                "character": "Lord Asriel",
+                "credit_id": "52fe4348c3a36847f8048655",
+                "id": 2268,
+                "original_title": "The Golden Compass",
+                "poster_path": "/mOF2xK2xDgbpOCPgXreM4vfw9dC.jpg",
+                "release_date": "2007-12-04",
+                "title": "The Golden Compass"
+            },
+            {
+                "adult": false,
+                "character": "Connor Rooney",
+                "credit_id": "52fe43afc3a36847f80678d7",
+                "id": 4147,
+                "original_title": "Road to Perdition",
+                "poster_path": "/9C3VMy9HZ1VBhVHTadqg7pFh2ac.jpg",
+                "release_date": "2002-09-05",
+                "title": "Road to Perdition"
+            },
+            {
+                "adult": false,
+                "character": "James Bond",
+                "credit_id": "52fe43b29251416c7501aa5d",
+                "id": 10764,
+                "original_title": "Quantum of Solace",
+                "poster_path": "/6mlNx0Jiqhg3D7NlANT9pidsgPJ.jpg",
+                "release_date": "2008-10-30",
+                "title": "Quantum of Solace"
+            },
+            {
+                "adult": false,
+                "character": "John Ballard",
+                "credit_id": "52fe43c8c3a36847f806f2e5",
+                "id": 4518,
+                "original_title": "Elizabeth",
+                "poster_path": "/y4ynYOy205LorkOIN6hs6DgJ1xa.jpg",
+                "release_date": "1998-09-13",
+                "title": "Elizabeth"
+            },
+            {
+                "adult": false,
+                "character": "XXXX",
+                "credit_id": "52fe43ddc3a36847f8074f57",
+                "id": 4836,
+                "original_title": "Layer Cake",
+                "poster_path": "/1CwSw9Fw4vMyohcMdmWQKldkML4.jpg",
+                "release_date": "2004-09-30",
+                "title": "Layer Cake"
+            },
+            {
+                "adult": false,
+                "character": "Ben",
+                "credit_id": "52fe43dec3a36847f80753c3",
+                "id": 4858,
+                "original_title": "The Invasion",
+                "poster_path": "/bhuG1ijKGuoEM3rwBijy2ZH83q1.jpg",
+                "release_date": "2007-08-17",
+                "title": "The Invasion"
+            },
+            {
+                "adult": false,
+                "character": "George Dyer",
+                "credit_id": "52fe43eac3a36847f8078025",
+                "id": 4975,
+                "original_title": "Love Is the Devil: Study for a Portrait of Francis Bacon",
+                "poster_path": "/wRYFf3o6JP4ezL5Ci8yF8m7EHf6.jpg",
+                "release_date": "1998-09-16",
+                "title": "Love Is the Devil: Study for a Portrait of Francis Bacon"
+            },
+            {
+                "adult": false,
+                "character": "Declan Fielding",
+                "credit_id": "52fe4414c3a368484e00e3b5",
+                "id": 21311,
+                "original_title": "I Dreamed of Africa",
+                "poster_path": "/7ryJpWMbI9YerAYI6dvidGZfOzp.jpg",
+                "release_date": "2000-05-05",
+                "title": "I Dreamed of Africa"
+            },
+            {
+                "adult": false,
+                "character": "Prof. Fluke Kelso",
+                "credit_id": "52fe447e9251416c91012aa7",
+                "id": 31446,
+                "original_title": "Archangel",
+                "poster_path": "/6HMJLStFTjjX5L83IRyOjStbKv8.jpg",
+                "release_date": "2005-03-18",
+                "title": "Archangel"
+            },
+            {
+                "adult": false,
+                "character": "Barthélémy Karas",
+                "credit_id": "52fe44f1c3a36847f80b332d",
+                "id": 9389,
+                "original_title": "Renaissance",
+                "poster_path": "/qLCgkxWisyDBLLQWaANRiaMG6wn.jpg",
+                "release_date": "2006-03-16",
+                "title": "Renaissance"
+            },
+            {
+                "adult": false,
+                "character": "Joe",
+                "credit_id": "52fe44f1c3a36847f80b343b",
+                "id": 9391,
+                "original_title": "Enduring Love",
+                "poster_path": "/obAF46VQsGmQg0hUMZeciFW0KUm.jpg",
+                "release_date": "2004-11-26",
+                "title": "Enduring Love"
+            },
+            {
+                "adult": false,
+                "character": "Rudy Mackenzie",
+                "credit_id": "52fe4518c3a36847f80bc3bb",
+                "id": 9667,
+                "original_title": "The Jacket",
+                "poster_path": "/ts5hSSpgHEcPFpdfk6gmLLgx5k4.jpg",
+                "release_date": "2005-03-04",
+                "title": "The Jacket"
+            },
+            {
+                "adult": false,
+                "character": "Perry Smith",
+                "credit_id": "52fe4519c3a36847f80bc5c9",
+                "id": 9672,
+                "original_title": "Infamous",
+                "poster_path": "/iy89EscyCxdHDjA3EXjUiRDG4cj.jpg",
+                "release_date": "2006-11-16",
+                "title": "Infamous"
+            },
+            {
+                "adult": false,
+                "character": "Sgt. Telford Winter",
+                "credit_id": "52fe452ec3a368484e04cead",
+                "id": 27123,
+                "original_title": "The Trench",
+                "poster_path": "/yu19Toc54a5jvwd1B59519CSlVx.jpg",
+                "release_date": "1999-09-17",
+                "title": "The Trench"
+            },
+            {
+                "adult": false,
+                "character": "Ted Hughes",
+                "credit_id": "52fe4581c3a368484e05f2bd",
+                "id": 28200,
+                "original_title": "Sylvia",
+                "poster_path": "/4sqvB7yoDRA3JFtuu8iLQtYhNL5.jpg",
+                "release_date": "2003-10-17",
+                "title": "Sylvia"
+            },
+            {
+                "adult": false,
+                "character": "Joe Scott",
+                "credit_id": "52fe45a19251416c7505d0c5",
+                "id": 13793,
+                "original_title": "Flashbacks of a Fool",
+                "poster_path": "/pehFi5sKgSYKoBKb4XpfdK26dzZ.jpg",
+                "release_date": "2008-10-17",
+                "title": "Flashbacks of a Fool"
+            },
+            {
+                "adult": false,
+                "character": "Tuvia Bielski",
+                "credit_id": "52fe45a59251416c7505d841",
+                "id": 13813,
+                "original_title": "Defiance",
+                "poster_path": "/3Iu1jCiWxeLJZeNczzRwMi9OWPk.jpg",
+                "release_date": "2008-12-31",
+                "title": "Defiance"
+            },
+            {
+                "adult": false,
+                "character": "Sergeant Botha",
+                "credit_id": "52fe45a99251416c7505e1ff",
+                "id": 13823,
+                "original_title": "The Power of One",
+                "poster_path": "/so9bcuzOJKMYQJETyOCLF5xH1LN.jpg",
+                "release_date": "1992-09-17",
+                "title": "The Power of One"
+            },
+            {
+                "adult": false,
+                "character": "James Bond",
+                "credit_id": "52fe45f29251416c91043e59",
+                "id": 36557,
+                "original_title": "Casino Royale",
+                "poster_path": "/zlWBxz2pTA9p45kUTrI8AQiKrHm.jpg",
+                "release_date": "2006-11-14",
+                "title": "Casino Royale"
+            },
+            {
+                "adult": false,
+                "character": "Master Kane",
+                "credit_id": "52fe462a9251416c9104b621",
+                "id": 37108,
+                "original_title": "A Kid in King Arthur's Court",
+                "poster_path": "/iklPPdF1TQFPmRyVu0SH0yF1gdt.jpg",
+                "release_date": "1995-08-11",
+                "title": "A Kid in King Arthur's Court"
+            },
+            {
+                "adult": false,
+                "character": "James Bond",
+                "credit_id": "52fe46689251416c91053743",
+                "id": 37724,
+                "original_title": "Skyfall",
+                "poster_path": "/lQCkPLDxFONmgzrWLvq085v1g2d.jpg",
+                "release_date": "2012-10-25",
+                "title": "Skyfall"
+            },
+            {
+                "adult": false,
+                "character": "Mikael Blomkvist",
+                "credit_id": "52fe4718c3a368484e0b4c4d",
+                "id": 65754,
+                "original_title": "The Girl with the Dragon Tattoo",
+                "poster_path": "/voxRWFTtagLiqnJQs9tWQLB0MN.jpg",
+                "release_date": "2011-12-14",
+                "title": "The Girl with the Dragon Tattoo"
+            },
+            {
+                "adult": false,
+                "character": "Sakharine / Red Rackham (voice)",
+                "credit_id": "52fe47349251416c75091437",
+                "id": 17578,
+                "original_title": "The Adventures of Tintin",
+                "poster_path": "/bDE10SyVAFEBrwI6qettdCHQjT.jpg",
+                "release_date": "2011-10-25",
+                "title": "The Adventures of Tintin"
+            },
+            {
+                "adult": false,
+                "character": "Ronald Blanche",
+                "credit_id": "52fe475dc3a368484e0c3201",
+                "id": 67252,
+                "original_title": "Hotel Splendide",
+                "poster_path": "/wMYQBrIXYOoFOLi4vbtzSGCA8I1.jpg",
+                "release_date": "2000-09-21",
+                "title": "Hotel Splendide"
+            },
+            {
+                "adult": false,
+                "character": "Jake Lonergan",
+                "credit_id": "52fe47abc3a36847f8141e29",
+                "id": 49849,
+                "original_title": "Cowboys & Aliens",
+                "poster_path": "/tXEHvxU315Yu7bEaMMRcpDpW6RI.jpg",
+                "release_date": "2011-07-29",
+                "title": "Cowboys & Aliens"
+            },
+            {
+                "adult": false,
+                "character": "Will Atenton",
+                "credit_id": "52fe47d4c3a368484e0dbd23",
+                "id": 69668,
+                "original_title": "Dream House",
+                "poster_path": "/8MDE7wXp7gxf61yRDptSLowU2e6.jpg",
+                "release_date": "2011-09-30",
+                "title": "Dream House"
+            },
+            {
+                "adult": false,
+                "character": "Werner Heisenberg",
+                "credit_id": "52fe47dec3a36847f814cab1",
+                "id": 51016,
+                "original_title": "Copenhagen",
+                "poster_path": "/fMHqBipUbrr4spnKt5TmSA6LOu8.jpg",
+                "release_date": "2002-09-27",
+                "title": "Copenhagen"
+            },
+            {
+                "adult": false,
+                "character": "Ray",
+                "credit_id": "52fe48ab9251416c91094771",
+                "id": 83581,
+                "original_title": "Some Voices",
+                "poster_path": "/7tvCuw41oIuAjzpsDsKXYTd5Bty.jpg",
+                "release_date": "2000-08-25",
+                "title": "Some Voices"
+            },
+            {
+                "adult": false,
+                "character": "James Lynchehaun",
+                "credit_id": "52fe48bdc3a36847f8176ee3",
+                "id": 55143,
+                "original_title": "Love and Rage",
+                "poster_path": "/bG6ZUtL8Ce0ldfnVcXeRUWujHZI.jpg",
+                "release_date": "2000-02-09",
+                "title": "Love and Rage"
+            },
+            {
+                "adult": false,
+                "character": "Narrator (voice)",
+                "credit_id": "52fe490ec3a368484e1185c1",
+                "id": 75720,
+                "original_title": "One Life",
+                "poster_path": "/aC1KuZnVVvMUA4lFGPtcuTY3Gj6.jpg",
+                "release_date": "2011-07-19",
+                "title": "One Life"
+            },
+            {
+                "adult": false,
+                "character": "Darren",
+                "credit_id": "52fe4985c3a36847f819eb1d",
+                "id": 59210,
+                "original_title": "The Mother",
+                "poster_path": "/8GV8AjbqKIN0q5vuEwYXUtk6UdM.jpg",
+                "release_date": "2003-01-01",
+                "title": "The Mother"
+            },
+            {
+                "adult": false,
+                "character": "Guy Crouchback",
+                "credit_id": "52fe4a009251416c910bff6b",
+                "id": 88726,
+                "original_title": "Sword of Honour",
+                "poster_path": "/bmIXD425V316HqPfXhWIExmRnEt.jpg",
+                "release_date": "2001-01-02",
+                "title": "Sword of Honour"
+            },
+            {
+                "adult": false,
+                "character": "John MacHale",
+                "credit_id": "52fe4a169251416c750dd371",
+                "id": 98544,
+                "original_title": "Obsession",
+                "poster_path": "/nii1GQ2F80Chn7gqe7aNs6KBvAF.jpg",
+                "release_date": "1997-08-28",
+                "title": "Obsession"
+            },
+            {
+                "adult": false,
+                "character": "Guillaumet",
+                "credit_id": "52fe4ab6c3a368484e162f7d",
+                "id": 124844,
+                "original_title": "Saint-Ex",
+                "poster_path": "/h70oUXmTFwbVKwogCipFu4iaj4W.jpg",
+                "release_date": "1996-11-17",
+                "title": "Saint-Ex"
+            },
+            {
+                "adult": false,
+                "character": "Matt Kearney",
+                "credit_id": "52fe4ac5c3a368484e165f93",
+                "id": 125409,
+                "original_title": "Kiss And Tell",
+                "poster_path": "/rERx88A0WvDnejxlB3iIVKwZWye.jpg",
+                "release_date": "1996-11-09",
+                "title": "Kiss And Tell"
+            },
+            {
+                "adult": false,
+                "character": "D.S. Andy McLoughlin",
+                "credit_id": "52fe4b739251416c910dacbf",
+                "id": 155055,
+                "original_title": "The Ice House",
+                "poster_path": "/iBStpkU7C9cYEuMYn458mOWJpwx.jpg",
+                "release_date": "1997-04-04",
+                "title": "The Ice House"
+            },
+            {
+                "adult": false,
+                "character": "Steve",
+                "credit_id": "52fe425dc3a36847f8018a85",
+                "id": 612,
+                "original_title": "Munich",
+                "poster_path": "/3pnsX1egUElYvgmAcCqYvXVOY9O.jpg",
+                "release_date": "2005-12-22",
+                "title": "Munich"
+            },
+            {
+                "adult": false,
+                "character": "Himself",
+                "credit_id": "52fe4c0ac3a368484e1a3cc7",
+                "id": 135921,
+                "original_title": "Everything or Nothing: The Untold Story of 007",
+                "poster_path": "/r46x7gHKWsdTc47RJKRUsdboldY.jpg",
+                "release_date": "2012-10-05",
+                "title": "Everything or Nothing: The Untold Story of 007"
+            },
+            {
+                "adult": false,
+                "character": "James Bond",
+                "credit_id": "52fe4d22c3a368484e1d8d6b",
+                "id": 206647,
+                "original_title": "Spectre",
+                "poster_path": "/hE24GYddaxB9MVZl1CaiI86M3kp.jpg",
+                "release_date": "2015-10-26",
+                "title": "Spectre"
+            },
+            {
+                "adult": false,
+                "character": "James Bond",
+                "credit_id": "52fe4d389251416c75133f1b",
+                "id": 188454,
+                "original_title": "Happy and Glorious",
+                "poster_path": "/6BzOSayWxGP2XU45MoXh92rFQE5.jpg",
+                "release_date": "2012-07-26",
+                "title": "Happy and Glorious"
+            },
+            {
+                "adult": false,
+                "character": "",
+                "credit_id": "52fe4d8fc3a368484e1effa1",
+                "id": 211191,
+                "original_title": "Our Friends in the North",
+                "poster_path": "/1hAufCr09hWwpbKYrLDw1YVYaYH.jpg",
+                "release_date": "1996-01-13",
+                "title": "Our Friends in the North"
+            },
+            {
+                "adult": false,
+                "character": "James 'Jemmy' Seagrave",
+                "credit_id": "53a3c864c3a3682a4500078c",
+                "id": 174271,
+                "original_title": "The Fortunes and Misfortunes of Moll Flanders",
+                "poster_path": "/3axe2JK3OM9zwYmKisUYY7JmuPD.jpg",
+                "release_date": "1996-10-13",
+                "title": "The Fortunes and Misfortunes of Moll Flanders"
+            },
+            {
+                "adult": false,
+                "character": "Lieutenant Guth, Schatz's replacement",
+                "credit_id": "53d69d6cc3a3686b8b006340",
+                "id": 284129,
+                "original_title": "Genghis Cohn",
+                "poster_path": "/qrtEZ92rLjfhd8ABNR5R6Iw2JVO.jpg",
+                "release_date": "1994-03-02",
+                "title": "Genghis Cohn"
+            },
+            {
+                "adult": false,
+                "character": "",
+                "credit_id": "53dc5ae60e0a26482500140d",
+                "id": 284747,
+                "original_title": "The Organ Grinder's Monkey",
+                "poster_path": "/7ABQLbKPYRlMcZfFKpeN0lDSPHT.jpg",
+                "release_date": "2011-06-06",
+                "title": "The Organ Grinder's Monkey"
+            },
+            {
+                "adult": false,
+                "character": "",
+                "credit_id": "54d68ce2c3a3683b8f002ca7",
+                "id": 79591,
+                "original_title": "Ten Minutes Older: The Cello",
+                "poster_path": "/kaZjKHXsZbggJt2Xb7jYVtedhBk.jpg",
+                "release_date": "2002-09-03",
+                "title": "Ten Minutes Older: The Cello"
+            },
+            {
+                "adult": false,
+                "character": "James Bond",
+                "credit_id": "5517b8f592514115000003cc",
+                "id": 123024,
+                "original_title": "London 2012 Olympic Opening Ceremony: Isles of Wonder",
+                "poster_path": "/8YUgNGlEjczGx80pPLSdK13ZIa3.jpg",
+                "release_date": "2012-07-27",
+                "title": "London 2012 Olympic Opening Ceremony: Isles of Wonder"
+            },
+            {
+                "adult": false,
+                "character": "",
+                "credit_id": "5622afbac3a36868680061b6",
+                "id": 364218,
+                "original_title": "The Hunger. El Lado Salvaje del Deseo",
+                "poster_path": "/fT37WdPwMpohxanWDY6cDcmwysC.jpg",
+                "release_date": "1997-05-15",
+                "title": "The Hunger. El Lado Salvaje del Deseo"
+            },
+            {
+                "adult": false,
+                "character": "Maxwell's Fan",
+                "credit_id": "5651df46925141123900205d",
+                "id": 369601,
+                "original_title": "Burst",
+                "poster_path": null,
+                "release_date": "2004-01-01",
+                "title": "Burst"
+            },
+            {
+                "adult": false,
+                "character": "James Bond",
+                "credit_id": "5657775bc3a3681970009dfa",
+                "id": 370172,
+                "original_title": "Bond 25",
+                "poster_path": null,
+                "release_date": "2018-01-01",
+                "title": "Bond 25"
+            },
+            {
+                "adult": false,
+                "character": "Stormtrooper",
+                "credit_id": "5675425792514179d40026b6",
+                "id": 140607,
+                "original_title": "Star Wars: The Force Awakens",
+                "poster_path": "/weUSwMdQIa3NaXVzwUoIIcAi85d.jpg",
+                "release_date": "2015-12-15",
+                "title": "Star Wars: The Force Awakens"
+            },
+            {
+                "adult": false,
+                "character": "US sergeant",
+                "credit_id": "57423b7b9251411dc8000190",
+                "id": 41508,
+                "original_title": "Sorstalanság",
+                "poster_path": "/lKPlz8kavNZfBw1UILSAhPU0NPL.jpg",
+                "release_date": "2005-02-10",
+                "title": "Fateless"
+            },
+            {
+                "adult": false,
+                "character": "",
+                "credit_id": "574f36a2c3a36858c20001ba",
+                "id": 399170,
+                "original_title": "Logan Lucky",
+                "poster_path": null,
+                "release_date": "2017-12-31",
+                "title": "Logan Lucky"
+            },
+            {
+                "adult": false,
+                "character": "Ollie",
+                "credit_id": "579d1cf5c3a36837b20018a6",
+                "id": 408873,
+                "original_title": "Kings",
+                "poster_path": null,
+                "release_date": "2017-12-30",
+                "title": "Kings"
+            }
+        ],
+        "crew": [
+            {
+                "adult": false,
+                "credit_id": "52fe45a19251416c7505d149",
+                "department": "Production",
+                "id": 13793,
+                "job": "Executive Producer",
+                "original_title": "Flashbacks of a Fool",
+                "poster_path": "/pehFi5sKgSYKoBKb4XpfdK26dzZ.jpg",
+                "release_date": "2008-10-17",
+                "title": "Flashbacks of a Fool"
+            },
+            {
+                "adult": false,
+                "credit_id": "5720e370c3a368117e00045b",
+                "department": "Production",
+                "id": 206647,
+                "job": "Co-Producer",
+                "original_title": "Spectre",
+                "poster_path": "/hE24GYddaxB9MVZl1CaiI86M3kp.jpg",
+                "release_date": "2015-10-26",
+                "title": "Spectre"
+            }
+        ]
+    }
+}

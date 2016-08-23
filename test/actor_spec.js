@@ -79,6 +79,15 @@ describe('the Actor model', function() {
       expect(testActor.image).to.equal('/rFuETZeyOAfIqBahOObF7Soq5Dh.jpg');
     });
 
+    it('should replace N/A images with a stock unknown image', function(done) {
+      var blankData = Object.assign({}, data, { image: 'N/A' });
+      Actor.create(blankData, function(err, actor) {
+        expect(err).to.not.exist;
+        expect(actor.image).to.equal('https://upload.wikimedia.org/wikipedia/commons/4/44/Question_mark_(black_on_white).png');
+        done();
+      });
+    });
+
     it('should have the correct credits', function() {
       expect(testActor.credits).to.be.a('Array');
       expect(testActor.credits[0].moviedb_id).to.equal(206647);

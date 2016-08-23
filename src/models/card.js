@@ -2,27 +2,26 @@
 
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var apiObject = require('./api_object.js');
+var apiHelpers = require('./api_object.js');
+var apiObject = apiHelpers.apiObject;
+var creditsCheck = apiHelpers.creditsCheck;
 
-var cardObject = Object.assign(
-  {},
-  {
-    type: {
-      type: String,
-      validate: {
-        validator: function(value) {
-          return /^(actor|movie)$/.test(value);
-        }
+var cardDetails = {
+  type: {
+    type: String,
+    validate: {
+      validator: function(value) {
+        return /^(actor|movie)$/.test(value);
       }
     }
-  },
-  apiObject);
+  }
+};
+
+var cardObject = Object.assign({}, cardDetails, apiObject);
 
 var CardSchema = new Schema(cardObject);
 
-CardSchema.path('credits').validate(function(credits) {
-  return credits.length > 0;
-});
+CardSchema.path('credits').validate(creditsCheck);
 
 var Card = mongoose.model('Card', CardSchema);
 

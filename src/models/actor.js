@@ -2,13 +2,16 @@
 
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var apiObject = require('./api_object.js');
+var apiHelpers = require('./api_object.js');
+var apiObject = apiHelpers.apiObject;
+var creditsCheck = apiHelpers.creditsCheck;
+var preSave = apiHelpers.preSave;
 
 var ActorSchema = new Schema(apiObject);
 
-ActorSchema.path('credits').validate(function(credits) {
-  return credits.length > 0;
-});
+ActorSchema.pre('save', preSave);
+
+ActorSchema.path('credits').validate(creditsCheck);
 
 var Actor = mongoose.model('Actor', ActorSchema);
 

@@ -78,6 +78,15 @@ describe('the Movie model', function() {
       expect(testMovie.image).to.equal('/hE24GYddaxB9MVZl1CaiI86M3kp.jpg');
     });
 
+    it('should replace N/A images with a stock unknown image', function(done) {
+      var blankData = Object.assign({}, data, { image: 'N/A' });
+      Movie.create(blankData, function(err, movie) {
+        expect(err).to.not.exist;
+        expect(movie.image).to.equal('https://upload.wikimedia.org/wikipedia/commons/4/44/Question_mark_(black_on_white).png');
+        done();
+      });
+    });
+
     it('should have the correct credits', function() {
       expect(testMovie.credits).to.be.a('Array');
       expect(testMovie.credits[0].moviedb_id).to.equal(8784);
