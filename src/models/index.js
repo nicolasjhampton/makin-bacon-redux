@@ -4,14 +4,14 @@ var mongoose = require('mongoose');
 // Use native promises
 mongoose.Promise = global.Promise;
 
-
+var Actor = require('./actor.js');
 var Movie = require('./movie.js');
 var Card = require('./card.js');
-var Actor = require('./actor.js');
-
+var Game = require('./game.js');
 
 module.exports = {
-  Card: Card,
-  Actor: Actor,
-  Movie: Movie
+  Card,
+  Actor,
+  Movie,
+  Game
 };

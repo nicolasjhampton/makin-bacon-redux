@@ -7,7 +7,31 @@ var apiObject = apiHelpers.apiObject;
 var creditsCheck = apiHelpers.creditsCheck;
 var preSave = apiHelpers.preSave;
 
-var ActorSchema = new Schema(apiObject);
+var creditsObject = {
+  credits: {
+    type: [{
+      name: {
+        type: String,
+        required: true
+      },
+      moviedb_id: {
+        type: Number,
+        required: true
+      },
+      image: {
+        type: String
+      }
+    }]
+  }
+};
+
+var apiCopy = Object.assign({}, apiObject);
+
+apiCopy.type = { type: String, default: 'actor' };
+
+var ActorObject = Object.assign({}, { entry: apiCopy }, creditsObject);
+
+var ActorSchema = new Schema(ActorObject);
 
 ActorSchema.pre('save', preSave);
 

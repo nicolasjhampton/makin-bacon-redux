@@ -7,7 +7,8 @@
     "start": "MODE=DEVELOPMENT nodemon",
     "createrepo": "curl -u 'nicolasjhampton' https://api.github.com/user/repos -d '{ \"name\": \"makin-bacon-redux\" }'",
     "addremote": "git remote add origin git@github.com:nicolasjhampton/makin-bacon-redux.git",
-    "test": "REPORTER=nyan MODE=TESTING mocha"
+    "tests": "mocha",
+    "test": "MODE=TESTING npm run tests"
   },
   "keywords": [
     "movies",

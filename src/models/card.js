@@ -10,19 +10,20 @@ var cardDetails = {
   type: {
     type: String,
     validate: {
-      validator: function(value) {
-        return /^(actor|movie)$/.test(value);
-      }
+      validator: value => /^(actor|movie)$/.test(value)
     }
   }
 };
 
-var cardObject = Object.assign({}, cardDetails, apiObject);
+
+var mid = Object.assign({}, cardDetails, apiObject);
+
+var cardObject = { entry: mid };
 
 var CardSchema = new Schema(cardObject);
 
-CardSchema.path('credits').validate(creditsCheck);
+// CardSchema.path('credits').validate(creditsCheck);
 
-var Card = mongoose.model('Card', CardSchema);
+// var Card = mongoose.model('Card', CardSchema);
 
-module.exports = Card;
+module.exports = CardSchema;

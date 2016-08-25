@@ -8,12 +8,6 @@ var apiToObject = apiHelpers.apiToObject;
 
 describe('Middleware', function() {
 
-  function next(req, res) {
-    return function() {
-      return { req, res };
-    }
-  }
-
   describe('apiToObject', function() {
     var req;
     var res;
@@ -25,61 +19,54 @@ describe('Middleware', function() {
     });
 
     it('returns an object with the correct properties (actor)', function(done) {
-      req.apiObject = mockActor;
-      var result = apiToObject(req, res, next(req, res));
-      expect(result.req.actor).to.have.property('name');
-      expect(result.req.actor).to.have.property('moviedb_id');
-      expect(result.req.actor).to.have.property('image');
-      expect(result.req.actor).to.have.property('credits');
+      var result = apiToObject(mockActor);
+      expect(result.entry).to.have.property('name');
+      expect(result.entry).to.have.property('moviedb_id');
+      expect(result.entry).to.have.property('image');
+      expect(result).to.have.property('credits');
       done();
     });
 
     it('returns an object with the correct properties (movie)', function(done) {
-      req.apiObject = mockMovie;
-      var result = apiToObject(req, res, next(req, res));
-      expect(result.req.movie).to.have.property('name');
-      expect(result.req.movie).to.have.property('moviedb_id');
-      expect(result.req.movie).to.have.property('image');
-      expect(result.req.movie).to.have.property('credits');
+      var result = apiToObject(mockMovie);
+      expect(result.entry).to.have.property('name');
+      expect(result.entry).to.have.property('moviedb_id');
+      expect(result.entry).to.have.property('image');
+      expect(result).to.have.property('credits');
       done();
     });
 
     it('sets each property to the correct value (actor)', function(done) {
-      req.apiObject = mockActor;
-      var result = apiToObject(req, res, next(req, res));
-      expect(result.req.actor.name).to.equal(mockActor.name);
-      expect(result.req.actor.moviedb_id).to.equal(mockActor.id);
-      expect(result.req.actor.image).to.equal(mockActor.profile_path);
+      var result = apiToObject(mockActor);
+      expect(result.entry.name).to.equal(mockActor.name);
+      expect(result.entry.moviedb_id).to.equal(mockActor.id);
+      expect(result.entry.image).to.equal(mockActor.profile_path);
       done();
     });
 
     it('sets each property to the correct value (movie)', function(done) {
-      req.apiObject = mockMovie;
-      var result = apiToObject(req, res, next(req, res));
-      expect(result.req.movie.name).to.equal(mockMovie.title);
-      expect(result.req.movie.moviedb_id).to.equal(mockMovie.id);
-      expect(result.req.movie.image).to.equal(mockMovie.poster_path);
+      var result = apiToObject(mockMovie);
+      expect(result.entry.name).to.equal(mockMovie.title);
+      expect(result.entry.moviedb_id).to.equal(mockMovie.id);
+      expect(result.entry.image).to.equal(mockMovie.poster_path);
       done();
     });
 
     it('sets the credits as an array (movie)', function(done) {
-      req.apiObject = mockMovie;
-      var result = apiToObject(req, res, next(req, res));
-      expect(result.req.movie.credits).to.be.a('Array');
+      var result = apiToObject(mockMovie);
+      expect(result.credits).to.be.a('Array');
       done();
     });
 
     it('sets the credits as an array (actor)', function(done) {
-      req.apiObject = mockActor;
-      var result = apiToObject(req, res, next(req, res));
-      expect(result.req.actor.credits).to.be.a('Array');
+      var result = apiToObject(mockActor);
+      expect(result.credits).to.be.a('Array');
       done();
     });
 
     it('sets the credits array to the proper values (movie)', function(done) {
-      req.apiObject = mockMovie;
-      var result = apiToObject(req, res, next(req, res));
-      result.req.movie.credits.forEach(function(credit, index) {
+      var result = apiToObject(mockMovie);
+      result.credits.forEach(function(credit, index) {
         expect(credit.moviedb_id).to.equal(mockMovie.credits.cast[index].id);
         expect(credit.name).to.equal(mockMovie.credits.cast[index].name);
         expect(credit.image).to.equal(mockMovie.credits.cast[index].profile_path);
@@ -88,9 +75,8 @@ describe('Middleware', function() {
     });
 
     it('sets the credits array to the proper values (actor)', function(done) {
-      req.apiObject = mockActor;
-      var result = apiToObject(req, res, next(req, res));
-      result.req.actor.credits.forEach(function(credit, index) {
+      var result = apiToObject(mockActor);
+      result.credits.forEach(function(credit, index) {
         expect(credit.moviedb_id).to.equal(mockActor.movie_credits.cast[index].id);
         expect(credit.name).to.equal(mockActor.movie_credits.cast[index].title);
         expect(credit.image).to.equal(mockActor.movie_credits.cast[index].poster_path);
