@@ -19,10 +19,12 @@ var GameSchema = new Schema({
 
 GameSchema.path('stack').validate(function(stack, callback) {
   // this gets complicated because of the unshift
+
+  var isLengthEven = (stack.length % 2 === 0);
+
   var valid = stack.every(function(card, index) {
 
     var indexIsOdd = (index % 2 !== 0);
-    var isLengthEven = (stack.length % 2 == 0);
 
     if(card.entry.type == 'actor') {
       return isLengthEven ? indexIsOdd : !indexIsOdd;
