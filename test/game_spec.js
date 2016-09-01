@@ -8,9 +8,11 @@ var Game = require('../src/models').Game;
 
 var Movie = require('../src/models').Movie;
 var Actor = require('../src/models').Actor;
+var User = require('../src/models').User;
 
 var mockMovie = require('./mock_api_movie.json');
 var mockActor = require('./mock_api_actor.json');
+var mockUser = require('./mock_user_info.json');
 
 var apiHelpers = require('../src/models/api_object.js');
 var apiToObject = apiHelpers.apiToObject;
@@ -21,7 +23,16 @@ describe('the Game model', function() {
   after(function(done) {
     db.db.dropCollection('games', function(err, result) {
       if(err) return done(err);
-      done();
+      db.db.dropCollection('actors', function(err, result) {
+        if(err) return done(err);
+        db.db.dropCollection('movies', function(err, result) {
+          if(err) return done(err);
+          db.db.dropCollection('users', function(err, result) {
+            if(err) return done(err);
+            done();
+          });
+        });
+      });
     });
   });
 
@@ -47,8 +58,13 @@ describe('the Game model', function() {
       });
     });
 
-    xit('should have a players property', function(done) {
+    it('should have a players property', function(done) {
       expect(testGame).to.have.property('players');
+      done();
+    });
+
+    it('should have a playCard property', function(done) {
+      expect(testGame).to.have.property('playCard');
       done();
     });
 
@@ -67,6 +83,7 @@ describe('the Game model', function() {
     var testGame;
     var testActor;
     var testMovie;
+    var testUser;
     var data;
 
     before(function(done) {
@@ -74,16 +91,20 @@ describe('the Game model', function() {
       var dataMovie = apiToObject(mockMovie);
       testActor = new Actor(dataActor);
       testMovie = new Movie(dataMovie);
-      testActor.save(function(err) {
-        testMovie.save(function(err) {
-          data = {
-            stack: [testMovie, testActor],
-            currentOptions: testMovie.credits
-          };
-          testGame = new Game(data);
-          testGame.save(function(err) {
-            if(err) console.log(err);
-            done();
+      testUser = new User(mockUser);
+      testUser.save(function(err) {
+        testActor.save(function(err) {
+          testMovie.save(function(err) {
+            data = { player: testUser, move: testActor };
+            testGame = new Game({ playCard: data });
+            testGame.save(function(err) {
+              data = { player: testUser, move: testMovie };
+              testGame.playCard = data;
+              testGame.save(function(err) {
+                if(err) console.log(err);
+                done();
+              });
+            });
           });
         });
       });
@@ -131,39 +152,42 @@ describe('the Game model', function() {
     var testGame;
     var testActor;
     var testMovie;
+    var testUser;
     var data;
 
     before(function(done) {
       var dataActor = apiToObject(mockActor);
       var dataMovie = apiToObject(mockMovie);
-      data = { stack: [], currentOptions: {} };
+      //data = { stack: [], currentOptions: {} };
+      testUser = new User(mockUser);
       testActor = new Actor(dataActor);
       testMovie = new Movie(dataMovie);
-      testGame = new Game(data);
-      testActor.save(function(err) {
-        testMovie.save(function(err) {
-          testGame.save(function(err) {
-            if(err) console.log(err);
-            done();
+      testGame = new Game({});
+      testUser.save(function(err) {
+        testActor.save(function(err) {
+          testMovie.save(function(err) {
+            testGame.save(function(err) {
+              if(err) console.log(err);
+              done();
+            });
           });
         });
       });
     });
 
     after(function(done) {
-      Game.remove({}, function(err) {
-        Actor.remove({}, function(err) {
-          Movie.remove({}, done);
+      User.remove({}, function(err) {
+        Game.remove({}, function(err) {
+          Actor.remove({}, function(err) {
+            Movie.remove({}, done);
+          });
         });
       });
     });
 
     it('should not accept movies as odd stack entries', function(done) {
-      var badData = {
-        stack: [testMovie],
-        currentOptions: testMovie.credits
-      };
-      var badGame = new Game(badData);
+      var badData = { player: testUser, move: testMovie };
+      var badGame = new Game({ playCard: badData });
       badGame.save(function(err) {
         expect(err).to.exist;
         expect(err.errors.stack.message).to.equal('Actors must be odd, and movies even');
@@ -172,11 +196,9 @@ describe('the Game model', function() {
     });
 
     it('should not accept actors as even stack entries', function(done) {
-      var badData = {
-        stack: [testActor, testActor],
-        currentOptions: testActor.credits
-      };
-      var badGame = new Game(badData);
+      var data = { player: testUser, move: testActor };
+      var badGame = new Game({ playCard: data });
+      badGame.playCard = { player: testUser, move: testActor };
       badGame.save(function(err) {
         expect(err).to.exist;
         expect(err.errors.stack.message).to.equal('Actors must be odd, and movies even');
@@ -184,37 +206,16 @@ describe('the Game model', function() {
       });
     });
 
-    it('should have a unshiftCard method', function(done) {
-      Game.findById(testGame._id, function(err, game) {
-        game.unshiftCard(testActor, function(err, gameUpdate) {
-          expect(err).to.not.exist;
-          expect(gameUpdate.currentOptions[0].moviedb_id).to.equal(1995);
-          expect(gameUpdate.stack[0].entry.moviedb_id).to.equal(8784);
-          done();
-        });
-      });
-    });
-
-    it('should error if pushCard pushes the wrong type', function(done) {
-      Game.findById(testGame._id, function(err, game) {
-        game.unshiftCard(testActor, function(err, gameUpdate) {
-          expect(err).to.exist;
-          expect(gameUpdate).to.not.exist;
-          done();
-        });
-      });
-    });
-
     it('should replace the currentOptions with each push', function(done) {
       Game.findById(testGame._id, function(err, game) {
-        game.unshiftCard(testMovie, function(err, gameUpdate) {
-          console.log(err);
+        game.playCard = { player: testUser, move: testActor };
+        game.playCard = { player: testUser, move: testMovie };
+        game.save(function(err) {
           expect(err).to.not.exist;
-          gameUpdate.currentOptions.forEach(function(actor, index) {
+          game.currentOptions.forEach(function(actor, index) {
             expect(actor.moviedb_id).to.equal(testMovie.credits[index].moviedb_id);
           });
-          //var top = gameUpdate.stack.length - 1;
-          expect(gameUpdate.stack[0].entry.moviedb_id).to.equal(testMovie.entry.moviedb_id);
+          expect(game.stack[0].entry.moviedb_id).to.equal(testMovie.entry.moviedb_id);
           done();
         });
       });

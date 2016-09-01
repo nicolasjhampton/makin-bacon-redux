@@ -5,10 +5,10 @@ var Schema = mongoose.Schema;
 var CardSchema = require('./card.js');
 
 var GameSchema = new Schema({
-  // players: [{
-  //   type: Schema.Types.ObjectId,
-  //   ref: 'User'
-  // }],
+  players: [{
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  }],
   stack: [CardSchema],
   currentOptions: [{
     name: String,
@@ -37,24 +37,36 @@ GameSchema.path('stack').validate(function(stack, callback) {
   return callback(valid);
 }, "Actors must be odd, and movies even");
 
-// GameSchema.pre('save', function(next) {
-//   console.log(this);
-//   //var lastCardIndex = stack.length - 1;
-//   this.currentOptions = this.credits;
-//   //console.log(this.credits);
-//   //console.log(this.currentOptions);
-//   next();
-// });
-
-GameSchema.methods.unshiftCard = function(card, callback) {
+GameSchema.virtual('playCard').set(function(card) {
   var game = this;
-  this.stack.unshift(card);
-  this.currentOptions = card.credits;
-  this.save(function(err) {
-    if(err) return callback(err);
-    return callback(null, game);
-  });
-};
+  var obj = {
+    entry: {
+      type: card.move.entry.type,
+      image: card.move.entry.image,
+      name: card.move.entry.name,
+      moviedb_id: card.move.entry.moviedb_id
+    }
+  };
+  this.currentOptions = card.move.credits;
+  if(card.player) {
+    obj.entry.user = card.player;
+    if(!this.players.includes(card.player._id)) {
+      this.players.push(card.player);
+    }
+  }
+  this.stack.unshift(obj);
+});
+
+
+// GameSchema.methods.unshiftCard = function(card, callback) {
+//   var game = this;
+//   this.stack.unshift(card);
+//   this.currentOptions = card.credits;
+//   this.save(function(err) {
+//     if(err) return callback(err);
+//     return callback(null, game);
+//   });
+// };
 
 var Game = mongoose.model('Game', GameSchema);
 

@@ -12,6 +12,10 @@ var cardDetails = {
     validate: {
       validator: value => /^(actor|movie)$/.test(value)
     }
+  },
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'  
   }
 };
 

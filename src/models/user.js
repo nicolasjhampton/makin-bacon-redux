@@ -45,6 +45,18 @@ UserSchema.pre('save', function(next) {
   });
 });
 
+UserSchema.statics.authenticate = function(credentials, callback) {
+  if(!credentials) return callback(null, false);
+  this.findOne({ username: credentials.name })
+      .exec(function(err, user) {
+        if(!user || err) return callback(null, false);
+        bcrypt.compare(credentials.pass, user.password, function(err2, authorization){
+          if(err2) return callback(null, false);
+          return callback(null, authorization, user);
+        });
+      });
+};
+
 var User = mongoose.model('User', UserSchema);
 
 module.exports = User;

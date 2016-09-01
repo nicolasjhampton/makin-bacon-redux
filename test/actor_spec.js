@@ -14,8 +14,8 @@ describe('the Actor model', function() {
     Actor.remove({}, done);
   });
 
-  after(function(done) {
-    db.db.dropCollection('actors', function(err, result) {
+  afterEach(function(done) {
+    Actor.remove({}, function(err) {
       if(err) return done(err);
       done();
     });

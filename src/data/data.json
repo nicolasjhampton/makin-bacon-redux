@@ -1,0 +1,23 @@
+{
+  "users": {
+    "_model": "User",
+    "joesmith": {
+      "_id": "57029ed4795118be119cc437",
+      "username": "@joesmith",
+      "email": "joe@smith.com",
+      "password": "password"
+    },
+    "samjones": {
+      "_id": "57029ed4795118be119cc438",
+      "username": "@samjones",
+      "email": "sam@jones.com",
+      "password": "password"
+    },
+    "samsmith": {
+      "_id": "57029ed4795118be119cc439",
+      "username": "@samsmith",
+      "email": "sam@smith.com",
+      "password": "password"
+    }
+  }
+}

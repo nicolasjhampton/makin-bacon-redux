@@ -10,7 +10,7 @@ var bcrypt = require('bcrypt');
 describe('The User model', function() {
 
   after(function(done) {
-    db.db.dropCollection('actors', function(err, result) {
+    User.remove({}, function(err) {
       if(err) return done(err);
       done();
     });
