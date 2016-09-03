@@ -1,36 +1,35 @@
 'use strict';
 
 var request = require('request');
-var api_info = require('./api_info.js');
+var apiInfo = require('./api_info.js');
 
 module.exports = function(action) {
   var url;
 
   switch (action.type) {
     case 'popular':
-      url = api_info.getPopular();
+      url = apiInfo.getPopular();
       break;
     case 'actor':
-      url = api_info.getActor(action.id);
+      url = apiInfo.getActor(action.id);
       break;
     case 'movie':
-      url = api_info.getMovie(action.id);
+      url = apiInfo.getMovie(action.id);
       break;
     default:
       return new Error('Must have an action object.');
   }
 
-  return new Promise(function(resolve, reject) {
-    request({ url: url, method: 'GET' }, function(err, res, body) {
-
+  return new Promise((resolve, reject) => {
+    request({ url: url, method: 'GET' }, (err, res, body) => {
+      // connection problem
       if(err) return reject(err);
-
-      //console.log(res.statusCode);
 
       if(res.statusCode === 200) {
         var data = JSON.parse(body);
         return resolve(data);
       } else {
+        // movie or actor not found
         return reject(new Error(res.statusCode));
       }
 

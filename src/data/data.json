@@ -19,5 +19,123 @@
       "email": "sam@smith.com",
       "password": "password"
     }
+  },
+  "games": {
+    "_model": "Game",
+    "one": {
+      "_id": "57029ed4795118be119cc43d",
+      "players": [
+        "->users.joesmith"
+      ],
+      "stack": [
+        {
+          "_id": "57029ed4795118be119cc43f",
+          "entry": {
+            "type": "actor",
+            "image": "/ylF5eBdfev0bgmFx8BFRmClqStM.jpg",
+            "name": "Margot Robbie",
+            "moviedb_id": 234352
+          }
+        }
+      ],
+      "currentOptions": [
+        {
+          "moviedb_id": 61767,
+          "name": "I.C.U.",
+          "image": "/x8sRqONnZjteQnMy6f832XCQbX2.jpg",
+          "_id": "57c8da412c342ee5ac33854e"
+        },
+        {
+          "moviedb_id": 106646,
+          "name": "The Wolf of Wall Street",
+          "image": "/vK1o5rZGqxyovfIhZyMELhk03wO.jpg",
+          "_id": "57c8da412c342ee5ac33854d"
+        },
+        {
+          "moviedb_id": 122906,
+          "name": "About Time",
+          "image": "/zSuh8dGwqpsWR7ccvYbfxbSZ37o.jpg",
+          "_id": "57c8da412c342ee5ac33854c"
+        },
+        {
+          "moviedb_id": 238349,
+          "name": "Vigilante",
+          "image": "/4O9nCc0BffYXmuXrjVeRnZQY82M.jpg",
+          "_id": "57c8da412c342ee5ac33854b"
+        },
+        {
+          "moviedb_id": 258489,
+          "name": "The Legend of Tarzan",
+          "image": "/6FxOPJ9Ysilpq0IgkrMJ7PubFhq.jpg",
+          "_id": "57c8da412c342ee5ac33854a"
+        },
+        {
+          "moviedb_id": 271674,
+          "name": "Suite Française",
+          "image": "/4lMmrBRNwMXC9KSaj1Kw6M9MSCm.jpg",
+          "_id": "57c8da412c342ee5ac338549"
+        },
+        {
+          "moviedb_id": 193687,
+          "name": "Z for Zachariah",
+          "image": "/xrwxzShNKYs8l0ISnfjFVfUD0CW.jpg",
+          "_id": "57c8da412c342ee5ac338548"
+        },
+        {
+          "moviedb_id": 256591,
+          "name": "Focus",
+          "image": "/9IElGiLkxPLUWZ3avy31bNSG3Tq.jpg",
+          "_id": "57c8da412c342ee5ac338547"
+        },
+        {
+          "moviedb_id": 279641,
+          "name": "Whiskey Tango Foxtrot",
+          "image": "/96vLovyljHFXIZIF0Ffar5qcldV.jpg",
+          "_id": "57c8da412c342ee5ac338546"
+        },
+        {
+          "moviedb_id": 385332,
+          "name": "Terminal",
+          "image": "N/A",
+          "_id": "57c8da412c342ee5ac338545"
+        },
+        {
+          "moviedb_id": 297761,
+          "name": "Suicide Squad",
+          "image": "/e1mjopzAS2KNsvpbpahQ1a6SkSn.jpg",
+          "_id": "57c8da412c342ee5ac338544"
+        },
+        {
+          "moviedb_id": 389014,
+          "name": "Dangerous Odds",
+          "image": "N/A",
+          "_id": "57c8da412c342ee5ac338543"
+        },
+        {
+          "moviedb_id": 389015,
+          "name": "I, Tonya",
+          "image": "N/A",
+          "_id": "57c8da412c342ee5ac338542"
+        },
+        {
+          "moviedb_id": 318846,
+          "name": "The Big Short",
+          "image": "/p11Ftd4VposrAzthkhF53ifYZRl.jpg",
+          "_id": "57c8da412c342ee5ac338541"
+        },
+        {
+          "moviedb_id": 408627,
+          "name": "Australian Psycho",
+          "image": "/zAu5erM8ArzvhymzGITFNTmsjP6.jpg",
+          "_id": "57c8da412c342ee5ac338540"
+        },
+        {
+          "moviedb_id": 324862,
+          "name": "Larrikins",
+          "image": "N/A",
+          "_id": "57c8da412c342ee5ac33853f"
+        }
+      ]
+    }
   }
 }

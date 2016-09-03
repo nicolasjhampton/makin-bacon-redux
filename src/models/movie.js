@@ -11,12 +11,10 @@ var creditsObject = {
   credits: {
     type: [{
       name: {
-        type: String,
-        required: true
+        type: String
       },
       moviedb_id: {
-        type: Number,
-        required: true
+        type: Number
       },
       image: {
         type: String
@@ -35,7 +33,7 @@ var MovieSchema = new Schema(MovieObject);
 
 MovieSchema.pre('save', preSave);
 
-MovieSchema.path('credits').validate(creditsCheck);
+// MovieSchema.path('credits').validate(creditsCheck, 'Movie has no credits');
 
 var Movie = mongoose.model('Movie', MovieSchema);
 

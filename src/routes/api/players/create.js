@@ -2,9 +2,9 @@
 
 var User = require('../../../models/user.js');
 
-module.exports = function(req, res, next) {
+module.exports = (req, res, next) => {
   var user = new User(req.body);
-  user.save(function(err) {
+  user.save((err) => {
     if(err) return next(err);
     res.user = user;
     res.json(user);

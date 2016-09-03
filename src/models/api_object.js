@@ -1,6 +1,6 @@
 'use strict';
 
-var imageRegEx = /(^\/[a-zA-Z0-9]+\.jpg$|^N\/A$)/;
+var imageRegEx = /(^\/[a-zA-Z0-9]+\.jpg$|^N\/A$|^https:\/\/upload\.wikimedia\.org\/wikipedia\/commons\/4\/44\/Question_mark_\(black_on_white\)\.png$)/;
 
 module.exports.apiToObject = (obj) => {
 

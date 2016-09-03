@@ -7,7 +7,7 @@
     "start": "MODE=DEVELOPMENT nodemon",
     "createrepo": "curl -u 'nicolasjhampton' https://api.github.com/user/repos -d '{ \"name\": \"makin-bacon-redux\" }'",
     "addremote": "git remote add origin git@github.com:nicolasjhampton/makin-bacon-redux.git",
-    "tests": "mocha",
+    "tests": "mocha || true",
     "test": "MODE=TESTING npm run tests"
   },
   "keywords": [
@@ -25,11 +25,21 @@
     "mongoose": "^4.5.9",
     "mongoose-seeder": "^1.2.1",
     "morgan": "^1.7.0",
-    "request": "^2.74.0"
+    "request": "^2.74.0",
+    "socket.io": "^1.4.8"
   },
   "devDependencies": {
     "chai": "^3.5.0",
     "chai-http": "^3.0.0",
+    "eslint": "^3.4.0",
+    "eslint-config-airbnb": "^10.0.1",
+    "eslint-config-google": "^0.6.0",
+    "eslint-config-standard": "^6.0.0",
+    "eslint-plugin-import": "^1.14.0",
+    "eslint-plugin-jsx-a11y": "^2.2.1",
+    "eslint-plugin-promise": "^2.0.1",
+    "eslint-plugin-react": "^6.2.0",
+    "eslint-plugin-standard": "^2.0.0",
     "mocha": "^3.0.2",
     "nodemon": "^1.10.2"
   }

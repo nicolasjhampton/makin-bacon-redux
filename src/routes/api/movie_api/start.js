@@ -2,9 +2,9 @@
 
 var api_request = require('../../../api_requests.js');
 
-module.exports = function(req, res, next) {
+module.exports = (req, res, next) => {
   api_request({ type: 'popular' })
-    .then(function(response) {
+    .then((response) => {
         req.popular = response.results;
         next();
     })

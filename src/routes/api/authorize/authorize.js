@@ -4,9 +4,9 @@ var User = require('../../../models/user.js');
 var auth = require('basic-auth');
 
 
-module.exports = function(req, res, next) {
+module.exports = (req, res, next) => {
   var credentials = auth(req);
-  User.authenticate(credentials, function(err, authorization, user) {
+  User.authenticate(credentials, (err, authorization, user) => {
     if (err) return next(err);
     if(authorization) {
       req.user = user;
