@@ -7,6 +7,6 @@ module.exports = (req, res, next) => {
   user.save((err) => {
     if(err) return next(err);
     res.user = user;
-    res.json(user);
+    next();
   });
 };

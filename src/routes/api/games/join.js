@@ -7,8 +7,6 @@ module.exports = (req, res, next) => {
 
   req.game.save((err) => {
     if(err) return next(err);
-    // will be next later
-    //res.json(req.game.toObject());
     next();
   });
 };
