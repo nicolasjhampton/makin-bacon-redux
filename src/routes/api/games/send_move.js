@@ -12,7 +12,7 @@ module.exports = (req, res, next, io) => {
         var gameObj = game.toObject();
         gameObj.stack = gameObj.stack[0];
         // needs to be refined to a namespaced room
-        io.emit('move', gameObj);
+        io.sockets.in(req.game._id).emit('move', gameObj);
         res.end();
       });
 };

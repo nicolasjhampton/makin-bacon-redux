@@ -2,7 +2,7 @@
 
 var express = require('express');
 var router = express.Router();
-var socketWrapper = require('../../app.js');
+var socketWrapper = require('../../sockets.js').socket;
 
 var authorize = require('./authorize');
 var database = require('./database');
@@ -20,7 +20,7 @@ var send_move = socketWrapper(games.send_move);
 var send_games = socketWrapper(games.send_games);
 var send_game_players = socketWrapper(games.send_game_players);
 var get_game = games.get_game;
-var join = games.join;
+var join = socketWrapper(games.join);
 
 var get_item = movie_api.get_item;
 var random = movie_api.random_actor;

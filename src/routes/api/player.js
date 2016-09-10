@@ -2,7 +2,7 @@
 
 var express = require('express');
 var router = express.Router();
-var socketWrapper = require('../../app.js');
+var socketWrapper = require('../../sockets.js').socket;
 
 var players = require('./players');
 

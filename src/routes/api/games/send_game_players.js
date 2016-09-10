@@ -10,7 +10,7 @@ module.exports = (req, res, next, io) => {
       .exec((err, game) => {
         if(err) return next(err);
         // needs to be refined to a namespaced room
-        io.emit('game players', game.toObject());
+        io.sockets.in(req.game._id).emit('game players', game.toObject());
         next();
       });
 };
