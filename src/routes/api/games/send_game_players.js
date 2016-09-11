@@ -3,7 +3,7 @@
 // This function sends to in game users only
 var Game = require('../../../models/game.js');
 
-module.exports = (req, res, next, io) => {
+module.exports = (req, res, next, io, socket) => {
   Game.findById(req.game._id)
       .select('players')
       .populate('players', 'username')

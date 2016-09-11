@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = (req, res, next, socket) => {
+module.exports = (req, res, next, io, socket) => {
 
   var user = req.user;
   req.game.players.push(user);

@@ -2,8 +2,10 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import io from 'socket.io-client';
+localStorage.debug = 'socket.io*';
 
-//import 'css/style.css';
+import './css/styles.css';
 
 import Options from './components/SomeOptions.jsx';
 import Stack from './components/Stack.jsx';

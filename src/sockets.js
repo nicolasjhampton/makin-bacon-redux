@@ -2,10 +2,10 @@
 
 var socket = require('socket.io');
 
-function wrapWithSocket(socket) {
+function wrapWithSocket(io, socket) {
   return function(middleware) {
     return function(req, res, next) {
-      middleware(req, res, next, socket);
+      middleware(req, res, next, io, socket);
     };
   };
 }
@@ -21,10 +21,17 @@ module.exports.startSockets = function(server, callback) {
     //Inform console that connection has been made
     console.log('Socket connection made');
 
+    socket.on("disconnect", function() {
+      console.log('Socket disconnected');
+    });
+
     // export the socket wrapper needed by the routes
-    module.exports.socket = wrapWithSocket(socket);
+    module.exports.socket = wrapWithSocket(io, socket);
 
     // start the rest of the app
     callback();
+
   });
+
+
 };
