@@ -29114,7 +29114,7 @@
 
 
 	// module
-	exports.push([module.id, "@media(min-width: 544px) {\n\n}\n\n@media(min-width: 768px) {\n  html {\n    font-size: .7rem;\n  }\n  button {\n    margin-top: 20px;\n  }\n}\n\n@media(min-width: 992px) {\n  html {\n    font-size: .85rem;\n  }\n  button {\n    margin-top: 15px;\n  }\n}\n\n@media(min-width: 1200px) {\n  html {\n    font-size: 1rem;\n  }\n  button {\n    margin-top: 10px;\n  }\n}\n\n.card {\n  height: 100px;\n}\n", ""]);
+	exports.push([module.id, "@media(min-width: 544px) {\n  .arrow {\n    margin-top: 6px;\n  }\n}\n\n@media(min-width: 768px) {\n  html {\n    font-size: .7rem;\n  }\n\n  .arrow {\n    margin-top: 14px;\n  }\n  /*button {\n    margin-top: 20px;\n  }*/\n}\n\n@media(min-width: 992px) {\n  html {\n    font-size: .85rem;\n  }\n\n  .arrow {\n    margin-top: 10px;\n  }\n  /*button {\n    margin-top: 15px;\n  }*/\n}\n\n@media(min-width: 1200px) {\n  html {\n    font-size: 1rem;\n  }\n\n  .arrow {\n    margin-top: 6px;\n  }\n  /*button {\n    margin-top: 10px;\n  }*/\n}\n\n.extend {\n  height: 120px;\n}\n\n.shrink {\n  height: 60px;\n}\n", ""]);
 
 	// exports
 
@@ -29443,28 +29443,72 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function GameOption(props) {
-	  return _react2.default.createElement(
-	    "option",
-	    { value: "moviedb_id" },
-	    props
-	  );
-	}
-
-	GameOption.PropTypes = {};
+	// function GameOption(props) {
+	//   return (
+	//     <option value="moviedb_id">{props}</option>
+	//   );
+	// }
+	//
+	// function Options(props) {
+	//
+	// }
+	//
+	// Options.PropTypes = {
+	//
+	// };
 
 	var Options = _react2.default.createClass({
 	  displayName: "Options",
 
-	  propTypes: {},
+	  propTypes: {
+	    submitOption: _react2.default.PropTypes.func.isRequired,
+	    options: _react2.default.PropTypes.array.isRequired,
+	    loaded: false
+	  },
+	  getInitialState: function getInitialState() {
+	    return {
+	      option: this.props.options[0].moviedb_id
+	    };
+	  },
+	  // componentDidMount: function() {
+	  //   if(this.props.loaded) {
+	  //     var that = this;
+	  //     this.setState({ option: that.props.options[0].moviedb_id });
+	  //   }
+	  // },
+	  onSubmit: function onSubmit(e) {
+	    e.preventDefault();
+	    var that = this;
+	    this.props.submitOption(this.state.option);
+	    //this.setState({ option: that.props.options[0].moviedb_id });
+	  },
+	  onOptionChange: function onOptionChange(e) {
+	    console.log(e.target.value);
+	    this.setState({ option: e.target.value });
+	  },
 	  render: function render() {
 	    return _react2.default.createElement(
 	      "div",
-	      { id: "options" },
+	      { className: "col-md-4 container-fluid" },
 	      _react2.default.createElement(
-	        "select",
-	        { id: "currentOptions", name: "currentOptions" },
-	        _react2.default.createElement(GameOption, null)
+	        "form",
+	        { onSubmit: this.onSubmit },
+	        _react2.default.createElement(
+	          "div",
+	          null,
+	          _react2.default.createElement(
+	            "select",
+	            { onChange: this.onOptionChange },
+	            this.props.options.map(function (option) {
+	              return _react2.default.createElement(
+	                "option",
+	                { value: option.moviedb_id },
+	                option.name
+	              );
+	            })
+	          ),
+	          _react2.default.createElement("input", { type: "submit", value: "Submit Move" })
+	        )
 	      )
 	    );
 	  }
@@ -29478,8 +29522,6 @@
 	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
 	    return;
 	  }
-
-	  __REACT_HOT_LOADER__.register(GameOption, "GameOption", "/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/SomeOptions.jsx");
 
 	  __REACT_HOT_LOADER__.register(Options, "Options", "/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/SomeOptions.jsx");
 
@@ -29504,38 +29546,60 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function StackItem(props) {
+	function Card(props) {
+	  var unknown = 'https://upload.wikimedia.org/wikipedia/commons/4/44/Question_mark_(black_on_white).png';
 	  return _react2.default.createElement(
-	    "div",
-	    null,
+	    'div',
+	    { className: 'media card card-inverse card-primary', 'data-moviedbid': props.moviedbid },
 	    _react2.default.createElement(
-	      "h1",
-	      null,
-	      props
+	      'div',
+	      { className: 'media-left media-middle' },
+	      _react2.default.createElement(
+	        'h1',
+	        null,
+	        props.name
+	      ),
+	      _react2.default.createElement(
+	        'p',
+	        null,
+	        props.type
+	      )
 	    ),
 	    _react2.default.createElement(
-	      "p",
-	      null,
-	      props
-	    ),
-	    _react2.default.createElement("img", { src: props })
+	      'div',
+	      { className: 'media-right' },
+	      _react2.default.createElement('img', { src: props.image == unknown ? props.image : "http://image.tmdb.org/t/p/w92" + props.image })
+	    )
 	  );
 	}
 
-	StackItem.PropTypes = {};
+	Card.PropTypes = {
+	  image: _react2.default.PropTypes.string.isRequired,
+	  moviedbid: _react2.default.PropTypes.number.isRequired,
+	  name: _react2.default.PropTypes.string.isRequired,
+	  type: _react2.default.PropTypes.string.isRequired,
+	  user: _react2.default.PropTypes.string.isRequired
+	};
 
-	var Stack = _react2.default.createClass({
-	  displayName: "Stack",
+	function Stack(props) {
+	  return _react2.default.createElement(
+	    'div',
+	    { className: 'col-md-8 container-fluid' },
+	    props.stack.map(function (card, index) {
+	      return _react2.default.createElement(Card, {
+	        image: card.entry.image,
+	        moviedbid: card.entry.moviedb_id,
+	        name: card.entry.name,
+	        type: card.entry.type,
+	        user: "start" && card.entry.user && card.entry.user.username,
+	        key: index });
+	    })
+	  );
+	}
 
-	  propTypes: {},
-	  render: function render() {
-	    return _react2.default.createElement(
-	      "div",
-	      { id: "stack" },
-	      _react2.default.createElement(StackItem, null)
-	    );
-	  }
-	});
+	Stack.PropTypes = {
+	  stack: _react2.default.PropTypes.array
+	};
 
 	var _default = Stack;
 	exports.default = _default;
@@ -29546,11 +29610,11 @@
 	    return;
 	  }
 
-	  __REACT_HOT_LOADER__.register(StackItem, "StackItem", "/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/Stack.jsx");
+	  __REACT_HOT_LOADER__.register(Card, 'Card', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/Stack.jsx');
 
-	  __REACT_HOT_LOADER__.register(Stack, "Stack", "/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/Stack.jsx");
+	  __REACT_HOT_LOADER__.register(Stack, 'Stack', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/Stack.jsx');
 
-	  __REACT_HOT_LOADER__.register(_default, "default", "/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/Stack.jsx");
+	  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/Stack.jsx');
 	})();
 
 	;
@@ -29630,128 +29694,61 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _Game = __webpack_require__(228);
+
+	var _Game2 = _interopRequireDefault(_Game);
+
+	var _GameCarousel = __webpack_require__(229);
+
+	var _GameCarousel2 = _interopRequireDefault(_GameCarousel);
+
+	var _CreateGame = __webpack_require__(230);
+
+	var _CreateGame2 = _interopRequireDefault(_CreateGame);
+
+	var _SomeOptions = __webpack_require__(224);
+
+	var _SomeOptions2 = _interopRequireDefault(_SomeOptions);
+
+	var _Stack = __webpack_require__(225);
+
+	var _Stack2 = _interopRequireDefault(_Stack);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function Game(props) {
-	  var display = "col-md-4 col-xs-12 card card-primary card-inverse";
-	  display += props.show ? "" : " hidden-xl-down";
-	  return _react2.default.createElement(
-	    "div",
-	    { className: display },
-	    _react2.default.createElement(
-	      "div",
-	      { className: "card-block" },
-	      _react2.default.createElement(
-	        "h6",
-	        { className: "text-muted" },
-	        props.gid
-	      ),
-	      _react2.default.createElement(
-	        "div",
-	        { className: "card-blockquote" },
-	        props.players.map(function (player, index) {
-	          return _react2.default.createElement(
-	            "p",
-	            { key: index },
-	            player.username
-	          );
-	        })
-	      )
-	    )
-	  );
+	function request(context, route, callback, body) {
+	  var req = new XMLHttpRequest();
+	  req.open("POST", "http://localhost:3000/api" + route);
+	  req.setRequestHeader("Authorization", context.state.auth);
+	  req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	  req.addEventListener("load", callback(context));
+	  req.send(body);
 	}
 
-	Game.PropTypes = {
-	  gid: _react2.default.PropTypes.string,
-	  players: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.shape({
-	    _id: _react2.default.PropTypes.string,
-	    username: _react2.default.PropTypes.string
-	  })),
-	  show: _react2.default.PropTypes.bool.isRequired
-	};
+	function reqCallback(context) {
+	  return function () {
+	    console.log(JSON.parse(this.responseText));
+	    var data = JSON.parse(this.responseText);
 
-	function Arrow(props) {
-	  return _react2.default.createElement(
-	    "div",
-	    { className: "col-md-1 col-xs-12 card card-inverse container-fluid" },
-	    _react2.default.createElement(
-	      "div",
-	      { className: "card-block row" },
-	      _react2.default.createElement(
-	        "button",
-	        {
-	          onClick: props.action,
-	          className: "btn btn-success col-xs-12 media-middle" },
-	        props.direction ? "⭆" : "⭅"
-	      )
-	    )
-	  );
+	    context.socket.on("move", function (data) {
+	      context.setState({ gameLoaded: false });
+	      context.state.stack.unshift(data.stack);
+	      context.setState({ stack: context.state.stack, gameLoaded: true });
+	    });
+
+	    context.setState({
+	      gameID: data._id,
+	      options: data.currentOptions,
+	      players: data.players,
+	      stack: data.stack,
+	      gameLoaded: true
+	    });
+	  };
 	}
 
-	Arrow.PropTypes = {
-	  direction: _react2.default.PropTypes.bool.isRequired,
-	  action: _react2.default.PropTypes.func.isRequired
-	};
-
-	function GameCarousel(props) {
-	  return _react2.default.createElement(
-	    "div",
-	    { className: "container-fluid col-xs-12 col-md-10" },
-	    _react2.default.createElement(
-	      "div",
-	      { className: "row" },
-	      _react2.default.createElement(Arrow, { action: props.action(-1), direction: false }),
-	      _react2.default.createElement(
-	        "div",
-	        { className: "col-xs-12 col-md-10 card container-fluid" },
-	        _react2.default.createElement(
-	          "div",
-	          { className: "row" },
-	          props.games.map(function (game, index) {
-	            return _react2.default.createElement(Game, {
-	              key: index,
-	              gid: game._id,
-	              players: game.players,
-	              show: game.show });
-	          })
-	        )
-	      ),
-	      _react2.default.createElement(Arrow, { action: props.action(1), direction: true })
-	    )
-	  );
-	}
-	// hidden-xl-down applies to all but three games -- pagination
-
-	GameCarousel.PropTypes = {
-	  games: _react2.default.PropTypes.array.isRequired,
-	  action: _react2.default.PropTypes.func.isRequired
-	};
-
-	function CreateGame(props) {
-	  return _react2.default.createElement(
-	    "div",
-	    { className: "col-md-2 col-xs-12 card card-primary card-inverse container-fluid" },
-	    _react2.default.createElement(
-	      "div",
-	      { className: "card-block row" },
-	      _react2.default.createElement(
-	        "button",
-	        {
-	          type: "button",
-	          className: "btn btn-success col-xs-12 media-middle",
-	          onClick: props.action },
-	        "Create Game"
-	      )
-	    )
-	  );
-	}
-
-	CreateGame.PropTypes = {
-	  action: _react2.default.PropTypes.func.isRequired
-	};
-
+	//<Players />
 	var Games = _react2.default.createClass({
-	  displayName: "Games",
+	  displayName: 'Games',
 
 	  propTypes: {
 	    // games: React.PropTypes.arrayOf(React.PropTypes.shape({
@@ -29762,9 +29759,16 @@
 	  },
 	  getInitialState: function getInitialState() {
 	    return {
-	      games: [],
+	      auth: "Basic QHNhbWpvbmVzOnBhc3N3b3Jk",
+	      loaded: false,
 	      offset: 0,
-	      loaded: false
+	      games: [],
+	      gameID: undefined,
+	      options: [],
+	      players: [],
+	      stack: [],
+	      headerContainer: true,
+	      gameLoaded: false
 	    };
 	  },
 	  componentDidMount: function componentDidMount() {
@@ -29794,30 +29798,65 @@
 	      this.setState({ games: games, offset: this.state.offset });
 	    }.bind(this);
 	  },
-	  createNewGame: function createNewGame() {
-	    var req = new XMLHttpRequest();
-	    req.open("POST", "http://localhost:3000/api/games");
-	    req.setRequestHeader("Authorization", "Basic QHNhbWpvbmVzOnBhc3N3b3Jk");
-	    req.addEventListener("load", function () {
-	      console.log(JSON.parse(this.responseText));
-	    });
-	    req.send();
+	  showHeader: function showHeader() {
+	    this.state.headerContainer = !this.state.headerContainer;
+	    this.setState({ headerContainer: this.state.headerContainer });
 	  },
+	  createNewGame: function createNewGame() {
+	    var route = "/games";
+	    this.setState({ gameLoaded: false });
+	    request(this, route, reqCallback);
+	  },
+	  joinGame: function joinGame(id) {
+	    var that = this;
+	    var route = "/games/" + id;
+	    var body = "previousGame=" + that.state.gameID;
+
+	    return function () {
+	      that.setState({ gameLoaded: false });
+	      request(that, route, reqCallback, body);
+	    };
+	  },
+	  submitOption: function submitOption(moviedb_id) {},
 	  render: function render() {
+	    var sizing = this.state.headerContainer ? " extend" : " shrink";
 	    return _react2.default.createElement(
-	      "div",
-	      { className: "container-fluid" },
+	      'div',
+	      { className: 'container-fluid' },
 	      _react2.default.createElement(
-	        "div",
-	        { className: "row" },
+	        'div',
+	        { className: 'row' },
 	        _react2.default.createElement(
-	          "div",
-	          { className: "card-deck-wrapper" },
+	          'div',
+	          { className: "card-deck-wrapper" + sizing },
 	          _react2.default.createElement(
-	            "div",
-	            { className: "card-deck" },
-	            _react2.default.createElement(CreateGame, { action: this.createNewGame }),
-	            _react2.default.createElement(GameCarousel, { action: this.rollCarousel, games: this.state.games })
+	            'div',
+	            { className: 'card-deck' },
+	            _react2.default.createElement(_CreateGame2.default, {
+	              headerContainer: this.state.headerContainer,
+	              headerControl: this.showHeader,
+	              action: this.createNewGame }),
+	            _react2.default.createElement(_GameCarousel2.default, {
+	              headerContainer: this.state.headerContainer,
+	              action: this.rollCarousel,
+	              join: this.joinGame,
+	              games: this.state.games })
+	          )
+	        )
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'row' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'card-deck-wrapper' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'card-deck' },
+	            this.state.gameLoaded ? _react2.default.createElement(_SomeOptions2.default, {
+	              submitOption: this.submitOption,
+	              options: this.state.options }) : null,
+	            _react2.default.createElement(_Stack2.default, { stack: this.state.stack })
 	          )
 	        )
 	      )
@@ -29834,17 +29873,266 @@
 	    return;
 	  }
 
-	  __REACT_HOT_LOADER__.register(Game, "Game", "/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/Games.jsx");
+	  __REACT_HOT_LOADER__.register(request, 'request', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/Games.jsx');
 
-	  __REACT_HOT_LOADER__.register(Arrow, "Arrow", "/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/Games.jsx");
+	  __REACT_HOT_LOADER__.register(reqCallback, 'reqCallback', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/Games.jsx');
 
-	  __REACT_HOT_LOADER__.register(GameCarousel, "GameCarousel", "/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/Games.jsx");
+	  __REACT_HOT_LOADER__.register(Games, 'Games', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/Games.jsx');
 
-	  __REACT_HOT_LOADER__.register(CreateGame, "CreateGame", "/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/Games.jsx");
+	  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/Games.jsx');
+	})();
 
-	  __REACT_HOT_LOADER__.register(Games, "Games", "/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/Games.jsx");
+	;
 
-	  __REACT_HOT_LOADER__.register(_default, "default", "/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/Games.jsx");
+/***/ },
+/* 228 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function Game(props) {
+	  var display = "col-md-4 col-xs-12 card card-primary card-inverse";
+	  display += props.show ? "" : " hidden-xl-down";
+	  return _react2.default.createElement(
+	    "div",
+	    { className: "extend " + display },
+	    _react2.default.createElement(
+	      "div",
+	      { className: "card-block" },
+	      _react2.default.createElement(
+	        "button",
+	        { className: "btn btn-primary", onClick: props.join(props.gid) },
+	        "Join"
+	      ),
+	      _react2.default.createElement(
+	        "h6",
+	        { className: "text-muted" },
+	        props.gid
+	      ),
+	      _react2.default.createElement(
+	        "div",
+	        { className: "card-blockquote" },
+	        props.players.map(function (player, index) {
+	          return _react2.default.createElement(
+	            "p",
+	            { key: index },
+	            player.username
+	          );
+	        })
+	      )
+	    )
+	  );
+	}
+
+	Game.PropTypes = {
+	  gid: _react2.default.PropTypes.string,
+	  players: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.shape({
+	    _id: _react2.default.PropTypes.string,
+	    username: _react2.default.PropTypes.string
+	  })),
+	  show: _react2.default.PropTypes.bool.isRequired,
+	  join: _react2.default.PropTypes.func.isRequired
+	};
+
+	var _default = Game;
+	exports.default = _default;
+	;
+
+	(function () {
+	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+	    return;
+	  }
+
+	  __REACT_HOT_LOADER__.register(Game, "Game", "/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/Game.jsx");
+
+	  __REACT_HOT_LOADER__.register(_default, "default", "/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/Game.jsx");
+	})();
+
+	;
+
+/***/ },
+/* 229 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _Game = __webpack_require__(228);
+
+	var _Game2 = _interopRequireDefault(_Game);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function Arrow(props) {
+	  var show = props.headerContainer ? "" : " hidden-xl-down";
+	  return _react2.default.createElement(
+	    'div',
+	    { className: "col-md-1 col-xs-12 card card-inverse media" + show },
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'media-middle' },
+	      _react2.default.createElement(
+	        'button',
+	        {
+	          onClick: props.action(-1),
+	          className: 'arrow btn btn-success col-xs-12' },
+	        '⭅'
+	      )
+	    ),
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'media-middle' },
+	      _react2.default.createElement(
+	        'button',
+	        {
+	          onClick: props.action(1),
+	          className: 'arrow btn btn-success col-xs-12' },
+	        '⭆'
+	      )
+	    )
+	  );
+	}
+
+	Arrow.PropTypes = {
+	  action: _react2.default.PropTypes.func.isRequired,
+	  headerContainer: _react2.default.PropTypes.bool.isRequired
+	};
+
+	function GameCarousel(props) {
+	  var sizing = props.headerContainer ? " extend" : " shrink";
+	  var show = props.headerContainer ? "" : " hidden-xl-down";
+	  return _react2.default.createElement(
+	    'div',
+	    { className: "container-fluid col-xs-12 col-md-10" + sizing },
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'row' },
+	      _react2.default.createElement(Arrow, { headerContainer: props.headerContainer, action: props.action }),
+	      _react2.default.createElement(
+	        'div',
+	        { className: "col-xs-12 col-md-11 card container-fluid" + show },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'row' },
+	          props.games.map(function (game, index) {
+	            return _react2.default.createElement(_Game2.default, {
+	              key: index,
+	              gid: game._id,
+	              players: game.players,
+	              show: game.show,
+	              join: props.join });
+	          })
+	        )
+	      )
+	    )
+	  );
+	}
+
+	GameCarousel.PropTypes = {
+	  games: _react2.default.PropTypes.array.isRequired,
+	  action: _react2.default.PropTypes.func.isRequired,
+	  join: _react2.default.PropTypes.func.isRequired,
+	  headerContainer: _react2.default.PropTypes.bool.isRequired
+	};
+
+	var _default = GameCarousel;
+	exports.default = _default;
+	;
+
+	(function () {
+	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+	    return;
+	  }
+
+	  __REACT_HOT_LOADER__.register(Arrow, 'Arrow', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/GameCarousel.jsx');
+
+	  __REACT_HOT_LOADER__.register(GameCarousel, 'GameCarousel', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/GameCarousel.jsx');
+
+	  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/GameCarousel.jsx');
+	})();
+
+	;
+
+/***/ },
+/* 230 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function CreateGame(props) {
+	  var sizing = props.headerContainer ? " extend" : " shrink";
+	  var show = props.headerContainer ? "" : " hidden-xl-down";
+	  return _react2.default.createElement(
+	    "div",
+	    { className: "col-md-2 col-xs-12 card card-primary card-inverse container-fluid" + sizing },
+	    _react2.default.createElement(
+	      "div",
+	      { className: "card-block row" },
+	      _react2.default.createElement(
+	        "button",
+	        {
+	          type: "button",
+	          className: "btn btn-success col-xs-12 media-middle" + show,
+	          onClick: props.action },
+	        "Create Game"
+	      ),
+	      _react2.default.createElement(
+	        "button",
+	        {
+	          type: "button",
+	          className: "btn btn-success col-xs-12 media-middle",
+	          onClick: props.headerControl },
+	        "Show Header"
+	      )
+	    )
+	  );
+	}
+
+	CreateGame.PropTypes = {
+	  headerControl: _react2.default.PropTypes.func.isRequired,
+	  headerContainer: _react2.default.PropTypes.bool.isRequired,
+	  action: _react2.default.PropTypes.func.isRequired
+	};
+
+	var _default = CreateGame;
+	exports.default = _default;
+	;
+
+	(function () {
+	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+	    return;
+	  }
+
+	  __REACT_HOT_LOADER__.register(CreateGame, "CreateGame", "/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/CreateGame.jsx");
+
+	  __REACT_HOT_LOADER__.register(_default, "default", "/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/CreateGame.jsx");
 	})();
 
 	;

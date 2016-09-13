@@ -2,31 +2,51 @@
 
 import React from 'react';
 
-function StackItem(props) {
+function Card(props) {
+  var unknown = 'https://upload.wikimedia.org/wikipedia/commons/4/44/Question_mark_(black_on_white).png';
   return (
-    <div>
-      <h1>{props}</h1>
-      <p>{props}</p>
-      <img src={props}/>
+    <div className="media card card-inverse card-primary" data-moviedbid={props.moviedbid}>
+      <div className="media-left media-middle">
+        <h1>{props.name}</h1>
+        <p>{props.type}</p>
+      </div>
+      <div className="media-right">
+        <img src={props.image == unknown ?
+                  props.image :
+                  "http://image.tmdb.org/t/p/w92" + props.image}/>
+      </div>
     </div>
   );
 }
 
-StackItem.PropTypes = {
-
+Card.PropTypes = {
+  image: React.PropTypes.string.isRequired,
+  moviedbid: React.PropTypes.number.isRequired,
+  name: React.PropTypes.string.isRequired,
+  type: React.PropTypes.string.isRequired,
+  user: React.PropTypes.string.isRequired
 };
 
-var Stack = React.createClass({
-  propTypes: {
+function Stack(props) {
+  return (
+    <div className="col-md-8 container-fluid">
+        {props.stack.map(function(card, index) {
+          return (
+            <Card
+              image={card.entry.image}
+              moviedbid={card.entry.moviedb_id}
+              name={card.entry.name}
+              type={card.entry.type}
+              user={"start" && card.entry.user && card.entry.user.username}
+              key={index}/>
+          );
+        })}
+    </div>
+  );
+}
 
-  },
-  render: function() {
-    return (
-      <div id="stack">
-        <StackItem />
-      </div>
-    );
-  }
-});
+Stack.PropTypes = {
+  stack: React.PropTypes.array
+};
 
 export default Stack;

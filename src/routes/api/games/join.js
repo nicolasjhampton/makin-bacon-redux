@@ -7,11 +7,13 @@ module.exports = (req, res, next, io, socket) => {
 
   req.game.save((err) => {
     if(err) return next(err);
-    // io.on('connection', (socket) => {
-      socket.join(req.game._id);
-      next();
-    // });
-    // //
-    // next();
+    console.log('req.body', req.body);
+    if(req.body.previousGame !== 'undefined') {
+      socket.leave(req.body.previousGame);
+    }
+
+    socket.join(req.game._id);
+    next();
+
   });
 };

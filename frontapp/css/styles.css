@@ -1,34 +1,52 @@
 @media(min-width: 544px) {
-
+  .arrow {
+    margin-top: 6px;
+  }
 }
 
 @media(min-width: 768px) {
   html {
     font-size: .7rem;
   }
-  button {
-    margin-top: 20px;
+
+  .arrow {
+    margin-top: 14px;
   }
+  /*button {
+    margin-top: 20px;
+  }*/
 }
 
 @media(min-width: 992px) {
   html {
     font-size: .85rem;
   }
-  button {
-    margin-top: 15px;
+
+  .arrow {
+    margin-top: 10px;
   }
+  /*button {
+    margin-top: 15px;
+  }*/
 }
 
 @media(min-width: 1200px) {
   html {
     font-size: 1rem;
   }
-  button {
-    margin-top: 10px;
+
+  .arrow {
+    margin-top: 6px;
   }
+  /*button {
+    margin-top: 10px;
+  }*/
 }
 
-.card {
-  height: 100px;
+.extend {
+  height: 120px;
+}
+
+.shrink {
+  height: 60px;
 }

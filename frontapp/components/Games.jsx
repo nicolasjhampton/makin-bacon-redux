@@ -1,104 +1,44 @@
 "use strict";
 
 import React from 'react';
+import Game from './Game.jsx';
+import GameCarousel from './GameCarousel.jsx';
+import CreateGame from './CreateGame.jsx';
+import Options from './SomeOptions.jsx';
+import Stack from './Stack.jsx';
 
+function request(context, route, callback, body) {
+  var req = new XMLHttpRequest();
+  req.open("POST", "http://localhost:3000/api" + route);
+  req.setRequestHeader("Authorization", context.state.auth);
+  req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  req.addEventListener("load", callback(context));
+  req.send(body);
 
-function Game(props) {
-  var display = "col-md-4 col-xs-12 card card-primary card-inverse";
-  display += props.show ? "" : " hidden-xl-down";
-  return (
-    <div className={display}>
-      <div className="card-block">
-        <h6 className="text-muted">{props.gid}</h6>
-        <div className="card-blockquote">
-          {props.players.map((player, index) => {
-            return (
-              <p key={index}>{player.username}</p>
-            );
-          })}
-        </div>
-      </div>
-    </div>
-  );
 }
 
-Game.PropTypes = {
-  gid: React.PropTypes.string,
-  players: React.PropTypes.arrayOf(React.PropTypes.shape({
-    _id: React.PropTypes.string,
-    username: React.PropTypes.string
-  })),
-  show: React.PropTypes.bool.isRequired,
-};
+function reqCallback(context) {
+  return function() {
+    console.log(JSON.parse(this.responseText));
+    var data = JSON.parse(this.responseText);
 
-function Arrow(props) {
-  return (
-    <div className="col-md-1 col-xs-12 card card-inverse container-fluid">
-      <div className="card-block row">
-        <button
-          onClick={props.action}
-          className="btn btn-success col-xs-12 media-middle">
-          { props.direction ? "\u2b46" : "\u2b45" }
-        </button>
-      </div>
-    </div>
-  );
+    context.socket.on("move", function(data) {
+      context.setState({ gameLoaded : false });
+      context.state.stack.unshift(data.stack);
+      context.setState({ stack: context.state.stack, gameLoaded: true });
+    });
+
+    context.setState({
+      gameID: data._id,
+      options: data.currentOptions,
+      players: data.players,
+      stack: data.stack,
+      gameLoaded: true,
+    });
+  }
 }
 
-Arrow.PropTypes = {
-  direction: React.PropTypes.bool.isRequired,
-  action: React.PropTypes.func.isRequired,
-};
-
-function GameCarousel(props) {
-  return (
-    <div className="container-fluid col-xs-12 col-md-10">
-      <div className="row">
-        <Arrow action={props.action(-1)} direction={false} />
-        <div className="col-xs-12 col-md-10 card container-fluid">
-          <div className="row">
-            {props.games.map((game, index) => {
-              return (
-                <Game
-                  key={index}
-                  gid={game._id}
-                  players={game.players}
-                  show={game.show}/>
-              );
-            })}
-          </div>
-        </div>
-        <Arrow action={props.action(1)} direction={true} />
-      </div>
-    </div>
-  );
-}
-// hidden-xl-down applies to all but three games -- pagination
-
-GameCarousel.PropTypes = {
-  games: React.PropTypes.array.isRequired,
-  action: React.PropTypes.func.isRequired,
-};
-
-function CreateGame(props) {
-  return (
-    <div className="col-md-2 col-xs-12 card card-primary card-inverse container-fluid">
-      <div className="card-block row">
-        <button
-          type="button"
-          className="btn btn-success col-xs-12 media-middle"
-          onClick={props.action}>
-            Create Game
-          </button>
-      </div>
-    </div>
-  );
-}
-
-CreateGame.PropTypes = {
-  action: React.PropTypes.func.isRequired,
-};
-
+//<Players />
 var Games = React.createClass({
   propTypes: {
     // games: React.PropTypes.arrayOf(React.PropTypes.shape({
@@ -109,9 +49,16 @@ var Games = React.createClass({
   },
   getInitialState: function() {
     return {
-      games: [],
-      offset: 0,
+      auth: "Basic QHNhbWpvbmVzOnBhc3N3b3Jk",
       loaded: false,
+      offset: 0,
+      games: [],
+      gameID: undefined,
+      options: [],
+      players: [],
+      stack: [],
+      headerContainer: true,
+      gameLoaded: false,
     }
   },
   componentDidMount: function() {
@@ -138,23 +85,56 @@ var Games = React.createClass({
       this.setState({games: games, offset: this.state.offset});
     }.bind(this);
   },
+  showHeader: function() {
+    this.state.headerContainer = !this.state.headerContainer;
+    this.setState({ headerContainer : this.state.headerContainer });
+  },
   createNewGame: function() {
-    var req = new XMLHttpRequest();
-    req.open("POST", "http://localhost:3000/api/games");
-    req.setRequestHeader("Authorization", "Basic QHNhbWpvbmVzOnBhc3N3b3Jk");
-    req.addEventListener("load", function() {
-      console.log(JSON.parse(this.responseText));
-    });
-    req.send();
+    var route = "/games";
+    this.setState({ gameLoaded : false });
+    request(this, route, reqCallback);
+  },
+  joinGame: function(id) {
+    var that = this;
+    var route = "/games/" + id;
+    var body = "previousGame=" + that.state.gameID;
+
+    return function() {
+      that.setState({ gameLoaded : false });
+      request(that, route, reqCallback, body);
+    }
+  },
+  submitOption: function(moviedb_id) {
+
   },
   render: function() {
+    var sizing = this.state.headerContainer ? " extend" : " shrink";
     return (
       <div className="container-fluid">
         <div className="row">
+          <div className={"card-deck-wrapper" + sizing}>
+            <div className="card-deck">
+              <CreateGame
+                headerContainer={this.state.headerContainer}
+                headerControl={this.showHeader}
+                action={this.createNewGame}/>
+              <GameCarousel
+                headerContainer={this.state.headerContainer}
+                action={this.rollCarousel}
+                join={this.joinGame}
+                games={this.state.games}/>
+            </div>
+          </div>
+        </div>
+        <div className="row">
           <div className="card-deck-wrapper">
             <div className="card-deck">
-              <CreateGame action={this.createNewGame}/>
-              <GameCarousel action={this.rollCarousel} games={this.state.games}/>
+              {this.state.gameLoaded ?
+                <Options
+                  submitOption={this.submitOption}
+                  options={this.state.options}/>
+                : null}
+              <Stack stack={this.state.stack}/>
             </div>
           </div>
         </div>
