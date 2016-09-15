@@ -2,12 +2,12 @@
 
 var express = require('express');
 var router = express.Router();
-var socketWrapper = require('../../sockets.js').socket;
+// var socketWrapper = require('../../sockets.js').socket;
 
 var players = require('./players');
 
 var get_player = players.get_player;
-var send_players = socketWrapper(players.send_players);
+var send_players = players.send_players;
 var create = players.create;
 
 // POST /api/players

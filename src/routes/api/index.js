@@ -8,7 +8,7 @@ var games = require('./game.js');
 
 // namespaced as localhost:port/api/
 
-router.use('/players', players);
+//router.use('/players', players);
 
 router.use('/games', games);
 

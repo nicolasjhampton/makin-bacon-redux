@@ -2,60 +2,43 @@
 
 import React from 'react';
 
-// function GameOption(props) {
-//   return (
-//     <option value="moviedb_id">{props}</option>
-//   );
-// }
-//
-// function Options(props) {
-//
-// }
-//
-// Options.PropTypes = {
-//
-// };
 
 var Options = React.createClass({
   propTypes: {
+    type: React.PropTypes.string.isRequired,
     submitOption: React.PropTypes.func.isRequired,
     options: React.PropTypes.array.isRequired,
-    loaded: false,
+    loaded: React.PropTypes.bool.isRequired,
   },
   getInitialState: function() {
     return {
-      option: this.props.options[0].moviedb_id,
+      option: "id=" + this.props.options[0].moviedb_id + "&type=" + this.props.type
     };
   },
-  // componentDidMount: function() {
-  //   if(this.props.loaded) {
-  //     var that = this;
-  //     this.setState({ option: that.props.options[0].moviedb_id });
-  //   }
-  // },
   onSubmit: function(e) {
     e.preventDefault();
     var that = this;
     this.props.submitOption(this.state.option);
-    //this.setState({ option: that.props.options[0].moviedb_id });
   },
   onOptionChange: function(e) {
     console.log(e.target.value);
     this.setState({option: e.target.value});
   },
   render: function() {
+    var type = this.props.type;
     return (
-      <div className="col-md-4 container-fluid">
+      <div className="col-md-12 container-fluid">
         <form onSubmit={this.onSubmit}>
-          <div>
-            <select onChange={this.onOptionChange}>
+          <div className="form-group">
+            <select className="form-control" onChange={this.onOptionChange}>
               {this.props.options.map(function(option) {
+                var value = "id=" + option.moviedb_id + "&type=" + type;
                 return (
-                  <option value={option.moviedb_id}>{option.name}</option>
+                  <option value={value}>{option.name}</option>
                 );
               })}
             </select>
-            <input type="submit" value="Submit Move" />
+            <input className="form-control" type="submit" value="Submit Move" />
           </div>
         </form>
       </div>

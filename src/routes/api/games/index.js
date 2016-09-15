@@ -3,6 +3,7 @@
 var create = require('./create.js');
 var join = require('./join.js');
 var get_game = require('./get_game.js');
+var get_games = require('./get_games.js');
 var find_game = require('./find_game.js');
 var send_move = require('./send_move.js');
 var play_card = require('./play_card.js');
@@ -14,6 +15,7 @@ module.exports = {
   send_games,
   send_move,
   get_game,
+  get_games,
   play_card,
   find_game,
   create,

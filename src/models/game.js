@@ -18,42 +18,42 @@ var GameSchema = new Schema({
 });
 
 
-GameSchema.path('stack').validate(function(stack, callback) {
-  // this gets complicated because of the unshift
+// GameSchema.path('stack').validate(function(stack, callback) {
+//   // this gets complicated because of the unshift
+//
+//   var isLengthEven = (stack.length % 2 === 0);
+//
+//   var valid = stack.every(function(card, index) {
+//
+//     var indexIsOdd = (index % 2 !== 0);
+//
+//     if(card.entry.type == 'actor') {
+//       return isLengthEven ? indexIsOdd : !indexIsOdd;
+//     } else if (card.entry.type == 'movie') {
+//       return isLengthEven ? !indexIsOdd : indexIsOdd;
+//     }
+//
+//   });
+//
+//   return callback(valid);
+// }, "Actors must be odd, and movies even");
 
-  var isLengthEven = (stack.length % 2 === 0);
 
-  var valid = stack.every(function(card, index) {
-
-    var indexIsOdd = (index % 2 !== 0);
-
-    if(card.entry.type == 'actor') {
-      return isLengthEven ? indexIsOdd : !indexIsOdd;
-    } else if (card.entry.type == 'movie') {
-      return isLengthEven ? !indexIsOdd : indexIsOdd;
-    }
-
-  });
-
-  return callback(valid);
-}, "Actors must be odd, and movies even");
-
-
-GameSchema.path('stack').validate(function(stack, callback) {
-
-  if(stack.length > 1) {
-
-    var playerMoving = stack[0].entry.user._id.toString();
-
-    var joined = this.players.some(player => player.toString() == playerMoving);
-
-    return callback(joined);
-
-  }
-
-  return callback(true);
-
-}, "Must join game to make a move");
+// GameSchema.path('stack').validate(function(stack, callback) {
+//
+//   if(stack.length > 1) {
+//
+//     var playerMoving = stack[0].entry.user._id;
+//
+//     var joined = this.players.some(player => player.toString() == playerMoving);
+//
+//     return callback(joined);
+//
+//   }
+//
+//   return callback(true);
+//
+// }, "Must join game to make a move");
 
 
 GameSchema.path('stack').validate(function(stack, callback) {
@@ -76,22 +76,22 @@ GameSchema.path('stack').validate(function(stack, callback) {
 }, "Card has already been played this game");
 
 
-GameSchema.path('currentOptions').validate(function(options, callback) {
-
-  if(this.stack.length > 1) {
-
-    var id = this.stack[1].entry.moviedb_id;
-    console.log(id);
-
-    var cardIsOption = this.currentOptions.some(option => option.moviedb_id == id);
-
-    return callback(cardIsOption);
-
-  }
-
-  return callback(true);
-
-}, "Card is not in current options");
+// GameSchema.path('currentOptions').validate(function(options, callback) {
+//
+//   if(this.stack.length > 1) {
+//
+//     var id = this.stack[1].entry.moviedb_id;
+//     console.log("card movie id", id);
+//
+//     var cardIsOption = this.currentOptions.some(option => option.moviedb_id == id);
+//
+//     return callback(cardIsOption);
+//
+//   }
+//
+//   return callback(true);
+//
+// }, "Card is not in current options");
 
 
 GameSchema.virtual('playCard').set(function(card) {

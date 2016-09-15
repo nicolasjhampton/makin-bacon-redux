@@ -29114,7 +29114,7 @@
 
 
 	// module
-	exports.push([module.id, "@media(min-width: 544px) {\n  .arrow {\n    margin-top: 6px;\n  }\n}\n\n@media(min-width: 768px) {\n  html {\n    font-size: .7rem;\n  }\n\n  .arrow {\n    margin-top: 14px;\n  }\n  /*button {\n    margin-top: 20px;\n  }*/\n}\n\n@media(min-width: 992px) {\n  html {\n    font-size: .85rem;\n  }\n\n  .arrow {\n    margin-top: 10px;\n  }\n  /*button {\n    margin-top: 15px;\n  }*/\n}\n\n@media(min-width: 1200px) {\n  html {\n    font-size: 1rem;\n  }\n\n  .arrow {\n    margin-top: 6px;\n  }\n  /*button {\n    margin-top: 10px;\n  }*/\n}\n\n.extend {\n  height: 120px;\n}\n\n.shrink {\n  height: 60px;\n}\n", ""]);
+	exports.push([module.id, "@media(min-width: 544px) {\n  .arrow {\n    margin-top: 6px;\n  }\n}\n\n@media(min-width: 768px) {\n  html {\n    font-size: .7rem;\n  }\n\n  .arrow {\n    margin-top: 14px;\n  }\n  /*button {\n    margin-top: 20px;\n  }*/\n}\n\n@media(min-width: 992px) {\n  html {\n    font-size: .85rem;\n  }\n\n  .arrow {\n    margin-top: 10px;\n  }\n  /*button {\n    margin-top: 15px;\n  }*/\n}\n\n@media(min-width: 1200px) {\n  html {\n    font-size: 1rem;\n  }\n\n  .arrow {\n    margin-top: 6px;\n  }\n  /*button {\n    margin-top: 10px;\n  }*/\n}\n\n.card {\n  border: 0;\n}\n\n.row {\n  margin-bottom: 15px;\n}\n\n.extend {\n  height: 120px;\n}\n\n.shrink {\n  height: 60px;\n}\n", ""]);
 
 	// exports
 
@@ -29443,71 +29443,53 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	// function GameOption(props) {
-	//   return (
-	//     <option value="moviedb_id">{props}</option>
-	//   );
-	// }
-	//
-	// function Options(props) {
-	//
-	// }
-	//
-	// Options.PropTypes = {
-	//
-	// };
-
 	var Options = _react2.default.createClass({
 	  displayName: "Options",
 
 	  propTypes: {
+	    type: _react2.default.PropTypes.string.isRequired,
 	    submitOption: _react2.default.PropTypes.func.isRequired,
 	    options: _react2.default.PropTypes.array.isRequired,
-	    loaded: false
+	    loaded: _react2.default.PropTypes.bool.isRequired
 	  },
 	  getInitialState: function getInitialState() {
 	    return {
-	      option: this.props.options[0].moviedb_id
+	      option: "id=" + this.props.options[0].moviedb_id + "&type=" + this.props.type
 	    };
 	  },
-	  // componentDidMount: function() {
-	  //   if(this.props.loaded) {
-	  //     var that = this;
-	  //     this.setState({ option: that.props.options[0].moviedb_id });
-	  //   }
-	  // },
 	  onSubmit: function onSubmit(e) {
 	    e.preventDefault();
 	    var that = this;
 	    this.props.submitOption(this.state.option);
-	    //this.setState({ option: that.props.options[0].moviedb_id });
 	  },
 	  onOptionChange: function onOptionChange(e) {
 	    console.log(e.target.value);
 	    this.setState({ option: e.target.value });
 	  },
 	  render: function render() {
+	    var type = this.props.type;
 	    return _react2.default.createElement(
 	      "div",
-	      { className: "col-md-4 container-fluid" },
+	      { className: "col-md-12 container-fluid" },
 	      _react2.default.createElement(
 	        "form",
 	        { onSubmit: this.onSubmit },
 	        _react2.default.createElement(
 	          "div",
-	          null,
+	          { className: "form-group" },
 	          _react2.default.createElement(
 	            "select",
-	            { onChange: this.onOptionChange },
+	            { className: "form-control", onChange: this.onOptionChange },
 	            this.props.options.map(function (option) {
+	              var value = "id=" + option.moviedb_id + "&type=" + type;
 	              return _react2.default.createElement(
 	                "option",
-	                { value: option.moviedb_id },
+	                { value: value },
 	                option.name
 	              );
 	            })
 	          ),
-	          _react2.default.createElement("input", { type: "submit", value: "Submit Move" })
+	          _react2.default.createElement("input", { className: "form-control", type: "submit", value: "Submit Move" })
 	        )
 	      )
 	    );
@@ -29716,27 +29698,31 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function request(context, route, callback, body) {
+	function request(context, method, route, callback, body) {
 	  var req = new XMLHttpRequest();
-	  req.open("POST", "http://localhost:3000/api" + route);
+	  req.open(method, "http://localhost:3000/api" + route);
 	  req.setRequestHeader("Authorization", context.state.auth);
 	  req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	  req.addEventListener("load", callback(context));
-	  req.send(body);
+	  body ? req.send(body) : req.send();
 	}
 
 	function reqCallback(context) {
 	  return function () {
 	    console.log(JSON.parse(this.responseText));
 	    var data = JSON.parse(this.responseText);
-
-	    context.socket.on("move", function (data) {
-	      context.setState({ gameLoaded: false });
-	      context.state.stack.unshift(data.stack);
-	      context.setState({ stack: context.state.stack, gameLoaded: true });
+	    context.gameSocket = context.props.io('/' + data._id);
+	    context.gameSocket.on("move", function (move) {
+	      context.state.stack.unshift(move.stack);
+	      var options = move.currentOptions;
+	      console.log(move.stack);
+	      console.log(context.state.stack);
+	      var optionType = context.state.stack[0].entry.type == "actor" ? "movie" : "actor";
+	      context.setState({ stack: context.state.stack, options: options, optionType: optionType });
 	    });
 
 	    context.setState({
+	      optionType: data.stack[0].entry.type == "actor" ? "movie" : "actor",
 	      gameID: data._id,
 	      options: data.currentOptions,
 	      players: data.players,
@@ -29751,10 +29737,6 @@
 	  displayName: 'Games',
 
 	  propTypes: {
-	    // games: React.PropTypes.arrayOf(React.PropTypes.shape({
-	    //   _id: React.PropTypes.string,
-	    //   players: React.PropTypes.array
-	    // }))
 	    io: _react2.default.PropTypes.func
 	  },
 	  getInitialState: function getInitialState() {
@@ -29768,21 +29750,32 @@
 	      players: [],
 	      stack: [],
 	      headerContainer: true,
-	      gameLoaded: false
+	      gameLoaded: false,
+	      optionType: undefined
 	    };
 	  },
 	  componentDidMount: function componentDidMount() {
 	    var _this = this;
 
 	    if (!this.state.loaded) {
+	      var that = this;
 	      var options = { 'sync disconnect on unload': true };
-	      this.socket = this.props.io('http://localhost:3000', options);
+	      this.socket = this.props.io();
 	      this.socket.on('games', function (games) {
-	        games.map(function (game, index) {
-	          game.show = index <= _this.state.offset + 2 && index >= _this.state.offset;
-	        });
-	        console.log(games);
 	        _this.setState({ games: games, loaded: true });
+	        _this.rollCarousel(0)();
+	      });
+	      request(this, "GET", "/games", function (context) {
+	        return function () {
+	          console.log(JSON.parse(this.responseText));
+	          var games = JSON.parse(this.responseText);
+
+	          context.setState({
+	            games: games,
+	            loaded: true
+	          });
+	          context.rollCarousel(0)();
+	        };
 	      });
 	    }
 	  },
@@ -29805,7 +29798,7 @@
 	  createNewGame: function createNewGame() {
 	    var route = "/games";
 	    this.setState({ gameLoaded: false });
-	    request(this, route, reqCallback);
+	    request(this, "POST", route, reqCallback);
 	  },
 	  joinGame: function joinGame(id) {
 	    var that = this;
@@ -29814,11 +29807,25 @@
 
 	    return function () {
 	      that.setState({ gameLoaded: false });
-	      request(that, route, reqCallback, body);
+
+	      request(that, "POST", route, reqCallback, body);
 	    };
 	  },
-	  submitOption: function submitOption(moviedb_id) {},
+	  submitOption: function submitOption(option) {
+	    var that = this;
+	    var route = "/games/" + this.state.gameID + "/move";
+	    // that.gameSocket.on("move", function(move) {
+	    //   var stack = that.state.stack.unshift(move.stack);
+	    //   var options = move.currentOptions;
+	    //   console.log(move);
+	    //   that.setState({ stack: stack, options: options})
+	    // });
+	    request(that, "POST", route, function (context) {
+	      return function () {};
+	    }, option);
+	  },
 	  render: function render() {
+	    var type;
 	    var sizing = this.state.headerContainer ? " extend" : " shrink";
 	    return _react2.default.createElement(
 	      'div',
@@ -29849,15 +29856,20 @@
 	        { className: 'row' },
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'card-deck-wrapper' },
+	          { className: 'container-fluid col-md-3' },
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'card-deck' },
 	            this.state.gameLoaded ? _react2.default.createElement(_SomeOptions2.default, {
+	              type: this.state.optionType,
 	              submitOption: this.submitOption,
-	              options: this.state.options }) : null,
-	            _react2.default.createElement(_Stack2.default, { stack: this.state.stack })
+	              options: this.state.options }) : null
 	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'container-fluid col-md-6' },
+	          _react2.default.createElement(_Stack2.default, { stack: this.state.stack })
 	        )
 	      )
 	    );

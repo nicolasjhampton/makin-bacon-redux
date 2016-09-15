@@ -10,8 +10,7 @@ module.exports = (req, res, next) => {
       .populate('players', 'username')
       .exec(function(err, games) {
         if(err) return next(err);
-        req.io.emit('games', games);
-        next();
+        res.json(games);
       });
 
 };

@@ -5,7 +5,7 @@
   "main": "src/app.js",
   "scripts": {
     "build": "webpack",
-    "start": "DEBUG=socket.io* MODE=DEVELOPMENT nodemon",
+    "start": "DEBUG=socket.io:socket MODE=DEVELOPMENT nodemon",
     "app": "webpack-dev-server --port 4000 --inline --content-base src/public/",
     "createrepo": "curl -u 'nicolasjhampton' https://api.github.com/user/repos -d '{ \"name\": \"makin-bacon-redux\" }'",
     "addremote": "git remote add origin git@github.com:nicolasjhampton/makin-bacon-redux.git",

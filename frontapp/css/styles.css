@@ -38,9 +38,14 @@
   .arrow {
     margin-top: 6px;
   }
-  /*button {
-    margin-top: 10px;
-  }*/
+}
+
+.card {
+  border: 0;
+}
+
+.row {
+  margin-bottom: 15px;
 }
 
 .extend {
