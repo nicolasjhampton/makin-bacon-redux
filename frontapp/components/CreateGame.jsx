@@ -3,9 +3,9 @@
 import React from 'react';
 
 
-function CreateGame(props) {
-  var sizing = props.headerContainer ? " extend" : " shrink";
-  var show = props.headerContainer ? "" : " hidden-xl-down";
+const CreateGame = props => {
+  let sizing = props.headerContainer ? " extend" : " shrink";
+  let show = props.headerContainer ? "" : " hidden-xl-down";
   return (
     <div className={"col-md-2 col-xs-12 card card-primary card-inverse container-fluid" + sizing}>
       <div className="card-block row">

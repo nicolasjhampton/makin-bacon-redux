@@ -4,8 +4,8 @@ var request = require('request');
 var apiInfo = require('./api_info.js');
 
 module.exports = function(action) {
+  
   var url;
-
   switch (action.type) {
     case 'popular':
       url = apiInfo.getPopular();

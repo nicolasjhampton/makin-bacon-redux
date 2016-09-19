@@ -1,39 +1,12 @@
 "use strict";
 
 import React from 'react';
-import Game from './Game.jsx';
+import GameList from './GameList.jsx';
+import Arrows from './Arrows.jsx';
 
-
-function Arrow(props) {
-  var show = props.headerContainer ? "" : " hidden-xl-down";
-  return (
-    <div className={"col-md-1 col-xs-12 card card-inverse media" + show}>
-      <div className="media-middle">
-            <button
-              onClick={props.action(-1)}
-              className="arrow btn btn-success col-xs-12">
-              {"\u2b45"}
-            </button>
-      </div>
-      <div className="media-middle">
-          <button
-            onClick={props.action(1)}
-            className="arrow btn btn-success col-xs-12">
-            {"\u2b46"}
-          </button>
-      </div>
-    </div>
-  );
-}
-
-Arrow.PropTypes = {
-  action: React.PropTypes.func.isRequired,
-  headerContainer: React.PropTypes.bool.isRequired,
-};
-
-function GameCarousel(props) {
-  var sizing = props.headerContainer ? " extend" : " shrink";
-  var show = props.headerContainer ? "" : " hidden-xl-down";
+const GameCarousel = (props) => {
+  let sizing = props.headerContainer ? " extend" : " shrink";
+  let show = props.headerContainer ? "" : " hidden-xl-down";
   return (
     <div className={"container-fluid col-xs-12 col-md-10" + sizing}>
       <div className="row">
@@ -42,7 +15,7 @@ function GameCarousel(props) {
           <div className="row">
             {props.games.map((game, index) => {
               return (
-                <Game
+                <GameList
                   key={index}
                   gid={game._id}
                   players={game.players}

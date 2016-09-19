@@ -1,39 +1,24 @@
 'use strict';
 
 import React from 'react';
-import ReactDOM from 'react-dom';
+//import {Router, Route, hashHistory } from 'react-router';
+import { render } from 'react-dom';
+//import ReactDOM from 'react-dom';
+
 import io from 'socket.io-client';
 localStorage.debug = 'socket.io*';
 
 import './css/styles.css';
 
-import Options from './components/SomeOptions.jsx';
-import Stack from './components/Stack.jsx';
-import Players from './components/Players.jsx';
-import Games from './components/Games.jsx';
+import routes from './router.jsx';
+
+// import Options from './components/SomeOptions.jsx';
+// import Stack from './components/Stack.jsx';
+// import Players from './components/Players.jsx';
+// import Games from './components/Games.jsx';
+//import Login from './components/Login.jsx';
+
+render(routes, document.getElementById("games"));
 
 
-
-// var socket = io('http://localhost:3000');
-//
-// socket.on('games', function(msg){
-//   console.log(msg);
-// });
-// socket.on('move', function(msg){
-//   console.log(msg);
-// });
-// socket.on('game players', function(msg){
-//   console.log(msg);
-// });
-
-
-
-// socket.on('players', function(msg){
-//   console.log(msg);
-// });
-
-ReactDOM.render(<Games io={io} />, document.getElementById("games"));
-//
-// ReactDOM.render(<Options />, document.getElementById("Options"));
-// ReactDOM.render(<Stack />, document.getElementById("Stack"));
-// ReactDOM.render(<Players />, document.getElementById("Players"));
+//ReactDOM.render(<Games io={io} />, document.getElementById("games"));
