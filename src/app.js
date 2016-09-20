@@ -30,9 +30,6 @@ app.use(function(req, res, next) {
  */
 app.use('/app', express.static(__dirname + '/public/app'));
 
-app.get('/', function(req, res){
-  res.sendFile(__dirname + '/public/index.html');
-});
 
 /**
  * Database startup import
@@ -66,6 +63,9 @@ var router = require('./routes/api/index.js');
 app.use('/api', parser.json());
 app.use('/api', router);
 
+app.get('*', function(req, res){
+  res.sendFile(__dirname + '/public/index.html');
+});
 
 /**
  * Standard error handling

@@ -29089,7 +29089,7 @@
 
 
 	// module
-	exports.push([module.id, "@media(min-width: 544px) {\n  .arrow {\n    margin-top: 6px;\n  }\n}\n\n@media(min-width: 768px) {\n  html {\n    font-size: .7rem;\n  }\n\n  .arrow {\n    margin-top: 14px;\n  }\n  /*button {\n    margin-top: 20px;\n  }*/\n}\n\n@media(min-width: 992px) {\n  html {\n    font-size: .85rem;\n  }\n\n  .arrow {\n    margin-top: 10px;\n  }\n  /*button {\n    margin-top: 15px;\n  }*/\n}\n\n@media(min-width: 1200px) {\n  html {\n    font-size: 1rem;\n  }\n\n  .arrow {\n    margin-top: 6px;\n  }\n}\n\n.card {\n  border: 0;\n}\n\n.row {\n  margin-bottom: 15px;\n}\n\n.extend {\n  height: 120px;\n}\n\n.shrink {\n  height: 60px;\n}\n", ""]);
+	exports.push([module.id, "@media(min-width: 544px) {\n  .arrow {\n    margin-top: 6px;\n  }\n}\n\n@media(min-width: 768px) {\n  html {\n    font-size: .7rem;\n  }\n\n  .arrow {\n    margin-top: 14px;\n  }\n  /*button {\n    margin-top: 20px;\n  }*/\n}\n\n@media(min-width: 992px) {\n  html {\n    font-size: .85rem;\n  }\n\n  .arrow {\n    margin-top: 10px;\n  }\n  /*button {\n    margin-top: 15px;\n  }*/\n}\n\n@media(min-width: 1200px) {\n  html {\n    font-size: 1rem;\n  }\n\n  .arrow {\n    margin-top: 6px;\n  }\n}\n\ninput[type=\"checkbox\"] {\n  margin-right: 10px;\n}\n\n.card {\n  border: 0;\n}\n\n.row {\n  margin-bottom: 15px;\n}\n\n.extend {\n  height: 120px;\n}\n\n.shrink {\n  height: 60px;\n}\n", ""]);
 
 	// exports
 
@@ -29422,50 +29422,41 @@
 
 	var _GameApp2 = _interopRequireDefault(_GameApp);
 
-	var _Login = __webpack_require__(289);
+	var _Login = __webpack_require__(292);
 
 	var _Login2 = _interopRequireDefault(_Login);
 
-	var _Register = __webpack_require__(292);
+	var _Home = __webpack_require__(296);
+
+	var _Home2 = _interopRequireDefault(_Home);
+
+	var _Register = __webpack_require__(297);
 
 	var _Register2 = _interopRequireDefault(_Register);
 
+	var _Profile = __webpack_require__(298);
+
+	var _Profile2 = _interopRequireDefault(_Profile);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	// import Profile from './components/Profile.jsx';
 	// import Games from './components/Games.jsx';
 	// import Game from './components/Game.jsx';
 
-
-	var request = function request(context, auth, callback) {
-	  var req = new XMLHttpRequest();
-	  req.open("POST", "http://localhost:3000/api/players/login");
-	  req.setRequestHeader("Authorization", auth);
-	  req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	  req.addEventListener("load", callback(context));
-	  req.send();
-	};
-
-	var loginFunc = function loginFunc(obj) {};
-
-	var registerFunc = function registerFunc(obj) {};
 
 	var routes = _react2.default.createElement(
 	  _reactRouter.Router,
 	  { history: _reactRouter.browserHistory },
 	  _react2.default.createElement(
 	    _reactRouter.Route,
-	    { path: '/', component: _GameApp2.default },
-	    _react2.default.createElement(_reactRouter.IndexRedirect, { to: '/login' }),
-	    _react2.default.createElement(_reactRouter.Route, { path: 'login', component: _Login2.default, login: loginFunc }),
-	    _react2.default.createElement(_reactRouter.Route, { path: 'register', component: _Register2.default, register: registerFunc })
+	    { component: _GameApp2.default },
+	    _react2.default.createElement(_reactRouter.Route, { path: '/', component: _Home2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: 'login', component: _Login2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: 'register', component: _Register2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: 'profile/:username', component: _Profile2.default })
 	  )
 	);
-
-	// <Route path="/register" component={Register}/>
-	// <Route path="/profile" component={Profile}/>
-	// <Route path="/games" component={Games}/>
-	// <Route path="/game" component={Game}/>
+	//IndexRoute, Redirect, DefaultRoute 
 
 	var _default = routes;
 	exports.default = _default;
@@ -29475,12 +29466,6 @@
 	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
 	    return;
 	  }
-
-	  __REACT_HOT_LOADER__.register(request, 'request', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/router.jsx');
-
-	  __REACT_HOT_LOADER__.register(loginFunc, 'loginFunc', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/router.jsx');
-
-	  __REACT_HOT_LOADER__.register(registerFunc, 'registerFunc', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/router.jsx');
 
 	  __REACT_HOT_LOADER__.register(routes, 'routes', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/router.jsx');
 
@@ -35153,13 +35138,23 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
 
 	var _reactRouter = __webpack_require__(225);
+
+	var _api_request = __webpack_require__(289);
+
+	var _api_request2 = _interopRequireDefault(_api_request);
+
+	var _NavLink = __webpack_require__(290);
+
+	var _NavLink2 = _interopRequireDefault(_NavLink);
+
+	var _auth_store = __webpack_require__(291);
+
+	var _auth_store2 = _interopRequireDefault(_auth_store);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -35169,9 +35164,21 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var NavLink = function NavLink(props) {
-	  return _react2.default.createElement(_reactRouter.Link, _extends({}, props, { activeStyle: { color: 'white' } }));
-	};
+	// const apiRequest = (context, path, auth, body, callback) => {
+	//   let req = new XMLHttpRequest();
+	//   req.open("POST", `http://localhost:3000/api${path}`);
+	//   req.setRequestHeader("authorization", auth);
+	//   req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	//   req.addEventListener("load", callback);
+	//   console.log(req);
+	//   req.send(body);
+	// }
+
+	// import {Link} from 'react-router';
+	//
+	// const NavLink = props => (
+	//     <Link {...props} activeStyle={{ color: 'white' }}/>
+	// );
 
 	var GameApp = function (_Component) {
 	  _inherits(GameApp, _Component);
@@ -35187,10 +35194,40 @@
 	      args[_key] = arguments[_key];
 	    }
 
-	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = GameApp.__proto__ || Object.getPrototypeOf(GameApp)).call.apply(_ref, [this].concat(args))), _this), _this.login = function () {}, _temp), _possibleConstructorReturn(_this, _ret);
+	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = GameApp.__proto__ || Object.getPrototypeOf(GameApp)).call.apply(_ref, [this].concat(args))), _this), _this.state = (0, _auth_store2.default)() || {}, _temp), _possibleConstructorReturn(_this, _ret);
 	  }
 
 	  _createClass(GameApp, [{
+	    key: 'getChildContext',
+	    value: function getChildContext() {
+	      return {
+	        submit: this.submit(this),
+	        authorization: this.state.authorization,
+	        currentUser: this.state.currentUser
+	      };
+	    }
+	  }, {
+	    key: 'submit',
+	    value: function submit(that) {
+	      return function (obj) {
+	        var authorization = 'Basic ' + btoa(obj.username + ':' + obj.password);
+	        var path = !obj.email ? '/login' : '';
+	        delete obj.toggle; // unneeded in the request
+	        (0, _api_request2.default)(null, '/players' + path, authorization, obj, function () {
+	          if (this.readyState == 4 && this.status == 200) {
+	            var data = JSON.parse(this.responseText);
+	            var currentUser = data.username;
+	            window[obj.storage].baconAuth = authorization;
+	            window[obj.storage].baconUser = currentUser;
+	            that.setState({ authorization: authorization, currentUser: currentUser });
+	            that.context.router.replace({
+	              pathname: '/profile/' + data.username
+	            });
+	          }
+	        });
+	      };
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
@@ -35203,8 +35240,11 @@
 	            'nav',
 	            { className: 'navbar navbar-dark bg-primary' },
 	            _react2.default.createElement(
-	              NavLink,
-	              { className: 'navbar-brand', to: 'home' },
+	              _reactRouter.Link,
+	              {
+	                className: 'navbar-brand',
+	                activeStyle: { color: 'white' },
+	                to: 'home' },
 	              'Makin Bacon'
 	            ),
 	            _react2.default.createElement(
@@ -35214,29 +35254,48 @@
 	                'li',
 	                { className: 'nav-item' },
 	                _react2.default.createElement(
-	                  NavLink,
-	                  { className: 'nav-link', to: 'home' },
+	                  _NavLink2.default,
+	                  { to: '/' },
 	                  'Home'
 	                )
 	              ),
 	              _react2.default.createElement(
 	                'li',
 	                { className: 'nav-item' },
-	                _react2.default.createElement(
-	                  NavLink,
-	                  { className: 'nav-link', to: 'login' },
+	                this.state.authorization ? _react2.default.createElement(
+	                  _NavLink2.default,
+	                  { to: 'profile/' + this.state.currentUser },
+	                  'Profile'
+	                ) : _react2.default.createElement(
+	                  _NavLink2.default,
+	                  { to: 'login' },
 	                  'Login'
 	                )
 	              ),
 	              _react2.default.createElement(
 	                'li',
 	                { className: 'nav-item' },
-	                _react2.default.createElement(
-	                  NavLink,
-	                  { className: 'nav-link', to: 'register' },
+	                this.state.authorization ? _react2.default.createElement(
+	                  _NavLink2.default,
+	                  { to: 'game' },
+	                  'Game'
+	                ) : _react2.default.createElement(
+	                  _NavLink2.default,
+	                  { to: 'register' },
 	                  'Register'
 	                )
-	              )
+	              ),
+	              this.state.authorization ? _react2.default.createElement(
+	                'li',
+	                { className: 'nav-item' },
+	                _react2.default.createElement(
+	                  _NavLink2.default,
+	                  {
+	                    className: 'nav-link'
+	                  },
+	                  'Logout'
+	                )
+	              ) : ""
 	            )
 	          )
 	        ),
@@ -35252,6 +35311,14 @@
 	  return GameApp;
 	}(_react.Component);
 
+	GameApp.contextTypes = {
+	  router: _react2.default.PropTypes.object
+	};
+	GameApp.childContextTypes = {
+	  submit: _react2.default.PropTypes.func,
+	  authorization: _react2.default.PropTypes.string,
+	  currentUser: _react2.default.PropTypes.string
+	};
 	var _default = GameApp;
 	exports.default = _default;
 	;
@@ -35260,8 +35327,6 @@
 	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
 	    return;
 	  }
-
-	  __REACT_HOT_LOADER__.register(NavLink, 'NavLink', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/GameApp.jsx');
 
 	  __REACT_HOT_LOADER__.register(GameApp, 'GameApp', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/GameApp.jsx');
 
@@ -35272,6 +35337,122 @@
 
 /***/ },
 /* 289 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var apiRequest = function apiRequest(context, path, auth, body, callback) {
+	  var req = new XMLHttpRequest();
+	  req.open("POST", "http://localhost:3000/api" + path);
+	  req.setRequestHeader("authorization", auth);
+	  req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	  req.addEventListener("load", callback);
+	  console.log(req);
+	  req.send(body);
+	};
+
+	var _default = apiRequest;
+	exports.default = _default;
+	;
+
+	(function () {
+	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+	    return;
+	  }
+
+	  __REACT_HOT_LOADER__.register(apiRequest, "apiRequest", "/Users/nicolasjhampton/code/bacon-project-12/frontapp/api/api_request.jsx");
+
+	  __REACT_HOT_LOADER__.register(_default, "default", "/Users/nicolasjhampton/code/bacon-project-12/frontapp/api/api_request.jsx");
+	})();
+
+	;
+
+/***/ },
+/* 290 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(225);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var NavLink = function NavLink(props) {
+	    return _react2.default.createElement(_reactRouter.Link, _extends({}, props, { className: 'nav-link', activeStyle: { color: 'white' } }));
+	};
+
+	var _default = NavLink;
+	exports.default = _default;
+	;
+
+	(function () {
+	    if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+	        return;
+	    }
+
+	    __REACT_HOT_LOADER__.register(NavLink, 'NavLink', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/NavLink.jsx');
+
+	    __REACT_HOT_LOADER__.register(_default, 'default', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/NavLink.jsx');
+	})();
+
+	;
+
+/***/ },
+/* 291 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var authStore = function authStore() {
+	  if (sessionStorage.baconAuth && sessionStorage.baconUser) {
+	    return {
+	      authorization: sessionStorage.baconAuth,
+	      currentUser: sessionStorage.baconUser
+	    };
+	  } else if (localStorage.baconAuth && localStorage.baconUser) {
+	    return {
+	      authorization: localStorage.baconAuth,
+	      currentUser: localStorage.baconUser
+	    };
+	  }
+
+	  return null;
+	};
+
+	var _default = authStore;
+	exports.default = _default;
+	;
+
+	(function () {
+	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+	    return;
+	  }
+
+	  __REACT_HOT_LOADER__.register(authStore, "authStore", "/Users/nicolasjhampton/code/bacon-project-12/frontapp/authorize/auth_store.jsx");
+
+	  __REACT_HOT_LOADER__.register(_default, "default", "/Users/nicolasjhampton/code/bacon-project-12/frontapp/authorize/auth_store.jsx");
+	})();
+
+	;
+
+/***/ },
+/* 292 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -35286,9 +35467,13 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _StringField = __webpack_require__(290);
+	var _StringField = __webpack_require__(293);
 
 	var _StringField2 = _interopRequireDefault(_StringField);
+
+	var _LoggedOut2 = __webpack_require__(295);
+
+	var _LoggedOut3 = _interopRequireDefault(_LoggedOut2);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -35300,24 +35485,8 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	// we need to set the headers for authorization
-	// var authString = btoa(email + ':' + pass);
-	// headers['Authorization'] = 'Basic ' + authString;
-
-	// // this replaces 'componentWillMount'
-	// constructor(props) {
-	//   super(props);
-	//   // do your 'will mount' stuff (like api calls) here
-	// }
-	//
-	// // This replaces 'getDefaultProps'
-	// static defaultProps = {
-	//
-	// }
-
-
-	var Login = function (_Component) {
-	  _inherits(Login, _Component);
+	var Login = function (_LoggedOut) {
+	  _inherits(Login, _LoggedOut);
 
 	  function Login() {
 	    var _ref;
@@ -35330,18 +35499,33 @@
 	      args[_key] = arguments[_key];
 	    }
 
-	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Login.__proto__ || Object.getPrototypeOf(Login)).call.apply(_ref, [this].concat(args))), _this), _this.state = { username: "", password: "" }, _this.onSubmit = function (e) {
+	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Login.__proto__ || Object.getPrototypeOf(Login)).call.apply(_ref, [this].concat(args))), _this), _this.state = { username: "", password: "", storage: "sessionStorage", toggle: false }, _this.onSubmit = function (e) {
 	      e.preventDefault();
-	      _this.props.submit(_this.state);
+	      _this.context.submit(_this.state);
 	    }, _this.onChange = function (e) {
-	      _this.setState(_defineProperty({}, e.target.id, e.target.value));
+	      var id = e.target.id;
+	      var value = void 0;
+	      if (e.target.id == "storage") {
+	        console.log(_this.state.toggle);
+	        _this.state.toggle = !_this.state.toggle;
+	        console.log(_this.state.toggle);
+	        value = _this.state.toggle ? "localStorage" : "sessionStorage";
+	      } else {
+	        value = e.target.value;
+	      }
+	      _this.setState(_defineProperty({}, id, value));
 	    }, _temp), _possibleConstructorReturn(_this, _ret);
 	  }
 
-	  // this replaces 'getInitialState'
-
-
 	  _createClass(Login, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      this.authorize();
+	    }
+
+	    // this replaces 'getInitialState'
+
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
@@ -35351,7 +35535,21 @@
 	          'form',
 	          { onSubmit: this.onSubmit, className: 'col-md-6 col-xs-12 offset-md-3' },
 	          _react2.default.createElement(_StringField2.default, { id: 'username', state: this.onChange }),
-	          _react2.default.createElement(_StringField2.default, { id: 'password', state: this.onChange }),
+	          _react2.default.createElement(_StringField2.default, { id: 'password', type: 'password', state: this.onChange }),
+	          _react2.default.createElement(
+	            'div',
+	            null,
+	            _react2.default.createElement('input', {
+	              type: 'checkbox',
+	              id: 'storage',
+	              onChange: this.onChange,
+	              placeholder: 'Keep me logged in!' }),
+	            _react2.default.createElement(
+	              'label',
+	              { htmlFor: 'storage' },
+	              'Keep me logged in!'
+	            )
+	          ),
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'form-group' },
@@ -35366,11 +35564,8 @@
 	  }]);
 
 	  return Login;
-	}(_react.Component);
+	}(_LoggedOut3.default);
 
-	Login.propTypes = {
-	  submit: _react2.default.PropTypes.func.isRequired
-	};
 	var _default = Login;
 	exports.default = _default;
 	;
@@ -35388,7 +35583,7 @@
 	;
 
 /***/ },
-/* 290 */
+/* 293 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -35401,7 +35596,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Field = __webpack_require__(291);
+	var _Field = __webpack_require__(294);
 
 	var _Field2 = _interopRequireDefault(_Field);
 
@@ -35410,7 +35605,7 @@
 	var StringField = function StringField(props) {
 	  return _react2.default.createElement(_Field2.default, {
 	    id: props.id,
-	    type: 'text',
+	    type: props.type || "text",
 	    state: props.state });
 	};
 
@@ -35436,7 +35631,7 @@
 	;
 
 /***/ },
-/* 291 */
+/* 294 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -35492,7 +35687,7 @@
 	;
 
 /***/ },
-/* 292 */
+/* 295 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -35507,13 +35702,149 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _StringField = __webpack_require__(290);
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var LoggedOut = function (_Component) {
+	  _inherits(LoggedOut, _Component);
+
+	  function LoggedOut() {
+	    _classCallCheck(this, LoggedOut);
+
+	    return _possibleConstructorReturn(this, (LoggedOut.__proto__ || Object.getPrototypeOf(LoggedOut)).apply(this, arguments));
+	  }
+
+	  _createClass(LoggedOut, [{
+	    key: "authorize",
+	    value: function authorize() {
+	      if (this.context.authorization) this.context.router.replace("/profile/" + this.context.currentUser);
+	    }
+	  }]);
+
+	  return LoggedOut;
+	}(_react.Component);
+
+	LoggedOut.contextTypes = {
+	  submit: _react2.default.PropTypes.func.isRequired,
+	  currentUser: _react2.default.PropTypes.string,
+	  authorization: _react2.default.PropTypes.string,
+	  router: _react2.default.PropTypes.object
+	};
+	var _default = LoggedOut;
+	exports.default = _default;
+	;
+
+	(function () {
+	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+	    return;
+	  }
+
+	  __REACT_HOT_LOADER__.register(LoggedOut, "LoggedOut", "/Users/nicolasjhampton/code/bacon-project-12/frontapp/authorize/LoggedOut.jsx");
+
+	  __REACT_HOT_LOADER__.register(_default, "default", "/Users/nicolasjhampton/code/bacon-project-12/frontapp/authorize/LoggedOut.jsx");
+	})();
+
+	;
+
+/***/ },
+/* 296 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Home = function (_Component) {
+	  _inherits(Home, _Component);
+
+	  function Home() {
+	    _classCallCheck(this, Home);
+
+	    return _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).apply(this, arguments));
+	  }
+
+	  _createClass(Home, [{
+	    key: "render",
+	    value: function render() {
+	      return _react2.default.createElement(
+	        "div",
+	        null,
+	        _react2.default.createElement(
+	          "p",
+	          null,
+	          "This is the home page"
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Home;
+	}(_react.Component);
+
+	var _default = Home;
+	exports.default = _default;
+	;
+
+	(function () {
+	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+	    return;
+	  }
+
+	  __REACT_HOT_LOADER__.register(Home, "Home", "/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/Home.jsx");
+
+	  __REACT_HOT_LOADER__.register(_default, "default", "/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/Home.jsx");
+	})();
+
+	;
+
+/***/ },
+/* 297 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _StringField = __webpack_require__(293);
 
 	var _StringField2 = _interopRequireDefault(_StringField);
 
-	var _Field = __webpack_require__(291);
+	var _Field = __webpack_require__(294);
 
 	var _Field2 = _interopRequireDefault(_Field);
+
+	var _LoggedOut2 = __webpack_require__(295);
+
+	var _LoggedOut3 = _interopRequireDefault(_LoggedOut2);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -35525,8 +35856,8 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var Register = function (_Component) {
-	  _inherits(Register, _Component);
+	var Register = function (_LoggedOut) {
+	  _inherits(Register, _LoggedOut);
 
 	  function Register() {
 	    var _ref;
@@ -35539,18 +35870,40 @@
 	      args[_key] = arguments[_key];
 	    }
 
-	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Register.__proto__ || Object.getPrototypeOf(Register)).call.apply(_ref, [this].concat(args))), _this), _this.state = { username: "", password: "", email: "", confirm: "" }, _this.onSubmit = function (e) {
+	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Register.__proto__ || Object.getPrototypeOf(Register)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+	      username: "",
+	      password: "",
+	      email: "",
+	      confirm: "",
+	      storage: "sessionStorage",
+	      toggle: false
+	    }, _this.onSubmit = function (e) {
 	      e.preventDefault();
-	      _this.props.submit(_this.state);
+	      _this.context.submit(_this.state);
 	    }, _this.onChange = function (e) {
-	      _this.setState(_defineProperty({}, e.target.id, e.target.value));
+	      var id = e.target.id;
+	      var value = void 0;
+	      if (e.target.id == "storage") {
+	        console.log(_this.state.toggle);
+	        _this.state.toggle = !_this.state.toggle;
+	        console.log(_this.state.toggle);
+	        value = _this.state.toggle ? "localStorage" : "sessionStorage";
+	      } else {
+	        value = e.target.value;
+	      }
+	      _this.setState(_defineProperty({}, id, value));
 	    }, _temp), _possibleConstructorReturn(_this, _ret);
 	  }
 
-	  // this replaces 'getInitialState'
-
-
 	  _createClass(Register, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      this.authorize();
+	    }
+
+	    // this replaces 'getInitialState'
+
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
@@ -35560,9 +35913,24 @@
 	          'form',
 	          { onSubmit: this.onSubmit, className: 'col-md-6 col-xs-12 offset-md-3' },
 	          _react2.default.createElement(_StringField2.default, { id: 'username', state: this.onChange }),
-	          _react2.default.createElement(_StringField2.default, { id: 'password', state: this.onChange }),
-	          _react2.default.createElement(_StringField2.default, { id: 'confirm', state: this.onChange }),
 	          _react2.default.createElement(_Field2.default, { id: 'email', type: 'email', state: this.onChange }),
+	          _react2.default.createElement(_StringField2.default, { id: 'password', type: 'password', state: this.onChange }),
+	          _react2.default.createElement(_StringField2.default, { id: 'confirm', type: 'password', state: this.onChange }),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'form-group' },
+	            _react2.default.createElement('input', {
+	              type: 'checkbox',
+	              className: 'form-control',
+	              id: 'storage',
+	              onChange: this.onChange,
+	              placeholder: 'Keep me logged in!' }),
+	            _react2.default.createElement(
+	              'label',
+	              { htmlFor: 'storage' },
+	              'Keep me logged in!'
+	            )
+	          ),
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'form-group' },
@@ -35577,11 +35945,8 @@
 	  }]);
 
 	  return Register;
-	}(_react.Component);
+	}(_LoggedOut3.default);
 
-	Register.propTypes = {
-	  submit: _react2.default.PropTypes.func.isRequired
-	};
 	var _default = Register;
 	exports.default = _default;
 	;
@@ -35594,6 +35959,168 @@
 	  __REACT_HOT_LOADER__.register(Register, 'Register', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/Register.jsx');
 
 	  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/Register.jsx');
+	})();
+
+	;
+
+/***/ },
+/* 298 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _LoggedIn2 = __webpack_require__(299);
+
+	var _LoggedIn3 = _interopRequireDefault(_LoggedIn2);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Profile = function (_LoggedIn) {
+	  _inherits(Profile, _LoggedIn);
+
+	  function Profile() {
+	    _classCallCheck(this, Profile);
+
+	    return _possibleConstructorReturn(this, (Profile.__proto__ || Object.getPrototypeOf(Profile)).apply(this, arguments));
+	  }
+
+	  _createClass(Profile, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      this.authorize();
+	      // var that = this;
+	      // var options = {'sync disconnect on unload':true};
+	      // this.socket = this.props.io();
+	      // this.socket.on('games', (games) => {
+	      //   this.setState({ games: games, loaded: true });
+	      //   this.rollCarousel(0)();
+	      // });
+	      // request(this, "GET", "/games", function(context) {
+	      //   return function() {
+	      //     console.log(JSON.parse(this.responseText));
+	      //     var games = JSON.parse(this.responseText);
+	      //
+	      //     context.setState({
+	      //       games: games,
+	      //       loaded: true,
+	      //     });
+	      //     context.rollCarousel(0)();
+	      //   }
+	      // });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          'This is ',
+	          this.context.currentUser + '\'s',
+	          ' profile page'
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Profile;
+	}(_LoggedIn3.default);
+
+	var _default = Profile;
+	exports.default = _default;
+	;
+
+	(function () {
+	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+	    return;
+	  }
+
+	  __REACT_HOT_LOADER__.register(Profile, 'Profile', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/Profile.jsx');
+
+	  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/Profile.jsx');
+	})();
+
+	;
+
+/***/ },
+/* 299 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var LoggedIn = function (_Component) {
+	  _inherits(LoggedIn, _Component);
+
+	  function LoggedIn() {
+	    _classCallCheck(this, LoggedIn);
+
+	    return _possibleConstructorReturn(this, (LoggedIn.__proto__ || Object.getPrototypeOf(LoggedIn)).apply(this, arguments));
+	  }
+
+	  _createClass(LoggedIn, [{
+	    key: 'authorize',
+	    value: function authorize() {
+	      if (!this.context.authorization) this.context.router.push('/login');
+	    }
+	  }]);
+
+	  return LoggedIn;
+	}(_react.Component);
+
+	LoggedIn.contextTypes = {
+	  submit: _react2.default.PropTypes.func.isRequired,
+	  currentUser: _react2.default.PropTypes.string,
+	  authorization: _react2.default.PropTypes.string,
+	  router: _react2.default.PropTypes.object
+	};
+	var _default = LoggedIn;
+	exports.default = _default;
+	;
+
+	(function () {
+	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+	    return;
+	  }
+
+	  __REACT_HOT_LOADER__.register(LoggedIn, 'LoggedIn', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/authorize/LoggedIn.jsx');
+
+	  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/authorize/LoggedIn.jsx');
 	})();
 
 	;

@@ -7,7 +7,7 @@ const StringField = props => {
   return (
     <Field
       id={props.id}
-      type="text"
+      type={props.type || "text"}
       state={props.state}/>
   );
 }

@@ -5,6 +5,8 @@ var auth = require('basic-auth');
 
 
 module.exports = (req, res, next) => {
+  console.log(req.headers);
+  console.log(req.headers.authorization);
   var credentials = auth(req);
   console.log(credentials);
   User.authenticate(credentials, (err, authorization, user) => {
