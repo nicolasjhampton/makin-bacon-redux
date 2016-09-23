@@ -68,6 +68,9 @@
 	localStorage.debug = 'socket.io*';
 	//import ReactDOM from 'react-dom';
 
+	var what = "sessionStorage";
+	window[what].setItem('other', "rferiuwfn");
+
 	// import Options from './components/SomeOptions.jsx';
 	// import Stack from './components/Stack.jsx';
 	// import Players from './components/Players.jsx';
@@ -84,6 +87,8 @@
 	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
 	    return;
 	  }
+
+	  __REACT_HOT_LOADER__.register(what, 'what', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/app.jsx');
 	})();
 
 	;
@@ -29422,41 +29427,65 @@
 
 	var _GameApp2 = _interopRequireDefault(_GameApp);
 
-	var _Login = __webpack_require__(292);
+	var _Login = __webpack_require__(290);
 
 	var _Login2 = _interopRequireDefault(_Login);
 
-	var _Home = __webpack_require__(296);
+	var _Home = __webpack_require__(293);
 
 	var _Home2 = _interopRequireDefault(_Home);
 
-	var _Register = __webpack_require__(297);
+	var _Register = __webpack_require__(294);
 
 	var _Register2 = _interopRequireDefault(_Register);
 
-	var _Profile = __webpack_require__(298);
+	var _Profile = __webpack_require__(295);
 
 	var _Profile2 = _interopRequireDefault(_Profile);
+
+	var _auth_manager = __webpack_require__(296);
+
+	var _auth_manager2 = _interopRequireDefault(_auth_manager);
+
+	var _api_request = __webpack_require__(297);
+
+	var _api_request2 = _interopRequireDefault(_api_request);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	// import Games from './components/Games.jsx';
 	// import Game from './components/Game.jsx';
+	var tokenStrategy = function tokenStrategy(auth) {
+	  return 'Basic ' + btoa(auth.username + ':' + auth.password);
+	};
+	//IndexRoute, Redirect, DefaultRoute
 
+	var getUser = function getUser(token) {
+	  return _api_request2.default.login(token);
+	};
+
+	var createUser = function createUser(profile) {
+	  return _api_request2.default.register(profile);
+	};
+
+	var authMgr = new _auth_manager2.default({
+	  tokenStrategy: tokenStrategy,
+	  getUser: getUser,
+	  createUser: createUser
+	});
 
 	var routes = _react2.default.createElement(
 	  _reactRouter.Router,
-	  { history: _reactRouter.browserHistory },
+	  { createElement: authMgr.attachAuthMgr, history: _reactRouter.browserHistory },
 	  _react2.default.createElement(
 	    _reactRouter.Route,
-	    { component: _GameApp2.default },
+	    { onEnter: authMgr.initAuth, component: _GameApp2.default },
 	    _react2.default.createElement(_reactRouter.Route, { path: '/', component: _Home2.default }),
-	    _react2.default.createElement(_reactRouter.Route, { path: 'login', component: _Login2.default }),
-	    _react2.default.createElement(_reactRouter.Route, { path: 'register', component: _Register2.default }),
-	    _react2.default.createElement(_reactRouter.Route, { path: 'profile/:username', component: _Profile2.default })
+	    _react2.default.createElement(_reactRouter.Route, { path: 'login', onEnter: authMgr.loggedOut, component: _Login2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: 'register', onEnter: authMgr.loggedOut, component: _Register2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: 'profile/:username', onEnter: authMgr.loggedIn, component: _Profile2.default })
 	  )
 	);
-	//IndexRoute, Redirect, DefaultRoute 
 
 	var _default = routes;
 	exports.default = _default;
@@ -29466,6 +29495,14 @@
 	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
 	    return;
 	  }
+
+	  __REACT_HOT_LOADER__.register(tokenStrategy, 'tokenStrategy', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/router.jsx');
+
+	  __REACT_HOT_LOADER__.register(getUser, 'getUser', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/router.jsx');
+
+	  __REACT_HOT_LOADER__.register(createUser, 'createUser', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/router.jsx');
+
+	  __REACT_HOT_LOADER__.register(authMgr, 'authMgr', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/router.jsx');
 
 	  __REACT_HOT_LOADER__.register(routes, 'routes', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/router.jsx');
 
@@ -35136,189 +35173,78 @@
 	  value: true
 	});
 
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
 
 	var _reactRouter = __webpack_require__(225);
 
-	var _api_request = __webpack_require__(289);
+	var _AuthNavMenuItem = __webpack_require__(289);
 
-	var _api_request2 = _interopRequireDefault(_api_request);
-
-	var _NavLink = __webpack_require__(290);
-
-	var _NavLink2 = _interopRequireDefault(_NavLink);
-
-	var _auth_store = __webpack_require__(291);
-
-	var _auth_store2 = _interopRequireDefault(_auth_store);
+	var _AuthNavMenuItem2 = _interopRequireDefault(_AuthNavMenuItem);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	// const apiRequest = (context, path, auth, body, callback) => {
-	//   let req = new XMLHttpRequest();
-	//   req.open("POST", `http://localhost:3000/api${path}`);
-	//   req.setRequestHeader("authorization", auth);
-	//   req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	//   req.addEventListener("load", callback);
-	//   console.log(req);
-	//   req.send(body);
-	// }
-
-	// import {Link} from 'react-router';
+	// class GameApp extends Component {
 	//
-	// const NavLink = props => (
-	//     <Link {...props} activeStyle={{ color: 'white' }}/>
-	// );
+	//   componentWillMount() {
+	//
+	//   }
 
-	var GameApp = function (_Component) {
-	  _inherits(GameApp, _Component);
-
-	  function GameApp() {
-	    var _ref;
-
-	    var _temp, _this, _ret;
-
-	    _classCallCheck(this, GameApp);
-
-	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-	      args[_key] = arguments[_key];
-	    }
-
-	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = GameApp.__proto__ || Object.getPrototypeOf(GameApp)).call.apply(_ref, [this].concat(args))), _this), _this.state = (0, _auth_store2.default)() || {}, _temp), _possibleConstructorReturn(_this, _ret);
-	  }
-
-	  _createClass(GameApp, [{
-	    key: 'getChildContext',
-	    value: function getChildContext() {
-	      return {
-	        submit: this.submit(this),
-	        authorization: this.state.authorization,
-	        currentUser: this.state.currentUser
-	      };
-	    }
-	  }, {
-	    key: 'submit',
-	    value: function submit(that) {
-	      return function (obj) {
-	        var authorization = 'Basic ' + btoa(obj.username + ':' + obj.password);
-	        var path = !obj.email ? '/login' : '';
-	        delete obj.toggle; // unneeded in the request
-	        (0, _api_request2.default)(null, '/players' + path, authorization, obj, function () {
-	          if (this.readyState == 4 && this.status == 200) {
-	            var data = JSON.parse(this.responseText);
-	            var currentUser = data.username;
-	            window[obj.storage].baconAuth = authorization;
-	            window[obj.storage].baconUser = currentUser;
-	            that.setState({ authorization: authorization, currentUser: currentUser });
-	            that.context.router.replace({
-	              pathname: '/profile/' + data.username
-	            });
-	          }
-	        });
-	      };
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'container' },
+	var GameApp = function GameApp(props) {
+	  var obj = props.authMgr.getAuth();
+	  var profilePath = '/profile/' + obj.currentUser;
+	  var authorized = obj.authorization ? true : false;
+	  return _react2.default.createElement(
+	    'div',
+	    { className: 'container' },
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'row' },
+	      _react2.default.createElement(
+	        'nav',
+	        { className: 'navbar navbar-dark bg-primary' },
 	        _react2.default.createElement(
-	          'div',
-	          { className: 'row' },
-	          _react2.default.createElement(
-	            'nav',
-	            { className: 'navbar navbar-dark bg-primary' },
-	            _react2.default.createElement(
-	              _reactRouter.Link,
-	              {
-	                className: 'navbar-brand',
-	                activeStyle: { color: 'white' },
-	                to: 'home' },
-	              'Makin Bacon'
-	            ),
-	            _react2.default.createElement(
-	              'ul',
-	              { className: 'nav navbar-nav pull-xs-right' },
-	              _react2.default.createElement(
-	                'li',
-	                { className: 'nav-item' },
-	                _react2.default.createElement(
-	                  _NavLink2.default,
-	                  { to: '/' },
-	                  'Home'
-	                )
-	              ),
-	              _react2.default.createElement(
-	                'li',
-	                { className: 'nav-item' },
-	                this.state.authorization ? _react2.default.createElement(
-	                  _NavLink2.default,
-	                  { to: 'profile/' + this.state.currentUser },
-	                  'Profile'
-	                ) : _react2.default.createElement(
-	                  _NavLink2.default,
-	                  { to: 'login' },
-	                  'Login'
-	                )
-	              ),
-	              _react2.default.createElement(
-	                'li',
-	                { className: 'nav-item' },
-	                this.state.authorization ? _react2.default.createElement(
-	                  _NavLink2.default,
-	                  { to: 'game' },
-	                  'Game'
-	                ) : _react2.default.createElement(
-	                  _NavLink2.default,
-	                  { to: 'register' },
-	                  'Register'
-	                )
-	              ),
-	              this.state.authorization ? _react2.default.createElement(
-	                'li',
-	                { className: 'nav-item' },
-	                _react2.default.createElement(
-	                  _NavLink2.default,
-	                  {
-	                    className: 'nav-link'
-	                  },
-	                  'Logout'
-	                )
-	              ) : ""
-	            )
-	          )
+	          _reactRouter.Link,
+	          {
+	            className: 'navbar-brand',
+	            activeStyle: { color: 'white' },
+	            to: 'home' },
+	          'Makin Bacon'
 	        ),
 	        _react2.default.createElement(
-	          'div',
-	          { className: 'row' },
-	          this.props.children
+	          'ul',
+	          { className: 'nav navbar-nav pull-xs-right' },
+	          _react2.default.createElement(_AuthNavMenuItem2.default, {
+	            authorized: authorized,
+	            authRoute: "/game",
+	            authRouteName: "Game",
+	            unAuthRoute: "/",
+	            unAuthRouteName: "Home" }),
+	          _react2.default.createElement(_AuthNavMenuItem2.default, {
+	            authorized: authorized,
+	            authRoute: profilePath,
+	            authRouteName: "Profile",
+	            unAuthRoute: "/register",
+	            unAuthRouteName: "Register" }),
+	          _react2.default.createElement(_AuthNavMenuItem2.default, {
+	            authorized: authorized,
+	            authRoute: "/login",
+	            authRouteName: "Logout",
+	            unAuthRoute: "/login",
+	            unAuthRouteName: "Login",
+	            onClick: props.authMgr.deleteAuth })
 	        )
-	      );
-	    }
-	  }]);
-
-	  return GameApp;
-	}(_react.Component);
-
-	GameApp.contextTypes = {
-	  router: _react2.default.PropTypes.object
+	      )
+	    ),
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'row' },
+	      props.children
+	    )
+	  );
 	};
-	GameApp.childContextTypes = {
-	  submit: _react2.default.PropTypes.func,
-	  authorization: _react2.default.PropTypes.string,
-	  currentUser: _react2.default.PropTypes.string
-	};
+
 	var _default = GameApp;
 	exports.default = _default;
 	;
@@ -35337,50 +35263,13 @@
 
 /***/ },
 /* 289 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	var apiRequest = function apiRequest(context, path, auth, body, callback) {
-	  var req = new XMLHttpRequest();
-	  req.open("POST", "http://localhost:3000/api" + path);
-	  req.setRequestHeader("authorization", auth);
-	  req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	  req.addEventListener("load", callback);
-	  console.log(req);
-	  req.send(body);
-	};
-
-	var _default = apiRequest;
-	exports.default = _default;
-	;
-
-	(function () {
-	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-	    return;
-	  }
-
-	  __REACT_HOT_LOADER__.register(apiRequest, "apiRequest", "/Users/nicolasjhampton/code/bacon-project-12/frontapp/api/api_request.jsx");
-
-	  __REACT_HOT_LOADER__.register(_default, "default", "/Users/nicolasjhampton/code/bacon-project-12/frontapp/api/api_request.jsx");
-	})();
-
-	;
-
-/***/ },
-/* 290 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 	var _react = __webpack_require__(1);
 
@@ -35390,52 +35279,40 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var NavLink = function NavLink(props) {
-	    return _react2.default.createElement(_reactRouter.Link, _extends({}, props, { className: 'nav-link', activeStyle: { color: 'white' } }));
+	var AuthNavMenuItem = function AuthNavMenuItem(props) {
+	  return _react2.default.createElement(
+	    'li',
+	    { className: 'nav-item' },
+	    props.authorized ? _react2.default.createElement(
+	      _reactRouter.Link,
+	      {
+	        onClick: props.onClick,
+	        className: 'nav-link',
+	        activeStyle: { color: 'white' },
+	        to: props.authRoute },
+	      props.authRouteName
+	    ) : _react2.default.createElement(
+	      _reactRouter.Link,
+	      {
+	        onClick: props.onClick,
+	        className: 'nav-link',
+	        activeStyle: { color: 'white' },
+	        to: props.unAuthRoute },
+	      props.unAuthRouteName
+	    )
+	  );
 	};
 
-	var _default = NavLink;
-	exports.default = _default;
-	;
-
-	(function () {
-	    if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-	        return;
-	    }
-
-	    __REACT_HOT_LOADER__.register(NavLink, 'NavLink', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/NavLink.jsx');
-
-	    __REACT_HOT_LOADER__.register(_default, 'default', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/NavLink.jsx');
-	})();
-
-	;
-
-/***/ },
-/* 291 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	var authStore = function authStore() {
-	  if (sessionStorage.baconAuth && sessionStorage.baconUser) {
-	    return {
-	      authorization: sessionStorage.baconAuth,
-	      currentUser: sessionStorage.baconUser
-	    };
-	  } else if (localStorage.baconAuth && localStorage.baconUser) {
-	    return {
-	      authorization: localStorage.baconAuth,
-	      currentUser: localStorage.baconUser
-	    };
-	  }
-
-	  return null;
+	AuthNavMenuItem.propTypes = {
+	  authorized: _react2.default.PropTypes.bool.isRequired,
+	  authRoute: _react2.default.PropTypes.string.isRequired,
+	  authRouteName: _react2.default.PropTypes.string.isRequired,
+	  unAuthRoute: _react2.default.PropTypes.string.isRequired,
+	  unAuthRouteName: _react2.default.PropTypes.string.isRequired,
+	  onClick: _react2.default.PropTypes.func
 	};
 
-	var _default = authStore;
+	var _default = AuthNavMenuItem;
 	exports.default = _default;
 	;
 
@@ -35444,15 +35321,15 @@
 	    return;
 	  }
 
-	  __REACT_HOT_LOADER__.register(authStore, "authStore", "/Users/nicolasjhampton/code/bacon-project-12/frontapp/authorize/auth_store.jsx");
+	  __REACT_HOT_LOADER__.register(AuthNavMenuItem, 'AuthNavMenuItem', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/AuthNavMenuItem.jsx');
 
-	  __REACT_HOT_LOADER__.register(_default, "default", "/Users/nicolasjhampton/code/bacon-project-12/frontapp/authorize/auth_store.jsx");
+	  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/AuthNavMenuItem.jsx');
 	})();
 
 	;
 
 /***/ },
-/* 292 */
+/* 290 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -35467,13 +35344,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _StringField = __webpack_require__(293);
+	var _reactRouter = __webpack_require__(225);
+
+	var _StringField = __webpack_require__(291);
 
 	var _StringField2 = _interopRequireDefault(_StringField);
-
-	var _LoggedOut2 = __webpack_require__(295);
-
-	var _LoggedOut3 = _interopRequireDefault(_LoggedOut2);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -35485,8 +35360,10 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var Login = function (_LoggedOut) {
-	  _inherits(Login, _LoggedOut);
+	//import LoggedOut from '../authorize/LoggedOut.jsx';
+
+	var Login = function (_Component) {
+	  _inherits(Login, _Component);
 
 	  function Login() {
 	    var _ref;
@@ -35499,17 +35376,22 @@
 	      args[_key] = arguments[_key];
 	    }
 
-	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Login.__proto__ || Object.getPrototypeOf(Login)).call.apply(_ref, [this].concat(args))), _this), _this.state = { username: "", password: "", storage: "sessionStorage", toggle: false }, _this.onSubmit = function (e) {
+	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Login.__proto__ || Object.getPrototypeOf(Login)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+	      username: "",
+	      password: "",
+	      storage: true
+	    }, _this.onSubmit = function (e) {
 	      e.preventDefault();
-	      _this.context.submit(_this.state);
+	      _this.props.authMgr.login(_this.state, function (auth) {
+	        _this.props.router.replace({
+	          pathname: '/profile/' + auth.username
+	        });
+	      });
 	    }, _this.onChange = function (e) {
 	      var id = e.target.id;
 	      var value = void 0;
 	      if (e.target.id == "storage") {
-	        console.log(_this.state.toggle);
-	        _this.state.toggle = !_this.state.toggle;
-	        console.log(_this.state.toggle);
-	        value = _this.state.toggle ? "localStorage" : "sessionStorage";
+	        value = !_this.state.storage;
 	      } else {
 	        value = e.target.value;
 	      }
@@ -35519,9 +35401,7 @@
 
 	  _createClass(Login, [{
 	    key: 'componentWillMount',
-	    value: function componentWillMount() {
-	      this.authorize();
-	    }
+	    value: function componentWillMount() {}
 
 	    // this replaces 'getInitialState'
 
@@ -35564,9 +35444,10 @@
 	  }]);
 
 	  return Login;
-	}(_LoggedOut3.default);
+	}(_react.Component);
 
-	var _default = Login;
+	var _default = (0, _reactRouter.withRouter)(Login);
+
 	exports.default = _default;
 	;
 
@@ -35583,7 +35464,7 @@
 	;
 
 /***/ },
-/* 293 */
+/* 291 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -35596,7 +35477,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Field = __webpack_require__(294);
+	var _Field = __webpack_require__(292);
 
 	var _Field2 = _interopRequireDefault(_Field);
 
@@ -35631,7 +35512,7 @@
 	;
 
 /***/ },
-/* 294 */
+/* 292 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -35687,72 +35568,7 @@
 	;
 
 /***/ },
-/* 295 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var LoggedOut = function (_Component) {
-	  _inherits(LoggedOut, _Component);
-
-	  function LoggedOut() {
-	    _classCallCheck(this, LoggedOut);
-
-	    return _possibleConstructorReturn(this, (LoggedOut.__proto__ || Object.getPrototypeOf(LoggedOut)).apply(this, arguments));
-	  }
-
-	  _createClass(LoggedOut, [{
-	    key: "authorize",
-	    value: function authorize() {
-	      if (this.context.authorization) this.context.router.replace("/profile/" + this.context.currentUser);
-	    }
-	  }]);
-
-	  return LoggedOut;
-	}(_react.Component);
-
-	LoggedOut.contextTypes = {
-	  submit: _react2.default.PropTypes.func.isRequired,
-	  currentUser: _react2.default.PropTypes.string,
-	  authorization: _react2.default.PropTypes.string,
-	  router: _react2.default.PropTypes.object
-	};
-	var _default = LoggedOut;
-	exports.default = _default;
-	;
-
-	(function () {
-	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-	    return;
-	  }
-
-	  __REACT_HOT_LOADER__.register(LoggedOut, "LoggedOut", "/Users/nicolasjhampton/code/bacon-project-12/frontapp/authorize/LoggedOut.jsx");
-
-	  __REACT_HOT_LOADER__.register(_default, "default", "/Users/nicolasjhampton/code/bacon-project-12/frontapp/authorize/LoggedOut.jsx");
-	})();
-
-	;
-
-/***/ },
-/* 296 */
+/* 293 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -35819,7 +35635,7 @@
 	;
 
 /***/ },
-/* 297 */
+/* 294 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -35834,17 +35650,15 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _StringField = __webpack_require__(293);
+	var _reactRouter = __webpack_require__(225);
+
+	var _StringField = __webpack_require__(291);
 
 	var _StringField2 = _interopRequireDefault(_StringField);
 
-	var _Field = __webpack_require__(294);
+	var _Field = __webpack_require__(292);
 
 	var _Field2 = _interopRequireDefault(_Field);
-
-	var _LoggedOut2 = __webpack_require__(295);
-
-	var _LoggedOut3 = _interopRequireDefault(_LoggedOut2);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -35856,8 +35670,8 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var Register = function (_LoggedOut) {
-	  _inherits(Register, _LoggedOut);
+	var Register = function (_Component) {
+	  _inherits(Register, _Component);
 
 	  function Register() {
 	    var _ref;
@@ -35875,19 +35689,19 @@
 	      password: "",
 	      email: "",
 	      confirm: "",
-	      storage: "sessionStorage",
-	      toggle: false
+	      storage: true
 	    }, _this.onSubmit = function (e) {
 	      e.preventDefault();
-	      _this.context.submit(_this.state);
+	      _this.props.authMgr.register(_this.state, function (auth) {
+	        _this.props.router.replace({
+	          pathname: '/profile/' + auth.username
+	        });
+	      });
 	    }, _this.onChange = function (e) {
 	      var id = e.target.id;
 	      var value = void 0;
 	      if (e.target.id == "storage") {
-	        console.log(_this.state.toggle);
-	        _this.state.toggle = !_this.state.toggle;
-	        console.log(_this.state.toggle);
-	        value = _this.state.toggle ? "localStorage" : "sessionStorage";
+	        value = !_this.state.storage;
 	      } else {
 	        value = e.target.value;
 	      }
@@ -35897,9 +35711,7 @@
 
 	  _createClass(Register, [{
 	    key: 'componentWillMount',
-	    value: function componentWillMount() {
-	      this.authorize();
-	    }
+	    value: function componentWillMount() {}
 
 	    // this replaces 'getInitialState'
 
@@ -35945,9 +35757,10 @@
 	  }]);
 
 	  return Register;
-	}(_LoggedOut3.default);
+	}(_react.Component);
 
-	var _default = Register;
+	var _default = (0, _reactRouter.withRouter)(Register);
+
 	exports.default = _default;
 	;
 
@@ -35964,7 +35777,7 @@
 	;
 
 /***/ },
-/* 298 */
+/* 295 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -35979,10 +35792,6 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _LoggedIn2 = __webpack_require__(299);
-
-	var _LoggedIn3 = _interopRequireDefault(_LoggedIn2);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -35991,8 +35800,8 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var Profile = function (_LoggedIn) {
-	  _inherits(Profile, _LoggedIn);
+	var Profile = function (_Component) {
+	  _inherits(Profile, _Component);
 
 	  function Profile() {
 	    _classCallCheck(this, Profile);
@@ -36001,9 +35810,9 @@
 	  }
 
 	  _createClass(Profile, [{
-	    key: 'componentWillMount',
+	    key: "componentWillMount",
 	    value: function componentWillMount() {
-	      this.authorize();
+
 	      // var that = this;
 	      // var options = {'sync disconnect on unload':true};
 	      // this.socket = this.props.io();
@@ -36025,24 +35834,25 @@
 	      // });
 	    }
 	  }, {
-	    key: 'render',
+	    key: "render",
 	    value: function render() {
+	      var authMgr = this.props.authMgr;
 	      return _react2.default.createElement(
-	        'div',
+	        "div",
 	        null,
 	        _react2.default.createElement(
-	          'p',
+	          "p",
 	          null,
-	          'This is ',
-	          this.context.currentUser + '\'s',
-	          ' profile page'
+	          "This is ",
+	          authMgr.getAuth().currentUser,
+	          " profile page"
 	        )
 	      );
 	    }
 	  }]);
 
 	  return Profile;
-	}(_LoggedIn3.default);
+	}(_react.Component);
 
 	var _default = Profile;
 	exports.default = _default;
@@ -36053,15 +35863,15 @@
 	    return;
 	  }
 
-	  __REACT_HOT_LOADER__.register(Profile, 'Profile', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/Profile.jsx');
+	  __REACT_HOT_LOADER__.register(Profile, "Profile", "/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/Profile.jsx");
 
-	  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/Profile.jsx');
+	  __REACT_HOT_LOADER__.register(_default, "default", "/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/Profile.jsx");
 	})();
 
 	;
 
 /***/ },
-/* 299 */
+/* 296 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -36076,40 +35886,104 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactRouter = __webpack_require__(225);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	var AuthManager = function () {
+	  function AuthManager(config) {
+	    var _this = this;
 
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	    _classCallCheck(this, AuthManager);
 
-	var LoggedIn = function (_Component) {
-	  _inherits(LoggedIn, _Component);
+	    this.setAuth = function (token, user, storage) {
+	      _this.storage = storage ? _this.primaryStoreKey : _this.secondaryStoreKey;
+	      _this.store[_this.storage].setItem(_this.tokenProp, token);
+	      _this.store[_this.storage].setItem(_this.userProp, user);
+	    };
 
-	  function LoggedIn() {
-	    _classCallCheck(this, LoggedIn);
+	    this.deleteAuth = function () {
+	      _this.store[_this.storage].setItem(_this.tokenProp, '');
+	      _this.store[_this.storage].setItem(_this.userProp, '');
+	      _this.storage = _this.primaryStoreKey;
+	    };
 
-	    return _possibleConstructorReturn(this, (LoggedIn.__proto__ || Object.getPrototypeOf(LoggedIn)).apply(this, arguments));
+	    this.attachAuthMgr = function (Component, props) {
+	      props.authMgr = _this;
+	      return _react2.default.createElement(Component, props);
+	    };
+
+	    this.initAuth = function (nextState, replace) {
+	      if (_this.store[_this.primaryStoreKey].hasOwnProperty(_this.tokenProp) && _this.store[_this.primaryStoreKey].hasOwnProperty(_this.userProp)) {
+	        _this.storage = _this.primaryStoreKey;
+	      } else if (_this.store[_this.secondaryStoreKey].hasOwnProperty(_this.tokenProp) && _this.store[_this.secondaryStoreKey].hasOwnProperty(_this.userProp)) {
+	        _this.storage = _this.secondaryStoreKey;
+	      } else {
+	        _this.storage = _this.primaryStoreKey;
+	        _this.store[_this.storage].setItem(_this.tokenProp, '');
+	        _this.store[_this.storage].setItem(_this.userProp, '');
+	      }
+	    };
+
+	    this.loggedIn = function (nextState, replace) {
+	      var auth = _this.getAuth();
+	      if (!auth.authorization) replace('/login');
+	    };
+
+	    this.loggedOut = function (nextState, replace) {
+	      var auth = _this.getAuth();
+	      if (auth.authorization) replace('/profile/' + auth.currentUser);
+	    };
+
+	    this.store = config.store || window;
+	    this.primaryStoreKey = config.primaryStoreKey || "sessionStorage";
+	    this.secondaryStoreKey = config.secondaryStoreKey || "localStorage";
+	    this.storage = this.primaryStoreKey;
+	    this.tokenProp = config.tokenProp || "authorization";
+	    this.userProp = config.userProp || "user";
+	    this.tokenStrategy = config.tokenStrategy;
+	    this.getUser = config.getUser;
+	    this.createUser = config.createUser;
 	  }
 
-	  _createClass(LoggedIn, [{
-	    key: 'authorize',
-	    value: function authorize() {
-	      if (!this.context.authorization) this.context.router.push('/login');
+	  _createClass(AuthManager, [{
+	    key: 'getAuth',
+	    value: function getAuth() {
+	      return {
+	        authorization: this.store[this.storage].getItem(this.tokenProp) || '',
+	        currentUser: this.store[this.storage].getItem(this.userProp) || ''
+	      };
+	    }
+	  }, {
+	    key: 'login',
+	    value: function login(auth, callback) {
+	      var _this2 = this;
+
+	      var token = this.tokenStrategy(auth);
+	      this.getUser(token).then(function (data) {
+	        _this2.setAuth(token, data.username, auth.storage);
+	        return callback(data);
+	      });
+	    }
+	  }, {
+	    key: 'register',
+	    value: function register(profile, callback) {
+	      var _this3 = this;
+
+	      var token = this.tokenStrategy(profile);
+	      this.createUser(profile).then(function (data) {
+	        _this3.setAuth(token, data.username, profile.storage);
+	        return callback(data);
+	      });
 	    }
 	  }]);
 
-	  return LoggedIn;
-	}(_react.Component);
+	  return AuthManager;
+	}();
 
-	LoggedIn.contextTypes = {
-	  submit: _react2.default.PropTypes.func.isRequired,
-	  currentUser: _react2.default.PropTypes.string,
-	  authorization: _react2.default.PropTypes.string,
-	  router: _react2.default.PropTypes.object
-	};
-	var _default = LoggedIn;
+	var _default = AuthManager;
 	exports.default = _default;
 	;
 
@@ -36118,9 +35992,65 @@
 	    return;
 	  }
 
-	  __REACT_HOT_LOADER__.register(LoggedIn, 'LoggedIn', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/authorize/LoggedIn.jsx');
+	  __REACT_HOT_LOADER__.register(AuthManager, 'AuthManager', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/authorize/auth_manager.jsx');
 
-	  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/authorize/LoggedIn.jsx');
+	  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/authorize/auth_manager.jsx');
+	})();
+
+	;
+
+/***/ },
+/* 297 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var apiRequest = {
+	  request: function request(path, auth, body) {
+	    return new Promise(function (resolve, reject) {
+	      var req = new XMLHttpRequest();
+	      req.open("POST", "http://localhost:3000/api" + path);
+	      req.setRequestHeader("authorization", auth);
+	      if (body) {
+	        req.setRequestHeader("Content-type", "application/json");
+	      } else {
+	        req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	      }
+
+	      req.addEventListener("load", function () {
+	        if (this.readyState == 4 && this.status == 200) {
+	          var data = JSON.parse(this.responseText);
+	          return resolve(data);
+	        } else {
+	          return reject(this.statusText);
+	        }
+	      });
+	      req.send(JSON.stringify(body));
+	    });
+	  },
+	  login: function login(auth) {
+	    return this.request("/players/login", auth, null);
+	  },
+	  register: function register(body) {
+	    return this.request("/players", null, body);
+	  }
+	};
+
+	var _default = apiRequest;
+	exports.default = _default;
+	;
+
+	(function () {
+	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+	    return;
+	  }
+
+	  __REACT_HOT_LOADER__.register(apiRequest, "apiRequest", "/Users/nicolasjhampton/code/bacon-project-12/frontapp/api/api_request.jsx");
+
+	  __REACT_HOT_LOADER__.register(_default, "default", "/Users/nicolasjhampton/code/bacon-project-12/frontapp/api/api_request.jsx");
 	})();
 
 	;

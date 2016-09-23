@@ -1,32 +1,32 @@
 "use strict";
 
 import React, {Component} from 'react';
+import {withRouter} from 'react-router';
 import StringField from './StringField.jsx';
-import LoggedOut from '../authorize/LoggedOut.jsx';
 
-
-class Login extends LoggedOut {
-
-  componentWillMount() {
-    this.authorize();
-  }
+class Login extends Component {
 
   // this replaces 'getInitialState'
-  state = { username: "", password: "", storage: "sessionStorage", toggle: false }
+  state = {
+    username: "",
+    password: "",
+    storage: true,
+  }
 
   onSubmit = (e) => {
     e.preventDefault();
-    this.context.submit(this.state);
+    this.props.authMgr.login(this.state, auth => {
+      this.props.router.replace({
+        pathname: `/profile/${auth.username}`,
+      });
+    });
   }
 
   onChange = (e) => {
     let id = e.target.id;
     let value;
     if(e.target.id == "storage")  {
-      console.log(this.state.toggle);
-      this.state.toggle = !this.state.toggle;
-      console.log(this.state.toggle);
-      value = this.state.toggle ? "localStorage" : "sessionStorage";
+      value = !this.state.storage;
     } else {
       value = e.target.value;
     }
@@ -45,7 +45,10 @@ class Login extends LoggedOut {
               id="storage"
               onChange={this.onChange}
               placeholder={`Keep me logged in!`}/>
-            <label htmlFor="storage">Keep me logged in!</label>
+            <label
+              htmlFor="storage">
+              Keep me logged in!
+            </label>
           </div>
           <div className="form-group">
             <input
@@ -59,4 +62,4 @@ class Login extends LoggedOut {
   }
 }
 
-export default Login;
+export default withRouter(Login);

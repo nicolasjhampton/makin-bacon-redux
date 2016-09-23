@@ -46,12 +46,9 @@ UserSchema.pre('save', function(next) {
 });
 
 UserSchema.statics.authenticate = function(credentials, callback) {
-  console.log(credentials.name);
   if(!credentials) return callback(null, false);
   this.findOne({ username: credentials.name })
       .exec(function(err, user) {
-        console.log('inside model', user);
-        console.log('inside model', err);
         if(!user || err) return callback(null, false);
         bcrypt.compare(credentials.pass, user.password, function(err2, authorization){
           if(err2) return callback(null, false);

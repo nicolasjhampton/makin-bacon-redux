@@ -1,15 +1,11 @@
 "use strict";
 
 import React, {Component} from 'react';
+import {withRouter} from 'react-router';
 import StringField from './StringField.jsx';
 import Field from './Field.jsx';
-import LoggedOut from '../authorize/LoggedOut.jsx';
 
-class Register extends LoggedOut {
-
-  componentWillMount() {
-    this.authorize();
-  }
+class Register extends Component {
 
   // this replaces 'getInitialState'
   state = {
@@ -17,23 +13,23 @@ class Register extends LoggedOut {
     password: "",
     email: "",
     confirm: "",
-    storage: "sessionStorage",
-    toggle: false,
+    storage: true,
   }
 
   onSubmit = (e) => {
     e.preventDefault();
-    this.context.submit(this.state);
+    this.props.authMgr.register(this.state, auth => {
+      this.props.router.replace({
+        pathname: `/profile/${auth.username}`,
+      });
+    });
   }
 
   onChange = (e) => {
     let id = e.target.id;
     let value;
     if(e.target.id == "storage")  {
-      console.log(this.state.toggle);
-      this.state.toggle = !this.state.toggle;
-      console.log(this.state.toggle);
-      value = this.state.toggle ? "localStorage" : "sessionStorage";
+      value = !this.state.storage;
     } else {
       value = e.target.value;
     }
@@ -69,4 +65,4 @@ class Register extends LoggedOut {
   }
 }
 
-export default Register;
+export default withRouter(Register);

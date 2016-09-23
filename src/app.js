@@ -17,7 +17,9 @@ var port = process.env.PORT || 3000;
  * Standard logging and request header middleware
  */
 app.use(morgan('dev'));
+app.use(parser.json());
 app.use(parser.urlencoded({ extended: false }));
+
 app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Origin', "*");
   res.header('Access-Control-Allow-Headers', "Content-Type");
@@ -60,7 +62,6 @@ app.use(function(req, res, next) {
  */
 
 var router = require('./routes/api/index.js');
-app.use('/api', parser.json());
 app.use('/api', router);
 
 app.get('*', function(req, res){

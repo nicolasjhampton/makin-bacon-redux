@@ -6,7 +6,7 @@ module.exports = (req, res, next) => {
   var user = new User(req.body);
   user.save((err) => {
     if(err) return next(err);
-    res.user = user;
+    req.user = user;
     next();
   });
 };
