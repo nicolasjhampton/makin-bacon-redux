@@ -9,14 +9,16 @@ class IoMgr {
   }
 
   gameListStream = (context) => {
-    this.gameList = io();
-    this.gameListChannel = Observable.create(observer => {
-      return this.gameList.on('games', game => { observer.next(game); });
-    });
-    return this.gameListChannel.subscribe(games => context.setState({games: games}));
+    if(!this.gameList) {
+      this.gameList = io();
+      this.gameListChannel = Observable.create(observer => {
+        return this.gameList.on('games', game => { observer.next(game); });
+      });
+      return this.gameListChannel.subscribe(games => context.setState({games: games}));
+    }
   }
 
-  gameStream = () => {
+  gameStream = (context) => {
     //this.id = id;
     this.game = io(`/${this.id}`);
     this.gameChannel = Observable.create(observer => {

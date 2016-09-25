@@ -20,40 +20,6 @@ import AuthManager from './authorize/auth_manager.jsx';
 import apiRequest from './api/api_request.jsx';
 
 
-import { Observable } from 'rxjs-es/Observable';
-
-class IoMgr {
-
-  constructor(io) {
-    this.io = io;
-  }
-
-  // initGameListSocket = () => {
-  //
-  // }
-
-  initGameSocket = (id) => {
-    this.id = id;
-    this.game = io(`/${this.id}`);
-  }
-
-  gameListStream = (context) => {
-    this.gameList = io();
-    this.gameListChannel = Observable.create(observer => {
-      return this.gameList.on('games', game => { observer.next(game); });
-    });
-    return this.gameListChannel.subscribe(games => context.setState({games: games}));
-  }
-
-  gameStream = () => {
-    this.gameChannel = Observable.create(observer => {
-      return this.game.on('move', move => { observer.next(move); });
-    });
-    //return this.gameChannel;
-  }
-
-}
-
 const tokenStrategy = (auth) => (
   `Basic ${btoa(`${auth.username}:${auth.password}`)}`
 );
@@ -74,36 +40,18 @@ const authMgr = new AuthManager({
 
 const ioMgr = new IoMgr(io);
 
-const sockets = {};
-
 const globalApis = (Component, props) => {
   props.authMgr = authMgr;
   props.apiRequest = apiRequest;
-  props.io = io;
-  props.sockets = sockets;
   props.ioMgr = ioMgr;
   return <Component {...props}/>
 };
-//////////////////////////////////////////////////
-// var options = {'sync disconnect on unload':true};
-//
-// this.socket = this.props.io();
-// this.socket.on('games', (games) => {
-//   this.setState({ games: games });
-// });
-//
-// this.props.apiRequest.getGames(this.props.auth).then(games => {
-//   this.setState({ games: games });
-// });
-//////////////////////////////////////////////////
+
 
 
 const startGame = (nextState, replace) => {
-  // this context gives us nothing useful here
   console.log(nextState.params.gameId);
-  sockets.game = {};
-  sockets.game.id = nextState.params.gameId;
-  //<Stack stack={this.state.stack}/>
+  ioMgr.id = nextState.params.gameId;
 };
 
 const routes = (

@@ -12,12 +12,9 @@ class Profile extends Component {
   }
 
   componentWillMount() {
-
-    //this.props.ioMgr.initGameListSocket();
-
-    let auth = this.props.authMgr.getAuth();
+    let auth = this.props.authMgr.getAuth().authorization;
     this.props.ioMgr.gameListStream(this);
-    this.props.apiRequest.getGames(auth.authorization).then(games => {
+    this.props.apiRequest.getGames(auth).then(games => {
       this.setState({ games: games });
     });
   }
