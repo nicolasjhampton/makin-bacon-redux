@@ -19,8 +19,8 @@ const GameApp = props => {
           <ul className="nav navbar-nav pull-xs-right">
             <AuthNavMenuItem
               authorized={authorized}
-              authRoute={"/game"}
-              authRouteName={"Game"}
+              authRoute={"/games"}
+              authRouteName={"Games"}
               unAuthRoute={"/"}
               unAuthRouteName={"Home"} />
             <AuthNavMenuItem

@@ -26,7 +26,7 @@ const Arrows = props => {
   );
 }
 
-Arrow.PropTypes = {
+Arrows.PropTypes = {
   action: React.PropTypes.func.isRequired,
   headerContainer: React.PropTypes.bool.isRequired,
 };

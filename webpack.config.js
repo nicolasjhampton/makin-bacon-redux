@@ -5,11 +5,16 @@ module.exports = {
     //path: './src/public/app/',
     filename: 'src/public/app/bundle.js'
   },
+  resolve: {
+    alias: {
+      'rxjs': 'rxjs-es'
+    }
+  },
   module: {
     loaders: [
       {
-        test: /\.jsx$/,
-        exclude: /node_modules/,
+        test: /\.js(x)?$/,
+        exclude: /(node_modules(?!\/rxjs))/,
         loaders: ['babel-loader']
       },
       {

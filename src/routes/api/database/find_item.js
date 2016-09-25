@@ -4,7 +4,7 @@ var Actor = require('../../../models/actor.js');
 var Movie = require('../../../models/movie.js');
 
 module.exports = (req, res, next) => {
-
+  console.log(req.body);
   var Collection;
   if(req.body.type === 'actor') {
     Collection = Actor;
