@@ -29278,7 +29278,11 @@
 	          return reject(this.statusText);
 	        }
 	      });
-	      req.send(JSON.stringify(body));
+	      if (body) {
+	        req.send(JSON.stringify(body));
+	      } else {
+	        req.send();
+	      }
 	    });
 	  },
 	  login: function login(auth) {
