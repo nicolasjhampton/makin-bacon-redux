@@ -29261,8 +29261,8 @@
 	  request: function request(method, path, auth, body) {
 	    return new Promise(function (resolve, reject) {
 	      var req = new XMLHttpRequest();
-	      req.withCredentials = true;
 	      req.open(method, "https://localhost:3000/api" + path);
+	      req.withCredentials = true;
 	      req.setRequestHeader("authorization", auth);
 	      if (body) {
 	        req.setRequestHeader("Content-type", "application/json");
