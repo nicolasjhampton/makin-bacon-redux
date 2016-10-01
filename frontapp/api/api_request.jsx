@@ -8,7 +8,7 @@ const apiRequest = {
   request: function(method, path, auth, body) {
     return new Promise(function(resolve, reject) {
       let req = new XMLHttpRequest();
-      req.open(method, `https://localhost:3000/api${path}`);
+      req.open(method, `https://makinbacon.herokuapp.com/api${path}`);
       req.withCredentials = true;
       req.setRequestHeader("authorization", auth);
       if(body) {
