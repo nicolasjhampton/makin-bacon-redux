@@ -17,6 +17,9 @@
     "actors",
     "game"
   ],
+  "engines": {
+    "node": "6.0.0"
+  },
   "author": "nicolasjhampton@gmail.com",
   "license": "ISC",
   "dependencies": {
