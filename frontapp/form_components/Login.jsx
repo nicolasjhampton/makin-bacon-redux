@@ -2,23 +2,20 @@
 
 import React, {Component} from 'react';
 import {withRouter} from 'react-router';
-import StringField from './StringField.jsx';
-import Field from './Field.jsx';
+import StringField from '../dummy_components/StringField.jsx';
 
-class Register extends Component {
+class Login extends Component {
 
   // this replaces 'getInitialState'
   state = {
     username: "",
     password: "",
-    email: "",
-    confirm: "",
     storage: true,
   }
 
   onSubmit = (e) => {
     e.preventDefault();
-    this.props.authMgr.register(this.state, auth => {
+    this.props.authMgr.login(this.state, auth => {
       this.props.router.replace({
         pathname: `/profile/${auth.username}`,
       });
@@ -41,23 +38,23 @@ class Register extends Component {
       <div className="container">
         <form onSubmit={this.onSubmit} className="col-md-6 col-xs-12 offset-md-3">
           <StringField id="username" state={this.onChange}/>
-          <Field id="email" type="email" state={this.onChange}/>
           <StringField id="password" type="password" state={this.onChange}/>
-          <StringField id="confirm" type="password" state={this.onChange}/>
-            <div className="form-group">
-              <input
-                type="checkbox"
-                className="form-control"
-                id="storage"
-                onChange={this.onChange}
-                placeholder={`Keep me logged in!`}/>
-              <label htmlFor="storage">Keep me logged in!</label>
-            </div>
+          <div>
+            <input
+              type="checkbox"
+              id="storage"
+              onChange={this.onChange}
+              placeholder={`Keep me logged in!`}/>
+            <label
+              htmlFor="storage">
+              Keep me logged in!
+            </label>
+          </div>
           <div className="form-group">
             <input
               className="form-control btn btn-primary"
               type="submit"
-              value="Register"/>
+              value="Login"/>
           </div>
         </form>
       </div>
@@ -65,4 +62,4 @@ class Register extends Component {
   }
 }
 
-export default withRouter(Register);
+export default withRouter(Login);

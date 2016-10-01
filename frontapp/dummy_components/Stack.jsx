@@ -5,8 +5,8 @@ import React from 'react';
 function Card(props) {
   var unknown = 'https://upload.wikimedia.org/wikipedia/commons/4/44/Question_mark_(black_on_white).png';
   return (
-    <div className="media card card-inverse card-primary" data-moviedbid={props.moviedbid}>
-      <div className="media-left media-middle">
+    <div className="card-inverse card-primary col-md-12 stackcard" data-moviedbid={props.moviedbid}>
+      <div className="media-right media-middle stats">
         <h1>{props.name}</h1>
         <p>{props.type}</p>
       </div>
@@ -24,12 +24,12 @@ Card.PropTypes = {
   moviedbid: React.PropTypes.number.isRequired,
   name: React.PropTypes.string.isRequired,
   type: React.PropTypes.string.isRequired,
-  user: React.PropTypes.string.isRequired
+  user: React.PropTypes.string.isRequired,
 };
 
 function Stack(props) {
   return (
-    <div className="col-md-8 container-fluid">
+    <div className="col-md-12 container-fluid">
         {props.stack.map(function(card, index) {
           return (
             <Card
@@ -46,7 +46,7 @@ function Stack(props) {
 }
 
 Stack.PropTypes = {
-  stack: React.PropTypes.array
+  stack: React.PropTypes.array,
 };
 
 export default Stack;

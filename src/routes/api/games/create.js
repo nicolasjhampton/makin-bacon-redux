@@ -7,10 +7,7 @@ module.exports = (req, res, next) => {
   game.save((err) => {
     if(err) return next(err);
     req.game = game;
-    req.gameIo = req.io.of('/' + req.game._id);
-    req.gameIo.on("connection", function(socket) {
-      console.log('connection made on namespace', socket.nsp.name);
-    });
+    req.io.join(`/${req.game._id}`);
     next();
   });
 };

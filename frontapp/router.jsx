@@ -2,22 +2,20 @@
 
 import React from 'react';
 import {Router, Route, browserHistory} from 'react-router';
-import io from 'socket.io-client';
-localStorage.debug = 'socket.io*';
 
 
-import GameApp from './components/GameApp.jsx'
-import Login from './components/Login.jsx';
-import Home from './components/Home.jsx';
-import Register from './components/Register.jsx';
-import Profile from './components/Profile.jsx';
-import Games from './components/Games.jsx';
-import Game from './components/Game.jsx';
+import GameApp from './dummy_components/GameApp.jsx'
+import Login from './form_components/Login.jsx';
+import Home from './dummy_components/Home.jsx';
+import Register from './form_components/Register.jsx';
+import Profile from './state_components/Profile.jsx';
+import Games from './state_components/Games.jsx';
+import Game from './state_components/Game.jsx';
 
 
 import AuthManager from './authorize/auth_manager.jsx';
-
 import apiRequest from './api/api_request.jsx';
+// import IoMgr from './streams/io_mgr.jsx';
 
 
 const tokenStrategy = (auth) => (
@@ -38,20 +36,18 @@ const authMgr = new AuthManager({
   createUser,
 });
 
-const ioMgr = new IoMgr(io);
+// import IoMgr from './streams/io_mgr.jsx';
+// const ioMgr = new IoMgr();
 
 const globalApis = (Component, props) => {
   props.authMgr = authMgr;
   props.apiRequest = apiRequest;
-  props.ioMgr = ioMgr;
+  //props.ioMgr = ioMgr;
   return <Component {...props}/>
 };
 
-
-
 const startGame = (nextState, replace) => {
-  console.log(nextState.params.gameId);
-  ioMgr.id = nextState.params.gameId;
+  apiRequest.id = nextState.params.gameId;
 };
 
 const routes = (
@@ -67,8 +63,6 @@ const routes = (
     </Route>
   </Router>
 );
-
-
 
 
 export default routes;

@@ -11,8 +11,8 @@ module.exports = (req, res, next) => {
         if(err) return next(err);
         var gameObj = game.toObject();
         gameObj.stack = gameObj.stack[0];
-        //console.log(gameObj);
-        req.gameIo.emit('move', gameObj);
+        //console.log(req.io.sockets.adapter.rooms);
+        req.io.emit(req.game._id, gameObj);
 
         res.end();
       });

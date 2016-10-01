@@ -18,25 +18,25 @@ var GameSchema = new Schema({
 });
 
 
-// GameSchema.path('stack').validate(function(stack, callback) {
-//   // this gets complicated because of the unshift
-//
-//   var isLengthEven = (stack.length % 2 === 0);
-//
-//   var valid = stack.every(function(card, index) {
-//
-//     var indexIsOdd = (index % 2 !== 0);
-//
-//     if(card.entry.type == 'actor') {
-//       return isLengthEven ? indexIsOdd : !indexIsOdd;
-//     } else if (card.entry.type == 'movie') {
-//       return isLengthEven ? !indexIsOdd : indexIsOdd;
-//     }
-//
-//   });
-//
-//   return callback(valid);
-// }, "Actors must be odd, and movies even");
+GameSchema.path('stack').validate(function(stack, callback) {
+  // this gets complicated because of the unshift
+
+  var isLengthEven = (stack.length % 2 === 0);
+
+  var valid = stack.every(function(card, index) {
+
+    var indexIsOdd = (index % 2 !== 0);
+
+    if(card.entry.type == 'actor') {
+      return isLengthEven ? indexIsOdd : !indexIsOdd;
+    } else if (card.entry.type == 'movie') {
+      return isLengthEven ? !indexIsOdd : indexIsOdd;
+    }
+
+  });
+
+  return callback(valid);
+}, "Actors must be odd, and movies even");
 
 
 // GameSchema.path('stack').validate(function(stack, callback) {
@@ -45,7 +45,7 @@ var GameSchema = new Schema({
 //
 //     var playerMoving = stack[0].entry.user._id;
 //
-//     var joined = this.players.some(player => player.toString() == playerMoving);
+//     var joined = this.players.some(player => player.equals(playerMoving));
 //
 //     return callback(joined);
 //

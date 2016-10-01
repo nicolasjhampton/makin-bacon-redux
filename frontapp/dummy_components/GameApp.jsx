@@ -46,5 +46,10 @@ const GameApp = props => {
   );
 }
 
+GameApp.PropTypes = {
+  children: React.PropTypes.element,
+  authMgr: React.PropTypes.object.isRequired,
+}
+
 
 export default GameApp;

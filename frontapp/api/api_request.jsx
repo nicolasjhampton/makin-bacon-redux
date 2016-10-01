@@ -1,6 +1,10 @@
 "use strict";
 
+import IoMgr from '../streams/io_mgr.jsx';
+//const ioMgr = new IoMgr();
+
 const apiRequest = {
+  ioMgr: new IoMgr(),
   request: function(method, path, auth, body) {
     return new Promise(function(resolve, reject) {
       let req = new XMLHttpRequest();
@@ -29,17 +33,43 @@ const apiRequest = {
   register: function(body) {
     return this.request(`POST`, `/players`, null, body);
   },
-  getGames: function(auth) {
-    return this.request(`GET`, `/games`, auth);
+  getGames: function(context, auth) {
+    this.ioMgr.gameListStream(context);
+    return this.request(`GET`, `/games`, auth).then(games => {
+      context.setState({ games: games });
+    });
   },
-  createGame: function(auth) {
-    return this.request(`POST`, `/games`, auth);
+  createGame: function(context, auth, callback) {
+
+    return this.request(`POST`, `/games`, auth).then(game => {
+      let optionType = game.stack[0].entry.type == "actor" ? "movie" : "actor";
+      let options = game.currentOptions;
+      let stack = game.stack;
+      context.setState({
+        optionType,
+        options,
+        stack,
+      });
+      this.ioMgr.gameStream(context, game._id);
+    });
   },
-  joinGame: function(auth, nextGame, previousGame) {
-    return this.request(`POST`, `/games/${nextGame}`, auth, { "previousGame": previousGame });
+  joinGame: function(context, auth, nextGame) {
+    let path = `/games/${nextGame}`;
+    this.ioMgr.gameStream(context, nextGame);
+    return this.request(`POST`, path, auth).then(game => {
+      let optionType = game.stack[0].entry.type == "actor" ? "movie" : "actor";
+      let options = game.currentOptions;
+      let stack = game.stack;
+      context.setState({
+        optionType,
+        options,
+        stack,
+      });
+    });
   },
   makeMove: function(auth, game, body) {
-    return this.request(`POST`, `/games/${game}/move`, auth, body);
+    let path = `/games/${game}/move`;
+    return this.request(`POST`, path, auth, body).then(game => {});
   },
 }
 

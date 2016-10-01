@@ -21477,7 +21477,7 @@
 
 
 	// module
-	exports.push([module.id, "@media(min-width: 544px) {\n  .arrow {\n    margin-top: 6px;\n  }\n}\n\n@media(min-width: 768px) {\n  html {\n    font-size: .7rem;\n  }\n\n  .arrow {\n    margin-top: 14px;\n  }\n  /*button {\n    margin-top: 20px;\n  }*/\n}\n\n@media(min-width: 992px) {\n  html {\n    font-size: .85rem;\n  }\n\n  .arrow {\n    margin-top: 10px;\n  }\n  /*button {\n    margin-top: 15px;\n  }*/\n}\n\n@media(min-width: 1200px) {\n  html {\n    font-size: 1rem;\n  }\n\n  .arrow {\n    margin-top: 6px;\n  }\n}\n\ninput[type=\"checkbox\"] {\n  margin-right: 10px;\n}\n\n.card {\n  border: 0;\n}\n\n.row {\n  margin-bottom: 15px;\n}\n\n.extend {\n  height: 120px;\n}\n\n.shrink {\n  height: 60px;\n}\n", ""]);
+	exports.push([module.id, "\n.action-button {\n  margin: 7.5px 0;\n}\n\n.create-game {\n  margin-bottom: 0;\n}\n\n\n@media(min-width: 544px) {\n  /*.arrow {\n    margin-top: 6px;\n    margin-bottom: 12px;\n  }*/\n  /*.create-game {\n    margin-bottom: 0;\n  }*/\n\n}\n\n@media(min-width: 768px) {\n  html {\n    font-size: .7rem;\n  }\n\n  .arrow {\n    margin-top: 23px;\n  }\n  .action-button {\n    margin: 16px 0;\n  }\n}\n\n@media(min-width: 992px) {\n  html {\n    font-size: .85rem;\n  }\n\n  .arrow {\n    margin-top: 20px;\n  }\n  .action-button {\n    margin: 12px 0;\n  }\n}\n\n@media(min-width: 1200px) {\n  html {\n    font-size: 1rem;\n  }\n\n  .arrow {\n    margin-top: 10px;\n  }\n\n  .action-button {\n    margin: 7.5px 0;\n  }\n}\n\ninput[type=\"checkbox\"] {\n  margin-right: 10px;\n}\n\n.custom-card-block {\n  padding: .5rem 1rem;\n}\n\n.gametext {\n  margin: 0 .25rem;\n  padding: 0 1.25rem;\n}\n\n.gamelink {\n  width: 100%;\n  height: 100%;\n  padding: 0;\n  border-radius: 8px;\n  border: 5px solid #5cbFA0;\n  background-color: #5cb85c;\n}\n\n.navbar {\n  border-radius: 0;\n}\n\n.action-block {\n  padding: 0 1.25rem;\n}\n\n.arrow {\n  margin-top: 6px;\n  margin-bottom: 12px;\n}\n\n.option-level {\n  z-index: 2;\n}\n\n.stackcard {\n  border: 5px solid blue;\n  border-radius: 8px;\n  margin-bottom: 3px;\n}\n\n.height {\n  height: 120px;\n}\n\n.card {\n  border: none;\n  border-radius: 0;\n}\n\n.extend {\n  height: 120px;\n}\n\n.stats {\n  width: 100%;\n}\n\n.shrink {\n  height: 60px;\n}\n", ""]);
 
 	// exports
 
@@ -21806,97 +21806,46 @@
 
 	var _reactRouter = __webpack_require__(177);
 
-	var _socket = __webpack_require__(240);
-
-	var _socket2 = _interopRequireDefault(_socket);
-
-	var _GameApp = __webpack_require__(288);
+	var _GameApp = __webpack_require__(240);
 
 	var _GameApp2 = _interopRequireDefault(_GameApp);
 
-	var _Login = __webpack_require__(290);
+	var _Login = __webpack_require__(242);
 
 	var _Login2 = _interopRequireDefault(_Login);
 
-	var _Home = __webpack_require__(293);
+	var _Home = __webpack_require__(245);
 
 	var _Home2 = _interopRequireDefault(_Home);
 
-	var _Register = __webpack_require__(294);
+	var _Register = __webpack_require__(246);
 
 	var _Register2 = _interopRequireDefault(_Register);
 
-	var _Profile = __webpack_require__(295);
+	var _Profile = __webpack_require__(247);
 
 	var _Profile2 = _interopRequireDefault(_Profile);
 
-	var _Games = __webpack_require__(297);
+	var _Games = __webpack_require__(249);
 
 	var _Games2 = _interopRequireDefault(_Games);
 
-	var _Game = __webpack_require__(304);
+	var _Game = __webpack_require__(256);
 
 	var _Game2 = _interopRequireDefault(_Game);
 
-	var _auth_manager = __webpack_require__(305);
+	var _auth_manager = __webpack_require__(257);
 
 	var _auth_manager2 = _interopRequireDefault(_auth_manager);
 
-	var _api_request = __webpack_require__(306);
+	var _api_request = __webpack_require__(258);
 
 	var _api_request2 = _interopRequireDefault(_api_request);
 
-	var _Observable = __webpack_require__(307);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	// import IoMgr from './streams/io_mgr.jsx';
 
-	localStorage.debug = 'socket.io*';
-
-	var IoMgr = function IoMgr(io) {
-	  _classCallCheck(this, IoMgr);
-
-	  _initialiseProps.call(this);
-
-	  this.io = io;
-	}
-
-	// initGameListSocket = () => {
-	//
-	// }
-
-	;
-
-	var _initialiseProps = function _initialiseProps() {
-	  var _this = this;
-
-	  this.initGameSocket = function (id) {
-	    _this.id = id;
-	    _this.game = (0, _socket2.default)('/' + _this.id);
-	  };
-
-	  this.gameListStream = function (context) {
-	    _this.gameList = (0, _socket2.default)();
-	    _this.gameListChannel = _Observable.Observable.create(function (observer) {
-	      return _this.gameList.on('games', function (game) {
-	        observer.next(game);
-	      });
-	    });
-	    return _this.gameListChannel.subscribe(function (games) {
-	      return context.setState({ games: games });
-	    });
-	  };
-
-	  this.gameStream = function () {
-	    _this.gameChannel = _Observable.Observable.create(function (observer) {
-	      return _this.game.on('move', function (move) {
-	        observer.next(move);
-	      });
-	    });
-	    //return this.gameChannel;
-	  };
-	};
 
 	var tokenStrategy = function tokenStrategy(auth) {
 	  return 'Basic ' + btoa(auth.username + ':' + auth.password);
@@ -21916,38 +21865,18 @@
 	  createUser: createUser
 	});
 
-	var ioMgr = new IoMgr(_socket2.default);
-
-	var sockets = {};
+	// import IoMgr from './streams/io_mgr.jsx';
+	// const ioMgr = new IoMgr();
 
 	var globalApis = function globalApis(Component, props) {
 	  props.authMgr = authMgr;
 	  props.apiRequest = _api_request2.default;
-	  props.io = _socket2.default;
-	  props.sockets = sockets;
-	  props.ioMgr = ioMgr;
+	  //props.ioMgr = ioMgr;
 	  return _react2.default.createElement(Component, props);
 	};
-	//////////////////////////////////////////////////
-	// var options = {'sync disconnect on unload':true};
-	//
-	// this.socket = this.props.io();
-	// this.socket.on('games', (games) => {
-	//   this.setState({ games: games });
-	// });
-	//
-	// this.props.apiRequest.getGames(this.props.auth).then(games => {
-	//   this.setState({ games: games });
-	// });
-	//////////////////////////////////////////////////
-
 
 	var startGame = function startGame(nextState, replace) {
-	  // this context gives us nothing useful here
-	  console.log(nextState.params.gameId);
-	  sockets.game = {};
-	  sockets.game.id = nextState.params.gameId;
-	  //<Stack stack={this.state.stack}/>
+	  _api_request2.default.id = nextState.params.gameId;
 	};
 
 	var routes = _react2.default.createElement(
@@ -21977,8 +21906,6 @@
 	    return;
 	  }
 
-	  __REACT_HOT_LOADER__.register(IoMgr, 'IoMgr', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/router.jsx');
-
 	  __REACT_HOT_LOADER__.register(tokenStrategy, 'tokenStrategy', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/router.jsx');
 
 	  __REACT_HOT_LOADER__.register(getUser, 'getUser', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/router.jsx');
@@ -21986,10 +21913,6 @@
 	  __REACT_HOT_LOADER__.register(createUser, 'createUser', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/router.jsx');
 
 	  __REACT_HOT_LOADER__.register(authMgr, 'authMgr', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/router.jsx');
-
-	  __REACT_HOT_LOADER__.register(ioMgr, 'ioMgr', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/router.jsx');
-
-	  __REACT_HOT_LOADER__.register(sockets, 'sockets', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/router.jsx');
 
 	  __REACT_HOT_LOADER__.register(globalApis, 'globalApis', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/router.jsx');
 
@@ -27658,15 +27581,1865 @@
 /* 240 */
 /***/ function(module, exports, __webpack_require__) {
 
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(177);
+
+	var _AuthNavMenuItem = __webpack_require__(241);
+
+	var _AuthNavMenuItem2 = _interopRequireDefault(_AuthNavMenuItem);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var GameApp = function GameApp(props) {
+	  var obj = props.authMgr.getAuth();
+	  var profilePath = '/profile/' + obj.currentUser;
+	  var authorized = obj.authorization ? true : false;
+	  return _react2.default.createElement(
+	    'div',
+	    { className: 'container' },
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'row' },
+	      _react2.default.createElement(
+	        'nav',
+	        { className: 'navbar navbar-dark bg-primary' },
+	        _react2.default.createElement(
+	          _reactRouter.Link,
+	          {
+	            className: 'navbar-brand',
+	            activeStyle: { color: 'white' },
+	            to: 'home' },
+	          'Makin Bacon'
+	        ),
+	        _react2.default.createElement(
+	          'ul',
+	          { className: 'nav navbar-nav pull-xs-right' },
+	          _react2.default.createElement(_AuthNavMenuItem2.default, {
+	            authorized: authorized,
+	            authRoute: "/games",
+	            authRouteName: "Games",
+	            unAuthRoute: "/",
+	            unAuthRouteName: "Home" }),
+	          _react2.default.createElement(_AuthNavMenuItem2.default, {
+	            authorized: authorized,
+	            authRoute: profilePath,
+	            authRouteName: "Profile",
+	            unAuthRoute: "/register",
+	            unAuthRouteName: "Register" }),
+	          _react2.default.createElement(_AuthNavMenuItem2.default, {
+	            authorized: authorized,
+	            authRoute: "/login",
+	            authRouteName: "Logout",
+	            unAuthRoute: "/login",
+	            unAuthRouteName: "Login",
+	            onClick: props.authMgr.deleteAuth })
+	        )
+	      )
+	    ),
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'row' },
+	      props.children
+	    )
+	  );
+	};
+
+	GameApp.PropTypes = {
+	  children: _react2.default.PropTypes.element,
+	  authMgr: _react2.default.PropTypes.object.isRequired
+	};
+
+	var _default = GameApp;
+	exports.default = _default;
+	;
+
+	(function () {
+	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+	    return;
+	  }
+
+	  __REACT_HOT_LOADER__.register(GameApp, 'GameApp', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/dummy_components/GameApp.jsx');
+
+	  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/dummy_components/GameApp.jsx');
+	})();
+
+	;
+
+/***/ },
+/* 241 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(177);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var AuthNavMenuItem = function AuthNavMenuItem(props) {
+	  return _react2.default.createElement(
+	    'li',
+	    { className: 'nav-item' },
+	    props.authorized ? _react2.default.createElement(
+	      _reactRouter.Link,
+	      {
+	        onClick: props.onClick,
+	        className: 'nav-link',
+	        activeStyle: { color: 'white' },
+	        to: props.authRoute },
+	      props.authRouteName
+	    ) : _react2.default.createElement(
+	      _reactRouter.Link,
+	      {
+	        onClick: props.onClick,
+	        className: 'nav-link',
+	        activeStyle: { color: 'white' },
+	        to: props.unAuthRoute },
+	      props.unAuthRouteName
+	    )
+	  );
+	};
+
+	AuthNavMenuItem.propTypes = {
+	  authorized: _react2.default.PropTypes.bool.isRequired,
+	  authRoute: _react2.default.PropTypes.string.isRequired,
+	  authRouteName: _react2.default.PropTypes.string.isRequired,
+	  unAuthRoute: _react2.default.PropTypes.string.isRequired,
+	  unAuthRouteName: _react2.default.PropTypes.string.isRequired,
+	  onClick: _react2.default.PropTypes.func
+	};
+
+	var _default = AuthNavMenuItem;
+	exports.default = _default;
+	;
+
+	(function () {
+	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+	    return;
+	  }
+
+	  __REACT_HOT_LOADER__.register(AuthNavMenuItem, 'AuthNavMenuItem', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/dummy_components/AuthNavMenuItem.jsx');
+
+	  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/dummy_components/AuthNavMenuItem.jsx');
+	})();
+
+	;
+
+/***/ },
+/* 242 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(177);
+
+	var _StringField = __webpack_require__(243);
+
+	var _StringField2 = _interopRequireDefault(_StringField);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Login = function (_Component) {
+	  _inherits(Login, _Component);
+
+	  function Login() {
+	    var _ref;
+
+	    var _temp, _this, _ret;
+
+	    _classCallCheck(this, Login);
+
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
+
+	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Login.__proto__ || Object.getPrototypeOf(Login)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+	      username: "",
+	      password: "",
+	      storage: true
+	    }, _this.onSubmit = function (e) {
+	      e.preventDefault();
+	      _this.props.authMgr.login(_this.state, function (auth) {
+	        _this.props.router.replace({
+	          pathname: '/profile/' + auth.username
+	        });
+	      });
+	    }, _this.onChange = function (e) {
+	      var id = e.target.id;
+	      var value = void 0;
+	      if (e.target.id == "storage") {
+	        value = !_this.state.storage;
+	      } else {
+	        value = e.target.value;
+	      }
+	      _this.setState(_defineProperty({}, id, value));
+	    }, _temp), _possibleConstructorReturn(_this, _ret);
+	  }
+
+	  // this replaces 'getInitialState'
+
+
+	  _createClass(Login, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'container' },
+	        _react2.default.createElement(
+	          'form',
+	          { onSubmit: this.onSubmit, className: 'col-md-6 col-xs-12 offset-md-3' },
+	          _react2.default.createElement(_StringField2.default, { id: 'username', state: this.onChange }),
+	          _react2.default.createElement(_StringField2.default, { id: 'password', type: 'password', state: this.onChange }),
+	          _react2.default.createElement(
+	            'div',
+	            null,
+	            _react2.default.createElement('input', {
+	              type: 'checkbox',
+	              id: 'storage',
+	              onChange: this.onChange,
+	              placeholder: 'Keep me logged in!' }),
+	            _react2.default.createElement(
+	              'label',
+	              {
+	                htmlFor: 'storage' },
+	              'Keep me logged in!'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'form-group' },
+	            _react2.default.createElement('input', {
+	              className: 'form-control btn btn-primary',
+	              type: 'submit',
+	              value: 'Login' })
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Login;
+	}(_react.Component);
+
+	var _default = (0, _reactRouter.withRouter)(Login);
+
+	exports.default = _default;
+	;
+
+	(function () {
+	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+	    return;
+	  }
+
+	  __REACT_HOT_LOADER__.register(Login, 'Login', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/form_components/Login.jsx');
+
+	  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/form_components/Login.jsx');
+	})();
+
+	;
+
+/***/ },
+/* 243 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _Field = __webpack_require__(244);
+
+	var _Field2 = _interopRequireDefault(_Field);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var StringField = function StringField(props) {
+	  return _react2.default.createElement(_Field2.default, {
+	    id: props.id,
+	    type: props.type || "text",
+	    state: props.state });
+	};
+
+	StringField.PropTypes = {
+	  id: _react2.default.PropTypes.string.isRequired,
+	  type: _react2.default.PropTypes.string.isRequired,
+	  state: _react2.default.PropTypes.func.isRequired
+	};
+
+	var _default = StringField;
+	exports.default = _default;
+	;
+
+	(function () {
+	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+	    return;
+	  }
+
+	  __REACT_HOT_LOADER__.register(StringField, 'StringField', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/dummy_components/StringField.jsx');
+
+	  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/dummy_components/StringField.jsx');
+	})();
+
+	;
+
+/***/ },
+/* 244 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Field = function Field(props) {
+	  return _react2.default.createElement(
+	    "div",
+	    { className: "form-group" },
+	    _react2.default.createElement(
+	      "label",
+	      { htmlFor: props.id },
+	      props.id
+	    ),
+	    _react2.default.createElement("input", {
+	      type: props.type,
+	      className: "form-control",
+	      id: props.id,
+	      onChange: props.state,
+	      placeholder: "Enter " + props.id })
+	  );
+	};
+
+	Field.PropTypes = {
+	  id: _react2.default.PropTypes.string.isRequired,
+	  type: _react2.default.PropTypes.string.isRequired,
+	  state: _react2.default.PropTypes.func.isRequired
+	};
+
+	var _default = Field;
+	exports.default = _default;
+	;
+
+	(function () {
+	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+	    return;
+	  }
+
+	  __REACT_HOT_LOADER__.register(Field, "Field", "/Users/nicolasjhampton/code/bacon-project-12/frontapp/dummy_components/Field.jsx");
+
+	  __REACT_HOT_LOADER__.register(_default, "default", "/Users/nicolasjhampton/code/bacon-project-12/frontapp/dummy_components/Field.jsx");
+	})();
+
+	;
+
+/***/ },
+/* 245 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Home = function (_Component) {
+	  _inherits(Home, _Component);
+
+	  function Home() {
+	    _classCallCheck(this, Home);
+
+	    return _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).apply(this, arguments));
+	  }
+
+	  _createClass(Home, [{
+	    key: "render",
+	    value: function render() {
+	      return _react2.default.createElement(
+	        "div",
+	        null,
+	        _react2.default.createElement(
+	          "p",
+	          null,
+	          "This is the home page"
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Home;
+	}(_react.Component);
+
+	var _default = Home;
+	exports.default = _default;
+	;
+
+	(function () {
+	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+	    return;
+	  }
+
+	  __REACT_HOT_LOADER__.register(Home, "Home", "/Users/nicolasjhampton/code/bacon-project-12/frontapp/dummy_components/Home.jsx");
+
+	  __REACT_HOT_LOADER__.register(_default, "default", "/Users/nicolasjhampton/code/bacon-project-12/frontapp/dummy_components/Home.jsx");
+	})();
+
+	;
+
+/***/ },
+/* 246 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(177);
+
+	var _StringField = __webpack_require__(243);
+
+	var _StringField2 = _interopRequireDefault(_StringField);
+
+	var _Field = __webpack_require__(244);
+
+	var _Field2 = _interopRequireDefault(_Field);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Register = function (_Component) {
+	  _inherits(Register, _Component);
+
+	  function Register() {
+	    var _ref;
+
+	    var _temp, _this, _ret;
+
+	    _classCallCheck(this, Register);
+
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
+
+	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Register.__proto__ || Object.getPrototypeOf(Register)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+	      username: "",
+	      password: "",
+	      email: "",
+	      confirm: "",
+	      storage: true
+	    }, _this.onSubmit = function (e) {
+	      e.preventDefault();
+	      _this.props.authMgr.register(_this.state, function (auth) {
+	        _this.props.router.replace({
+	          pathname: '/profile/' + auth.username
+	        });
+	      });
+	    }, _this.onChange = function (e) {
+	      var id = e.target.id;
+	      var value = void 0;
+	      if (e.target.id == "storage") {
+	        value = !_this.state.storage;
+	      } else {
+	        value = e.target.value;
+	      }
+	      _this.setState(_defineProperty({}, id, value));
+	    }, _temp), _possibleConstructorReturn(_this, _ret);
+	  }
+
+	  // this replaces 'getInitialState'
+
+
+	  _createClass(Register, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'container' },
+	        _react2.default.createElement(
+	          'form',
+	          { onSubmit: this.onSubmit, className: 'col-md-6 col-xs-12 offset-md-3' },
+	          _react2.default.createElement(_StringField2.default, { id: 'username', state: this.onChange }),
+	          _react2.default.createElement(_Field2.default, { id: 'email', type: 'email', state: this.onChange }),
+	          _react2.default.createElement(_StringField2.default, { id: 'password', type: 'password', state: this.onChange }),
+	          _react2.default.createElement(_StringField2.default, { id: 'confirm', type: 'password', state: this.onChange }),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'form-group' },
+	            _react2.default.createElement('input', {
+	              type: 'checkbox',
+	              className: 'form-control',
+	              id: 'storage',
+	              onChange: this.onChange,
+	              placeholder: 'Keep me logged in!' }),
+	            _react2.default.createElement(
+	              'label',
+	              { htmlFor: 'storage' },
+	              'Keep me logged in!'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'form-group' },
+	            _react2.default.createElement('input', {
+	              className: 'form-control btn btn-primary',
+	              type: 'submit',
+	              value: 'Register' })
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Register;
+	}(_react.Component);
+
+	var _default = (0, _reactRouter.withRouter)(Register);
+
+	exports.default = _default;
+	;
+
+	(function () {
+	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+	    return;
+	  }
+
+	  __REACT_HOT_LOADER__.register(Register, 'Register', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/form_components/Register.jsx');
+
+	  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/form_components/Register.jsx');
+	})();
+
+	;
+
+/***/ },
+/* 247 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(177);
+
+	var _GameList = __webpack_require__(248);
+
+	var _GameList2 = _interopRequireDefault(_GameList);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Profile = function (_Component) {
+	  _inherits(Profile, _Component);
+
+	  function Profile() {
+	    var _ref;
+
+	    var _temp, _this, _ret;
+
+	    _classCallCheck(this, Profile);
+
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
+
+	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Profile.__proto__ || Object.getPrototypeOf(Profile)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+	      games: []
+	    }, _temp), _possibleConstructorReturn(_this, _ret);
+	  }
+
+	  _createClass(Profile, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      var auth = this.props.authMgr.getAuth().authorization;
+	      this.props.apiRequest.getGames(this, auth);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var auth = this.props.authMgr.getAuth();
+	      console.log(auth.currentUser);
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'container-fluid col-xs-12 col-md-12' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'row' },
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            'This is ',
+	            auth.currentUser,
+	            ' profile page'
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'container-fluid col-xs-12 col-md-12' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'row' },
+	              this.state.games.map(function (game, index) {
+	                return _react2.default.createElement(_GameList2.default, {
+	                  key: index,
+	                  gid: game._id,
+	                  players: game.players,
+	                  bg: false });
+	              })
+	            )
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Profile;
+	}(_react.Component);
+
+	var _default = (0, _reactRouter.withRouter)(Profile);
+
+	exports.default = _default;
+	;
+
+	(function () {
+	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+	    return;
+	  }
+
+	  __REACT_HOT_LOADER__.register(Profile, 'Profile', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/state_components/Profile.jsx');
+
+	  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/state_components/Profile.jsx');
+	})();
+
+	;
+
+/***/ },
+/* 248 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(177);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var GameList = function GameList(props) {
+	  var show = props.show ? "" : "hidden-xl-down";
+	  var display = props.bg ? "card-primary" : "";
+	  return _react2.default.createElement(
+	    'div',
+	    { className: 'extend col-md-4 col-xs-12 card card-inverse ' + display },
+	    _react2.default.createElement(
+	      _reactRouter.Link,
+	      { className: 'nav-link card-primary gamelink', to: '/games/' + props.gid },
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'custom-card-block' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'card-blockquote' },
+	          props.players.map(function (player, index) {
+	            return _react2.default.createElement(
+	              'p',
+	              { className: 'gametext', key: index },
+	              player.username
+	            );
+	          })
+	        )
+	      )
+	    )
+	  );
+	};
+
+	// <h6 className="text-muted">{props.gid}</h6>
+
+	GameList.PropTypes = {
+	  gid: _react2.default.PropTypes.string,
+	  players: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.shape({
+	    _id: _react2.default.PropTypes.string,
+	    username: _react2.default.PropTypes.string
+	  })),
+	  bg: _react2.default.PropTypes.bool.isRequired
+	};
+
+	//
+
+	var _default = GameList;
+	exports.default = _default;
+	;
+
+	(function () {
+	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+	    return;
+	  }
+
+	  __REACT_HOT_LOADER__.register(GameList, 'GameList', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/dummy_components/GameList.jsx');
+
+	  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/dummy_components/GameList.jsx');
+	})();
+
+	;
+
+/***/ },
+/* 249 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(177);
+
+	var _GameCarousel = __webpack_require__(250);
+
+	var _GameCarousel2 = _interopRequireDefault(_GameCarousel);
+
+	var _Dashboard = __webpack_require__(252);
+
+	var _Dashboard2 = _interopRequireDefault(_Dashboard);
+
+	var _CreateGame = __webpack_require__(253);
+
+	var _CreateGame2 = _interopRequireDefault(_CreateGame);
+
+	var _SomeOptions = __webpack_require__(254);
+
+	var _SomeOptions2 = _interopRequireDefault(_SomeOptions);
+
+	var _Stack = __webpack_require__(255);
+
+	var _Stack2 = _interopRequireDefault(_Stack);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Games = function (_Component) {
+	  _inherits(Games, _Component);
+
+	  function Games() {
+	    var _ref;
+
+	    var _temp, _this, _ret;
+
+	    _classCallCheck(this, Games);
+
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
+
+	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Games.__proto__ || Object.getPrototypeOf(Games)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+	      headerContainer: true
+	    }, _this.showDashboard = function () {
+	      _this.state.headerContainer = !_this.state.headerContainer;
+	      _this.setState({ headerContainer: _this.state.headerContainer });
+	    }, _this.createNewGame = function () {
+	      _this.props.router.replace('/games/create');
+	    }, _this.render = function () {
+	      var auth = _this.props.authMgr.getAuth().authorization;
+	      //var sizing = this.state.headerContainer ? " extend" : " shrink";
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'container-fluid' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'row' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: "card-deck-wrapper option-level" },
+	            _react2.default.createElement(_Dashboard2.default, {
+	              headerContainer: _this.state.headerContainer,
+	              showDashboard: _this.showDashboard,
+	              apiRequest: _this.props.apiRequest,
+	              ioMgr: _this.props.ioMgr,
+	              auth: auth })
+	          )
+	        ),
+	        _this.props.children
+	      );
+	    }, _temp), _possibleConstructorReturn(_this, _ret);
+	  }
+
+	  return Games;
+	}(_react.Component);
+
+	var _default = (0, _reactRouter.withRouter)(Games);
+
+	exports.default = _default;
+	;
+
+	(function () {
+	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+	    return;
+	  }
+
+	  __REACT_HOT_LOADER__.register(Games, 'Games', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/state_components/Games.jsx');
+
+	  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/state_components/Games.jsx');
+	})();
+
+	;
+
+/***/ },
+/* 250 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _GameList = __webpack_require__(248);
+
+	var _GameList2 = _interopRequireDefault(_GameList);
+
+	var _Arrows = __webpack_require__(251);
+
+	var _Arrows2 = _interopRequireDefault(_Arrows);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var GameCarousel = function (_Component) {
+	  _inherits(GameCarousel, _Component);
+
+	  function GameCarousel() {
+	    var _ref;
+
+	    var _temp, _this, _ret;
+
+	    _classCallCheck(this, GameCarousel);
+
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
+
+	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = GameCarousel.__proto__ || Object.getPrototypeOf(GameCarousel)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+	      games: []
+	    }, _this.rollCarousel = function (delta) {
+	      return function () {
+	        var games = _this.state.games.slice(0); // I've got a ball and three cups
+	        var scroll = delta == 1 ? ['shift', 'push'] : ['pop', 'unshift']; // This cup has the ball, now...
+	        games[scroll[1]](games[scroll[0]]()); // watch closely...
+	        _this.setState({ games: games }); // alright. Where's the ball?
+	      };
+	    }, _this.render = function () {
+	      var sizing = _this.props.headerContainer ? " extend" : " shrink";
+	      var show = _this.props.headerContainer ? "" : " hidden-xl-down";
+	      return _react2.default.createElement(
+	        'div',
+	        { className: "container-fluid card-primary option-level col-xs-12 col-md-10" + sizing },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'row' },
+	          _react2.default.createElement(_Arrows2.default, { headerContainer: _this.props.headerContainer, action: _this.rollCarousel }),
+	          _react2.default.createElement(
+	            'div',
+	            { className: "height col-xs-12 col-md-11 option-level card-primary card container-fluid" + show },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'row' },
+	              _this.state.games.map(function (game, index) {
+	                if (index < 3) {
+	                  return _react2.default.createElement(_GameList2.default, {
+	                    key: index,
+	                    gid: game._id,
+	                    players: game.players,
+	                    bg: true });
+	                }
+	              })
+	            )
+	          )
+	        )
+	      );
+	    }, _temp), _possibleConstructorReturn(_this, _ret);
+	  }
+
+	  _createClass(GameCarousel, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      var auth = this.props.auth;
+	      this.props.apiRequest.getGames(this, auth);
+	    }
+	  }]);
+
+	  return GameCarousel;
+	}(_react.Component);
+
+	GameCarousel.PropTypes = {
+	  ioMgr: _react2.default.PropTypes.func.isRequired,
+	  auth: _react2.default.PropTypes.string.isRequired,
+	  headerContainer: _react2.default.PropTypes.bool.isRequired,
+	  apiRequest: _react2.default.PropTypes.object.isRequired
+	};
+
+	var _default = GameCarousel;
+	exports.default = _default;
+	;
+
+	(function () {
+	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+	    return;
+	  }
+
+	  __REACT_HOT_LOADER__.register(GameCarousel, 'GameCarousel', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/state_components/GameCarousel.jsx');
+
+	  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/state_components/GameCarousel.jsx');
+	})();
+
+	;
+
+/***/ },
+/* 251 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Arrows = function Arrows(props) {
+	  var show = props.headerContainer ? "" : " hidden-xl-down";
+	  var display = "col-md-1 col-xs-12 card card-primary card-inverse media height " + show;
+	  return _react2.default.createElement(
+	    "div",
+	    { className: display },
+	    _react2.default.createElement(
+	      "button",
+	      {
+	        onClick: props.action(-1),
+	        className: "action-button btn btn-success col-xs-12" },
+	      "⭅"
+	    ),
+	    _react2.default.createElement(
+	      "button",
+	      {
+	        onClick: props.action(1),
+	        className: "action-button btn btn-success col-xs-12" },
+	      "⭆"
+	    )
+	  );
+	};
+
+	Arrows.PropTypes = {
+	  action: _react2.default.PropTypes.func.isRequired,
+	  headerContainer: _react2.default.PropTypes.bool.isRequired
+	};
+
+	// <div className="media-middle">
+	//   <button
+	//     onClick={props.action(-1)}
+	//     className="arrow action-button btn btn-success col-xs-12">
+	//     {"\u2b45"}
+	//   </button>
+	// </div>
+	// <div className="media-middle">
+	//   <button
+	//     onClick={props.action(1)}
+	//     className="arrow action-button btn btn-success col-xs-12">
+	//     {"\u2b46"}
+	//   </button>
+	// </div>
+
+	var _default = Arrows;
+	exports.default = _default;
+	;
+
+	(function () {
+	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+	    return;
+	  }
+
+	  __REACT_HOT_LOADER__.register(Arrows, "Arrows", "/Users/nicolasjhampton/code/bacon-project-12/frontapp/dummy_components/Arrows.jsx");
+
+	  __REACT_HOT_LOADER__.register(_default, "default", "/Users/nicolasjhampton/code/bacon-project-12/frontapp/dummy_components/Arrows.jsx");
+	})();
+
+	;
+
+/***/ },
+/* 252 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _GameCarousel = __webpack_require__(250);
+
+	var _GameCarousel2 = _interopRequireDefault(_GameCarousel);
+
+	var _CreateGame = __webpack_require__(253);
+
+	var _CreateGame2 = _interopRequireDefault(_CreateGame);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Dashboard = function Dashboard(props) {
+	  return _react2.default.createElement(
+	    'div',
+	    { className: 'card-deck' },
+	    _react2.default.createElement(_CreateGame2.default, {
+	      headerContainer: props.headerContainer,
+	      headerControl: props.showDashboard }),
+	    _react2.default.createElement(_GameCarousel2.default, {
+	      ioMgr: props.ioMgr,
+	      auth: props.auth,
+	      apiRequest: props.apiRequest,
+	      headerContainer: props.headerContainer })
+	  );
+	};
+
+	Dashboard.PropTypes = {
+	  ioMgr: _react2.default.PropTypes.object.isRequired,
+	  apiRequest: _react2.default.PropTypes.object.isRequired,
+	  auth: _react2.default.PropTypes.string.isRequired,
+	  showDashboard: _react2.default.PropTypes.func.isRequired,
+	  headerContainer: _react2.default.PropTypes.bool.isRequired
+	};
+
+	var _default = Dashboard;
+	exports.default = _default;
+	;
+
+	(function () {
+	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+	    return;
+	  }
+
+	  __REACT_HOT_LOADER__.register(Dashboard, 'Dashboard', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/dummy_components/Dashboard.jsx');
+
+	  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/dummy_components/Dashboard.jsx');
+	})();
+
+	;
+
+/***/ },
+/* 253 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(177);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var CreateGame = function CreateGame(props) {
+	  var sizing = props.headerContainer ? " extend" : " shrink";
+	  var show = props.headerContainer ? "" : " hidden-xl-down";
+	  return _react2.default.createElement(
+	    'div',
+	    { className: "col-md-2 create-game col-xs-12 card card-inverse card-primary container-fluid" + sizing },
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'card-block action-block row' },
+	      _react2.default.createElement(
+	        _reactRouter.Link,
+	        {
+	          className: "btn action-button btn-success col-xs-12 media-middle" + show,
+	          to: '/games/create' },
+	        'Create Game'
+	      ),
+	      _react2.default.createElement(
+	        'button',
+	        {
+	          type: 'button',
+	          className: 'btn action-button btn-success col-xs-12 media-middle',
+	          onClick: props.headerControl },
+	        'Show Header'
+	      )
+	    )
+	  );
+	};
+
+	CreateGame.PropTypes = {
+	  headerControl: _react2.default.PropTypes.func.isRequired,
+	  headerContainer: _react2.default.PropTypes.bool.isRequired
+	};
+
+	var _default = CreateGame;
+	exports.default = _default;
+	;
+
+	(function () {
+	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+	    return;
+	  }
+
+	  __REACT_HOT_LOADER__.register(CreateGame, 'CreateGame', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/dummy_components/CreateGame.jsx');
+
+	  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/dummy_components/CreateGame.jsx');
+	})();
+
+	;
+
+/***/ },
+/* 254 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Options = function (_Component) {
+	  _inherits(Options, _Component);
+
+	  function Options() {
+	    var _ref;
+
+	    var _temp, _this, _ret;
+
+	    _classCallCheck(this, Options);
+
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
+
+	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Options.__proto__ || Object.getPrototypeOf(Options)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+	      id: [],
+	      type: ''
+	    }, _this.onSubmit = function (e) {
+	      e.preventDefault();
+	      var that = _this;
+	      _this.props.submitOption(_this.state);
+	    }, _this.onOptionChange = function (e) {
+	      console.log({ id: e.target.value, type: _this.props.type });
+	      _this.setState({ id: e.target.value, type: _this.props.type });
+	    }, _this.render = function () {
+	      var type = _this.props.type;
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'col-md-12 container-fluid' },
+	        _react2.default.createElement(
+	          'form',
+	          { onSubmit: _this.onSubmit },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'form-group' },
+	            _react2.default.createElement(
+	              'select',
+	              { className: 'form-control', onChange: _this.onOptionChange },
+	              _this.props.options.map(function (option, index) {
+	                //var value = { id: option.moviedb_id, type: type };
+	                return _react2.default.createElement(
+	                  'option',
+	                  {
+	                    key: index,
+	                    value: option.moviedb_id },
+	                  option.name
+	                );
+	              })
+	            ),
+	            _react2.default.createElement('input', { className: 'form-control', type: 'submit', value: 'Submit Move' })
+	          )
+	        )
+	      );
+	    }, _temp), _possibleConstructorReturn(_this, _ret);
+	  }
+
+	  return Options;
+	}(_react.Component);
+
+	var _default = Options;
+	exports.default = _default;
+	;
+
+	(function () {
+	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+	    return;
+	  }
+
+	  __REACT_HOT_LOADER__.register(Options, 'Options', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/form_components/SomeOptions.jsx');
+
+	  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/form_components/SomeOptions.jsx');
+	})();
+
+	;
+
+/***/ },
+/* 255 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function Card(props) {
+	  var unknown = 'https://upload.wikimedia.org/wikipedia/commons/4/44/Question_mark_(black_on_white).png';
+	  return _react2.default.createElement(
+	    'div',
+	    { className: 'card-inverse card-primary col-md-12 stackcard', 'data-moviedbid': props.moviedbid },
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'media-right media-middle stats' },
+	      _react2.default.createElement(
+	        'h1',
+	        null,
+	        props.name
+	      ),
+	      _react2.default.createElement(
+	        'p',
+	        null,
+	        props.type
+	      )
+	    ),
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'media-right' },
+	      _react2.default.createElement('img', { src: props.image == unknown ? props.image : "http://image.tmdb.org/t/p/w92" + props.image })
+	    )
+	  );
+	}
+
+	Card.PropTypes = {
+	  image: _react2.default.PropTypes.string.isRequired,
+	  moviedbid: _react2.default.PropTypes.number.isRequired,
+	  name: _react2.default.PropTypes.string.isRequired,
+	  type: _react2.default.PropTypes.string.isRequired,
+	  user: _react2.default.PropTypes.string.isRequired
+	};
+
+	function Stack(props) {
+	  return _react2.default.createElement(
+	    'div',
+	    { className: 'col-md-12 container-fluid' },
+	    props.stack.map(function (card, index) {
+	      return _react2.default.createElement(Card, {
+	        image: card.entry.image,
+	        moviedbid: card.entry.moviedb_id,
+	        name: card.entry.name,
+	        type: card.entry.type,
+	        user: "start" && card.entry.user && card.entry.user.username,
+	        key: index });
+	    })
+	  );
+	}
+
+	Stack.PropTypes = {
+	  stack: _react2.default.PropTypes.array
+	};
+
+	var _default = Stack;
+	exports.default = _default;
+	;
+
+	(function () {
+	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+	    return;
+	  }
+
+	  __REACT_HOT_LOADER__.register(Card, 'Card', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/dummy_components/Stack.jsx');
+
+	  __REACT_HOT_LOADER__.register(Stack, 'Stack', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/dummy_components/Stack.jsx');
+
+	  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/dummy_components/Stack.jsx');
+	})();
+
+	;
+
+/***/ },
+/* 256 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(177);
+
+	var _Stack = __webpack_require__(255);
+
+	var _Stack2 = _interopRequireDefault(_Stack);
+
+	var _SomeOptions = __webpack_require__(254);
+
+	var _SomeOptions2 = _interopRequireDefault(_SomeOptions);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Game = function (_Component) {
+	  _inherits(Game, _Component);
+
+	  function Game() {
+	    var _ref;
+
+	    var _temp, _this, _ret;
+
+	    _classCallCheck(this, Game);
+
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
+
+	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Game.__proto__ || Object.getPrototypeOf(Game)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+	      stack: [],
+	      options: [],
+	      optionType: ''
+	    }, _this.componentWillMount = function () {
+	      var auth = _this.props.authMgr.getAuth().authorization;
+	      var gameId = _this.props.apiRequest.id;
+	      if (gameId === 'create') {
+	        _this.props.apiRequest.createGame(_this, auth, function (id) {
+	          _this.props.router.replace('/games/' + id);
+	        });
+	      } else {
+	        _this.props.apiRequest.joinGame(_this, auth, gameId);
+	      }
+	    }, _this.submitOption = function (option) {
+	      var auth = _this.props.authMgr.getAuth().authorization;
+	      var id = _this.props.apiRequest.id;
+	      _this.props.apiRequest.makeMove(auth, id, option);
+	    }, _temp), _possibleConstructorReturn(_this, _ret);
+	  }
+
+	  _createClass(Game, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'row' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'container-fluid col-md-3' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'card-deck' },
+	            _react2.default.createElement(_SomeOptions2.default, {
+	              type: this.state.optionType,
+	              submitOption: this.submitOption,
+	              options: this.state.options })
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'container-fluid col-md-6' },
+	          _react2.default.createElement(_Stack2.default, { stack: this.state.stack })
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Game;
+	}(_react.Component);
+
+	var _default = (0, _reactRouter.withRouter)(Game);
+
+	exports.default = _default;
+	;
+
+	(function () {
+	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+	    return;
+	  }
+
+	  __REACT_HOT_LOADER__.register(Game, 'Game', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/state_components/Game.jsx');
+
+	  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/state_components/Game.jsx');
+	})();
+
+	;
+
+/***/ },
+/* 257 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(177);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var AuthManager = function () {
+	  function AuthManager(config) {
+	    var _this = this;
+
+	    _classCallCheck(this, AuthManager);
+
+	    this.setAuth = function (token, user, storage) {
+	      _this.storage = storage ? _this.primaryStoreKey : _this.secondaryStoreKey;
+	      _this.store[_this.storage].setItem(_this.tokenProp, token);
+	      _this.store[_this.storage].setItem(_this.userProp, user);
+	    };
+
+	    this.deleteAuth = function () {
+	      _this.store[_this.storage].setItem(_this.tokenProp, '');
+	      _this.store[_this.storage].setItem(_this.userProp, '');
+	      _this.storage = _this.primaryStoreKey;
+	    };
+
+	    this.attachAuthMgr = function (Component, props) {
+	      props.authMgr = _this;
+	      return _react2.default.createElement(Component, props);
+	    };
+
+	    this.initAuth = function (nextState, replace) {
+	      if (_this.store[_this.primaryStoreKey].hasOwnProperty(_this.tokenProp) && _this.store[_this.primaryStoreKey].hasOwnProperty(_this.userProp)) {
+	        _this.storage = _this.primaryStoreKey;
+	      } else if (_this.store[_this.secondaryStoreKey].hasOwnProperty(_this.tokenProp) && _this.store[_this.secondaryStoreKey].hasOwnProperty(_this.userProp)) {
+	        _this.storage = _this.secondaryStoreKey;
+	      } else {
+	        _this.storage = _this.primaryStoreKey;
+	        _this.store[_this.storage].setItem(_this.tokenProp, '');
+	        _this.store[_this.storage].setItem(_this.userProp, '');
+	      }
+	    };
+
+	    this.loggedIn = function (nextState, replace) {
+	      var auth = _this.getAuth();
+	      if (!auth.authorization) replace('/login');
+	    };
+
+	    this.loggedOut = function (nextState, replace) {
+	      var auth = _this.getAuth();
+	      if (auth.authorization) replace('/profile/' + auth.currentUser);
+	    };
+
+	    this.store = config.store || window;
+	    this.primaryStoreKey = config.primaryStoreKey || "sessionStorage";
+	    this.secondaryStoreKey = config.secondaryStoreKey || "localStorage";
+	    this.storage = this.primaryStoreKey;
+	    this.tokenProp = config.tokenProp || "authorization";
+	    this.userProp = config.userProp || "user";
+	    this.tokenStrategy = config.tokenStrategy;
+	    this.getUser = config.getUser;
+	    this.createUser = config.createUser;
+	  }
+
+	  _createClass(AuthManager, [{
+	    key: 'getAuth',
+	    value: function getAuth() {
+	      return {
+	        authorization: this.store[this.storage].getItem(this.tokenProp) || '',
+	        currentUser: this.store[this.storage].getItem(this.userProp) || ''
+	      };
+	    }
+	  }, {
+	    key: 'login',
+	    value: function login(auth, callback) {
+	      var _this2 = this;
+
+	      var token = this.tokenStrategy(auth);
+	      this.getUser(token).then(function (data) {
+	        _this2.setAuth(token, data.username, auth.storage);
+	        return callback(data);
+	      });
+	    }
+	  }, {
+	    key: 'register',
+	    value: function register(profile, callback) {
+	      var _this3 = this;
+
+	      var token = this.tokenStrategy(profile);
+	      this.createUser(profile).then(function (data) {
+	        _this3.setAuth(token, data.username, profile.storage);
+	        return callback(data);
+	      });
+	    }
+	  }]);
+
+	  return AuthManager;
+	}();
+
+	var _default = AuthManager;
+	exports.default = _default;
+	;
+
+	(function () {
+	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+	    return;
+	  }
+
+	  __REACT_HOT_LOADER__.register(AuthManager, 'AuthManager', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/authorize/auth_manager.jsx');
+
+	  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/authorize/auth_manager.jsx');
+	})();
+
+	;
+
+/***/ },
+/* 258 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _io_mgr = __webpack_require__(259);
+
+	var _io_mgr2 = _interopRequireDefault(_io_mgr);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	//const ioMgr = new IoMgr();
+
+	var apiRequest = {
+	  ioMgr: new _io_mgr2.default(),
+	  request: function request(method, path, auth, body) {
+	    return new Promise(function (resolve, reject) {
+	      var req = new XMLHttpRequest();
+	      req.open(method, "http://localhost:3000/api" + path);
+	      req.setRequestHeader("authorization", auth);
+	      if (body) {
+	        req.setRequestHeader("Content-type", "application/json");
+	      } else {
+	        req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	      }
+
+	      req.addEventListener("load", function () {
+	        if (this.readyState == 4 && this.status == 200) {
+	          var data = this.responseText ? JSON.parse(this.responseText) : '';
+	          return resolve(data);
+	        } else {
+	          return reject(this.statusText);
+	        }
+	      });
+	      req.send(JSON.stringify(body));
+	    });
+	  },
+	  login: function login(auth) {
+	    return this.request("POST", "/players/login", auth, null);
+	  },
+	  register: function register(body) {
+	    return this.request("POST", "/players", null, body);
+	  },
+	  getGames: function getGames(context, auth) {
+	    this.ioMgr.gameListStream(context);
+	    return this.request("GET", "/games", auth).then(function (games) {
+	      context.setState({ games: games });
+	    });
+	  },
+	  createGame: function createGame(context, auth, callback) {
+	    var _this = this;
+
+	    return this.request("POST", "/games", auth).then(function (game) {
+	      var optionType = game.stack[0].entry.type == "actor" ? "movie" : "actor";
+	      var options = game.currentOptions;
+	      var stack = game.stack;
+	      context.setState({
+	        optionType: optionType,
+	        options: options,
+	        stack: stack
+	      });
+	      _this.ioMgr.gameStream(context, game._id);
+	    });
+	  },
+	  joinGame: function joinGame(context, auth, nextGame) {
+	    var path = "/games/" + nextGame;
+	    this.ioMgr.gameStream(context, nextGame);
+	    return this.request("POST", path, auth).then(function (game) {
+	      var optionType = game.stack[0].entry.type == "actor" ? "movie" : "actor";
+	      var options = game.currentOptions;
+	      var stack = game.stack;
+	      context.setState({
+	        optionType: optionType,
+	        options: options,
+	        stack: stack
+	      });
+	    });
+	  },
+	  makeMove: function makeMove(auth, game, body) {
+	    var path = "/games/" + game + "/move";
+	    return this.request("POST", path, auth, body).then(function (game) {});
+	  }
+	};
+
+	var _default = apiRequest;
+	exports.default = _default;
+	;
+
+	(function () {
+	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+	    return;
+	  }
+
+	  __REACT_HOT_LOADER__.register(apiRequest, "apiRequest", "/Users/nicolasjhampton/code/bacon-project-12/frontapp/api/api_request.jsx");
+
+	  __REACT_HOT_LOADER__.register(_default, "default", "/Users/nicolasjhampton/code/bacon-project-12/frontapp/api/api_request.jsx");
+	})();
+
+	;
+
+/***/ },
+/* 259 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _socket = __webpack_require__(260);
+
+	var _socket2 = _interopRequireDefault(_socket);
+
+	var _Observable = __webpack_require__(308);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	localStorage.debug = 'socket.io*';
+
+	var IoMgr = function IoMgr() {
+	  var _this = this;
+
+	  _classCallCheck(this, IoMgr);
+
+	  this.roomStream = function (context) {};
+
+	  this.gameListStream = function (context) {
+	    if (!_this.gameList) {
+	      _this.gameListChannel = _Observable.Observable.create(function (observer) {
+	        return _this.io.on('games', function (game) {
+	          observer.next(game);
+	        });
+	      });
+	      return _this.gameListChannel.subscribe(function (games) {
+	        context.setState({
+	          games: games
+	        });
+	      });
+	    }
+	  };
+
+	  this.gameStream = function (context, id) {
+	    console.log('id', id);
+
+	    _this.gameChannel = _Observable.Observable.create(function (observer) {
+	      return _this.io.on(id, function (move) {
+	        observer.next(move);
+	      });
+	    });
+	    return _this.gameChannel.subscribe(function (move) {
+	      context.state.stack.unshift(move.stack);
+	      var stack = context.state.stack;
+	      var options = move.currentOptions;
+	      var optionType = context.state.stack[0].entry.type == "actor" ? "movie" : "actor";
+	      context.setState({
+	        optionType: optionType,
+	        options: options,
+	        stack: stack
+	      });
+	    });
+	  };
+
+	  this.io = (0, _socket2.default)({ transports: ['websocket'], upgrade: false });
+	};
+
+	var _default = IoMgr;
+	exports.default = _default;
+	;
+
+	(function () {
+	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+	    return;
+	  }
+
+	  __REACT_HOT_LOADER__.register(IoMgr, 'IoMgr', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/streams/io_mgr.jsx');
+
+	  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/streams/io_mgr.jsx');
+	})();
+
+	;
+
+/***/ },
+/* 260 */
+/***/ function(module, exports, __webpack_require__) {
+
 	
 	/**
 	 * Module dependencies.
 	 */
 
-	var url = __webpack_require__(241);
-	var parser = __webpack_require__(246);
-	var Manager = __webpack_require__(254);
-	var debug = __webpack_require__(243)('socket.io-client');
+	var url = __webpack_require__(261);
+	var parser = __webpack_require__(266);
+	var Manager = __webpack_require__(274);
+	var debug = __webpack_require__(263)('socket.io-client');
 
 	/**
 	 * Module exports.
@@ -27748,12 +29521,12 @@
 	 * @api public
 	 */
 
-	exports.Manager = __webpack_require__(254);
-	exports.Socket = __webpack_require__(281);
+	exports.Manager = __webpack_require__(274);
+	exports.Socket = __webpack_require__(301);
 
 
 /***/ },
-/* 241 */
+/* 261 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {
@@ -27761,8 +29534,8 @@
 	 * Module dependencies.
 	 */
 
-	var parseuri = __webpack_require__(242);
-	var debug = __webpack_require__(243)('socket.io-client:url');
+	var parseuri = __webpack_require__(262);
+	var debug = __webpack_require__(263)('socket.io-client:url');
 
 	/**
 	 * Module exports.
@@ -27836,7 +29609,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 242 */
+/* 262 */
 /***/ function(module, exports) {
 
 	/**
@@ -27881,7 +29654,7 @@
 
 
 /***/ },
-/* 243 */
+/* 263 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -27891,7 +29664,7 @@
 	 * Expose `debug()` as the module.
 	 */
 
-	exports = module.exports = __webpack_require__(244);
+	exports = module.exports = __webpack_require__(264);
 	exports.log = log;
 	exports.formatArgs = formatArgs;
 	exports.save = save;
@@ -28055,7 +29828,7 @@
 
 
 /***/ },
-/* 244 */
+/* 264 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -28071,7 +29844,7 @@
 	exports.disable = disable;
 	exports.enable = enable;
 	exports.enabled = enabled;
-	exports.humanize = __webpack_require__(245);
+	exports.humanize = __webpack_require__(265);
 
 	/**
 	 * The currently active debug mode names, and names to skip.
@@ -28258,7 +30031,7 @@
 
 
 /***/ },
-/* 245 */
+/* 265 */
 /***/ function(module, exports) {
 
 	/**
@@ -28389,7 +30162,7 @@
 
 
 /***/ },
-/* 246 */
+/* 266 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -28397,12 +30170,12 @@
 	 * Module dependencies.
 	 */
 
-	var debug = __webpack_require__(243)('socket.io-parser');
-	var json = __webpack_require__(247);
-	var isArray = __webpack_require__(250);
-	var Emitter = __webpack_require__(251);
-	var binary = __webpack_require__(252);
-	var isBuf = __webpack_require__(253);
+	var debug = __webpack_require__(263)('socket.io-parser');
+	var json = __webpack_require__(267);
+	var isArray = __webpack_require__(270);
+	var Emitter = __webpack_require__(271);
+	var binary = __webpack_require__(272);
+	var isBuf = __webpack_require__(273);
 
 	/**
 	 * Protocol version.
@@ -28795,14 +30568,14 @@
 
 
 /***/ },
-/* 247 */
+/* 267 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(module, global) {/*! JSON v3.3.2 | http://bestiejs.github.io/json3 | Copyright 2012-2014, Kit Cambridge | http://kit.mit-license.org */
 	;(function () {
 	  // Detect the `define` function exposed by asynchronous module loaders. The
 	  // strict `define` check is necessary for compatibility with `r.js`.
-	  var isLoader = "function" === "function" && __webpack_require__(249);
+	  var isLoader = "function" === "function" && __webpack_require__(269);
 
 	  // A set of types used to distinguish objects from primitives.
 	  var objectTypes = {
@@ -29701,10 +31474,10 @@
 	  }
 	}).call(this);
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(248)(module), (function() { return this; }())))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(268)(module), (function() { return this; }())))
 
 /***/ },
-/* 248 */
+/* 268 */
 /***/ function(module, exports) {
 
 	module.exports = function(module) {
@@ -29720,7 +31493,7 @@
 
 
 /***/ },
-/* 249 */
+/* 269 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(__webpack_amd_options__) {module.exports = __webpack_amd_options__;
@@ -29728,7 +31501,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, {}))
 
 /***/ },
-/* 250 */
+/* 270 */
 /***/ function(module, exports) {
 
 	module.exports = Array.isArray || function (arr) {
@@ -29737,7 +31510,7 @@
 
 
 /***/ },
-/* 251 */
+/* 271 */
 /***/ function(module, exports) {
 
 	
@@ -29907,7 +31680,7 @@
 
 
 /***/ },
-/* 252 */
+/* 272 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/*global Blob,File*/
@@ -29916,8 +31689,8 @@
 	 * Module requirements
 	 */
 
-	var isArray = __webpack_require__(250);
-	var isBuf = __webpack_require__(253);
+	var isArray = __webpack_require__(270);
+	var isBuf = __webpack_require__(273);
 
 	/**
 	 * Replaces every Buffer | ArrayBuffer in packet with a numbered placeholder.
@@ -30055,7 +31828,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 253 */
+/* 273 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {
@@ -30075,7 +31848,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 254 */
+/* 274 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -30083,15 +31856,15 @@
 	 * Module dependencies.
 	 */
 
-	var eio = __webpack_require__(255);
-	var Socket = __webpack_require__(281);
-	var Emitter = __webpack_require__(282);
-	var parser = __webpack_require__(246);
-	var on = __webpack_require__(284);
-	var bind = __webpack_require__(285);
-	var debug = __webpack_require__(243)('socket.io-client:manager');
-	var indexOf = __webpack_require__(279);
-	var Backoff = __webpack_require__(287);
+	var eio = __webpack_require__(275);
+	var Socket = __webpack_require__(301);
+	var Emitter = __webpack_require__(302);
+	var parser = __webpack_require__(266);
+	var on = __webpack_require__(304);
+	var bind = __webpack_require__(305);
+	var debug = __webpack_require__(263)('socket.io-client:manager');
+	var indexOf = __webpack_require__(299);
+	var Backoff = __webpack_require__(307);
 
 	/**
 	 * IE6+ hasOwnProperty
@@ -30638,19 +32411,19 @@
 
 
 /***/ },
-/* 255 */
+/* 275 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
-	module.exports =  __webpack_require__(256);
+	module.exports =  __webpack_require__(276);
 
 
 /***/ },
-/* 256 */
+/* 276 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
-	module.exports = __webpack_require__(257);
+	module.exports = __webpack_require__(277);
 
 	/**
 	 * Exports parser
@@ -30658,25 +32431,25 @@
 	 * @api public
 	 *
 	 */
-	module.exports.parser = __webpack_require__(264);
+	module.exports.parser = __webpack_require__(284);
 
 
 /***/ },
-/* 257 */
+/* 277 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
 	 * Module dependencies.
 	 */
 
-	var transports = __webpack_require__(258);
-	var Emitter = __webpack_require__(272);
-	var debug = __webpack_require__(243)('engine.io-client:socket');
-	var index = __webpack_require__(279);
-	var parser = __webpack_require__(264);
-	var parseuri = __webpack_require__(242);
-	var parsejson = __webpack_require__(280);
-	var parseqs = __webpack_require__(273);
+	var transports = __webpack_require__(278);
+	var Emitter = __webpack_require__(292);
+	var debug = __webpack_require__(263)('engine.io-client:socket');
+	var index = __webpack_require__(299);
+	var parser = __webpack_require__(284);
+	var parseuri = __webpack_require__(262);
+	var parsejson = __webpack_require__(300);
+	var parseqs = __webpack_require__(293);
 
 	/**
 	 * Module exports.
@@ -30800,9 +32573,9 @@
 	 */
 
 	Socket.Socket = Socket;
-	Socket.Transport = __webpack_require__(263);
-	Socket.transports = __webpack_require__(258);
-	Socket.parser = __webpack_require__(264);
+	Socket.Transport = __webpack_require__(283);
+	Socket.transports = __webpack_require__(278);
+	Socket.parser = __webpack_require__(284);
 
 	/**
 	 * Creates transport of the given type.
@@ -31397,17 +33170,17 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 258 */
+/* 278 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
 	 * Module dependencies
 	 */
 
-	var XMLHttpRequest = __webpack_require__(259);
-	var XHR = __webpack_require__(261);
-	var JSONP = __webpack_require__(276);
-	var websocket = __webpack_require__(277);
+	var XMLHttpRequest = __webpack_require__(279);
+	var XHR = __webpack_require__(281);
+	var JSONP = __webpack_require__(296);
+	var websocket = __webpack_require__(297);
 
 	/**
 	 * Export transports.
@@ -31457,11 +33230,11 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 259 */
+/* 279 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// browser shim for xmlhttprequest module
-	var hasCORS = __webpack_require__(260);
+	var hasCORS = __webpack_require__(280);
 
 	module.exports = function(opts) {
 	  var xdomain = opts.xdomain;
@@ -31499,7 +33272,7 @@
 
 
 /***/ },
-/* 260 */
+/* 280 */
 /***/ function(module, exports) {
 
 	
@@ -31522,18 +33295,18 @@
 
 
 /***/ },
-/* 261 */
+/* 281 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
 	 * Module requirements.
 	 */
 
-	var XMLHttpRequest = __webpack_require__(259);
-	var Polling = __webpack_require__(262);
-	var Emitter = __webpack_require__(272);
-	var inherit = __webpack_require__(274);
-	var debug = __webpack_require__(243)('engine.io-client:polling-xhr');
+	var XMLHttpRequest = __webpack_require__(279);
+	var Polling = __webpack_require__(282);
+	var Emitter = __webpack_require__(292);
+	var inherit = __webpack_require__(294);
+	var debug = __webpack_require__(263)('engine.io-client:polling-xhr');
 
 	/**
 	 * Module exports.
@@ -31941,19 +33714,19 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 262 */
+/* 282 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Module dependencies.
 	 */
 
-	var Transport = __webpack_require__(263);
-	var parseqs = __webpack_require__(273);
-	var parser = __webpack_require__(264);
-	var inherit = __webpack_require__(274);
-	var yeast = __webpack_require__(275);
-	var debug = __webpack_require__(243)('engine.io-client:polling');
+	var Transport = __webpack_require__(283);
+	var parseqs = __webpack_require__(293);
+	var parser = __webpack_require__(284);
+	var inherit = __webpack_require__(294);
+	var yeast = __webpack_require__(295);
+	var debug = __webpack_require__(263)('engine.io-client:polling');
 
 	/**
 	 * Module exports.
@@ -31966,7 +33739,7 @@
 	 */
 
 	var hasXHR2 = (function() {
-	  var XMLHttpRequest = __webpack_require__(259);
+	  var XMLHttpRequest = __webpack_require__(279);
 	  var xhr = new XMLHttpRequest({ xdomain: false });
 	  return null != xhr.responseType;
 	})();
@@ -32194,15 +33967,15 @@
 
 
 /***/ },
-/* 263 */
+/* 283 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Module dependencies.
 	 */
 
-	var parser = __webpack_require__(264);
-	var Emitter = __webpack_require__(272);
+	var parser = __webpack_require__(284);
+	var Emitter = __webpack_require__(292);
 
 	/**
 	 * Module exports.
@@ -32355,19 +34128,19 @@
 
 
 /***/ },
-/* 264 */
+/* 284 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
 	 * Module dependencies.
 	 */
 
-	var keys = __webpack_require__(265);
-	var hasBinary = __webpack_require__(266);
-	var sliceBuffer = __webpack_require__(267);
-	var base64encoder = __webpack_require__(268);
-	var after = __webpack_require__(269);
-	var utf8 = __webpack_require__(270);
+	var keys = __webpack_require__(285);
+	var hasBinary = __webpack_require__(286);
+	var sliceBuffer = __webpack_require__(287);
+	var base64encoder = __webpack_require__(288);
+	var after = __webpack_require__(289);
+	var utf8 = __webpack_require__(290);
 
 	/**
 	 * Check if we are running an android browser. That requires us to use
@@ -32424,7 +34197,7 @@
 	 * Create a blob api even for blob builder when vendor prefixes exist
 	 */
 
-	var Blob = __webpack_require__(271);
+	var Blob = __webpack_require__(291);
 
 	/**
 	 * Encodes a packet.
@@ -32956,7 +34729,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 265 */
+/* 285 */
 /***/ function(module, exports) {
 
 	
@@ -32981,7 +34754,7 @@
 
 
 /***/ },
-/* 266 */
+/* 286 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {
@@ -32989,7 +34762,7 @@
 	 * Module requirements.
 	 */
 
-	var isArray = __webpack_require__(250);
+	var isArray = __webpack_require__(270);
 
 	/**
 	 * Module exports.
@@ -33046,7 +34819,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 267 */
+/* 287 */
 /***/ function(module, exports) {
 
 	/**
@@ -33081,7 +34854,7 @@
 
 
 /***/ },
-/* 268 */
+/* 288 */
 /***/ function(module, exports) {
 
 	/*
@@ -33146,7 +34919,7 @@
 
 
 /***/ },
-/* 269 */
+/* 289 */
 /***/ function(module, exports) {
 
 	module.exports = after
@@ -33180,7 +34953,7 @@
 
 
 /***/ },
-/* 270 */
+/* 290 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(module, global) {/*! https://mths.be/utf8js v2.0.0 by @mathias */
@@ -33426,10 +35199,10 @@
 
 	}(this));
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(248)(module), (function() { return this; }())))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(268)(module), (function() { return this; }())))
 
 /***/ },
-/* 271 */
+/* 291 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
@@ -33532,7 +35305,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 272 */
+/* 292 */
 /***/ function(module, exports) {
 
 	
@@ -33702,7 +35475,7 @@
 
 
 /***/ },
-/* 273 */
+/* 293 */
 /***/ function(module, exports) {
 
 	/**
@@ -33745,7 +35518,7 @@
 
 
 /***/ },
-/* 274 */
+/* 294 */
 /***/ function(module, exports) {
 
 	
@@ -33757,7 +35530,7 @@
 	};
 
 /***/ },
-/* 275 */
+/* 295 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -33831,7 +35604,7 @@
 
 
 /***/ },
-/* 276 */
+/* 296 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {
@@ -33839,8 +35612,8 @@
 	 * Module requirements.
 	 */
 
-	var Polling = __webpack_require__(262);
-	var inherit = __webpack_require__(274);
+	var Polling = __webpack_require__(282);
+	var inherit = __webpack_require__(294);
 
 	/**
 	 * Module exports.
@@ -34076,19 +35849,19 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 277 */
+/* 297 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
 	 * Module dependencies.
 	 */
 
-	var Transport = __webpack_require__(263);
-	var parser = __webpack_require__(264);
-	var parseqs = __webpack_require__(273);
-	var inherit = __webpack_require__(274);
-	var yeast = __webpack_require__(275);
-	var debug = __webpack_require__(243)('engine.io-client:websocket');
+	var Transport = __webpack_require__(283);
+	var parser = __webpack_require__(284);
+	var parseqs = __webpack_require__(293);
+	var inherit = __webpack_require__(294);
+	var yeast = __webpack_require__(295);
+	var debug = __webpack_require__(263)('engine.io-client:websocket');
 	var BrowserWebSocket = global.WebSocket || global.MozWebSocket;
 
 	/**
@@ -34100,7 +35873,7 @@
 	var WebSocket = BrowserWebSocket;
 	if (!WebSocket && typeof window === 'undefined') {
 	  try {
-	    WebSocket = __webpack_require__(278);
+	    WebSocket = __webpack_require__(298);
 	  } catch (e) { }
 	}
 
@@ -34371,13 +36144,13 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 278 */
+/* 298 */
 /***/ function(module, exports) {
 
 	/* (ignored) */
 
 /***/ },
-/* 279 */
+/* 299 */
 /***/ function(module, exports) {
 
 	
@@ -34392,7 +36165,7 @@
 	};
 
 /***/ },
-/* 280 */
+/* 300 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
@@ -34430,7 +36203,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 281 */
+/* 301 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -34438,13 +36211,13 @@
 	 * Module dependencies.
 	 */
 
-	var parser = __webpack_require__(246);
-	var Emitter = __webpack_require__(282);
-	var toArray = __webpack_require__(283);
-	var on = __webpack_require__(284);
-	var bind = __webpack_require__(285);
-	var debug = __webpack_require__(243)('socket.io-client:socket');
-	var hasBin = __webpack_require__(286);
+	var parser = __webpack_require__(266);
+	var Emitter = __webpack_require__(302);
+	var toArray = __webpack_require__(303);
+	var on = __webpack_require__(304);
+	var bind = __webpack_require__(305);
+	var debug = __webpack_require__(263)('socket.io-client:socket');
+	var hasBin = __webpack_require__(306);
 
 	/**
 	 * Module exports.
@@ -34848,7 +36621,7 @@
 
 
 /***/ },
-/* 282 */
+/* 302 */
 /***/ function(module, exports) {
 
 	
@@ -35015,7 +36788,7 @@
 
 
 /***/ },
-/* 283 */
+/* 303 */
 /***/ function(module, exports) {
 
 	module.exports = toArray
@@ -35034,7 +36807,7 @@
 
 
 /***/ },
-/* 284 */
+/* 304 */
 /***/ function(module, exports) {
 
 	
@@ -35064,7 +36837,7 @@
 
 
 /***/ },
-/* 285 */
+/* 305 */
 /***/ function(module, exports) {
 
 	/**
@@ -35093,7 +36866,7 @@
 
 
 /***/ },
-/* 286 */
+/* 306 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {
@@ -35101,7 +36874,7 @@
 	 * Module requirements.
 	 */
 
-	var isArray = __webpack_require__(250);
+	var isArray = __webpack_require__(270);
 
 	/**
 	 * Module exports.
@@ -35159,7 +36932,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 287 */
+/* 307 */
 /***/ function(module, exports) {
 
 	
@@ -35250,1943 +37023,7 @@
 
 
 /***/ },
-/* 288 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRouter = __webpack_require__(177);
-
-	var _AuthNavMenuItem = __webpack_require__(289);
-
-	var _AuthNavMenuItem2 = _interopRequireDefault(_AuthNavMenuItem);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var GameApp = function GameApp(props) {
-	  var obj = props.authMgr.getAuth();
-	  var profilePath = '/profile/' + obj.currentUser;
-	  var authorized = obj.authorization ? true : false;
-	  return _react2.default.createElement(
-	    'div',
-	    { className: 'container' },
-	    _react2.default.createElement(
-	      'div',
-	      { className: 'row' },
-	      _react2.default.createElement(
-	        'nav',
-	        { className: 'navbar navbar-dark bg-primary' },
-	        _react2.default.createElement(
-	          _reactRouter.Link,
-	          {
-	            className: 'navbar-brand',
-	            activeStyle: { color: 'white' },
-	            to: 'home' },
-	          'Makin Bacon'
-	        ),
-	        _react2.default.createElement(
-	          'ul',
-	          { className: 'nav navbar-nav pull-xs-right' },
-	          _react2.default.createElement(_AuthNavMenuItem2.default, {
-	            authorized: authorized,
-	            authRoute: "/games",
-	            authRouteName: "Games",
-	            unAuthRoute: "/",
-	            unAuthRouteName: "Home" }),
-	          _react2.default.createElement(_AuthNavMenuItem2.default, {
-	            authorized: authorized,
-	            authRoute: profilePath,
-	            authRouteName: "Profile",
-	            unAuthRoute: "/register",
-	            unAuthRouteName: "Register" }),
-	          _react2.default.createElement(_AuthNavMenuItem2.default, {
-	            authorized: authorized,
-	            authRoute: "/login",
-	            authRouteName: "Logout",
-	            unAuthRoute: "/login",
-	            unAuthRouteName: "Login",
-	            onClick: props.authMgr.deleteAuth })
-	        )
-	      )
-	    ),
-	    _react2.default.createElement(
-	      'div',
-	      { className: 'row' },
-	      props.children
-	    )
-	  );
-	};
-
-	var _default = GameApp;
-	exports.default = _default;
-	;
-
-	(function () {
-	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-	    return;
-	  }
-
-	  __REACT_HOT_LOADER__.register(GameApp, 'GameApp', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/GameApp.jsx');
-
-	  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/GameApp.jsx');
-	})();
-
-	;
-
-/***/ },
-/* 289 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRouter = __webpack_require__(177);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var AuthNavMenuItem = function AuthNavMenuItem(props) {
-	  return _react2.default.createElement(
-	    'li',
-	    { className: 'nav-item' },
-	    props.authorized ? _react2.default.createElement(
-	      _reactRouter.Link,
-	      {
-	        onClick: props.onClick,
-	        className: 'nav-link',
-	        activeStyle: { color: 'white' },
-	        to: props.authRoute },
-	      props.authRouteName
-	    ) : _react2.default.createElement(
-	      _reactRouter.Link,
-	      {
-	        onClick: props.onClick,
-	        className: 'nav-link',
-	        activeStyle: { color: 'white' },
-	        to: props.unAuthRoute },
-	      props.unAuthRouteName
-	    )
-	  );
-	};
-
-	AuthNavMenuItem.propTypes = {
-	  authorized: _react2.default.PropTypes.bool.isRequired,
-	  authRoute: _react2.default.PropTypes.string.isRequired,
-	  authRouteName: _react2.default.PropTypes.string.isRequired,
-	  unAuthRoute: _react2.default.PropTypes.string.isRequired,
-	  unAuthRouteName: _react2.default.PropTypes.string.isRequired,
-	  onClick: _react2.default.PropTypes.func
-	};
-
-	var _default = AuthNavMenuItem;
-	exports.default = _default;
-	;
-
-	(function () {
-	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-	    return;
-	  }
-
-	  __REACT_HOT_LOADER__.register(AuthNavMenuItem, 'AuthNavMenuItem', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/AuthNavMenuItem.jsx');
-
-	  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/AuthNavMenuItem.jsx');
-	})();
-
-	;
-
-/***/ },
-/* 290 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRouter = __webpack_require__(177);
-
-	var _StringField = __webpack_require__(291);
-
-	var _StringField2 = _interopRequireDefault(_StringField);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var Login = function (_Component) {
-	  _inherits(Login, _Component);
-
-	  function Login() {
-	    var _ref;
-
-	    var _temp, _this, _ret;
-
-	    _classCallCheck(this, Login);
-
-	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-	      args[_key] = arguments[_key];
-	    }
-
-	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Login.__proto__ || Object.getPrototypeOf(Login)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-	      username: "",
-	      password: "",
-	      storage: true
-	    }, _this.onSubmit = function (e) {
-	      e.preventDefault();
-	      _this.props.authMgr.login(_this.state, function (auth) {
-	        _this.props.router.replace({
-	          pathname: '/profile/' + auth.username
-	        });
-	      });
-	    }, _this.onChange = function (e) {
-	      var id = e.target.id;
-	      var value = void 0;
-	      if (e.target.id == "storage") {
-	        value = !_this.state.storage;
-	      } else {
-	        value = e.target.value;
-	      }
-	      _this.setState(_defineProperty({}, id, value));
-	    }, _temp), _possibleConstructorReturn(_this, _ret);
-	  }
-
-	  // this replaces 'getInitialState'
-
-
-	  _createClass(Login, [{
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'container' },
-	        _react2.default.createElement(
-	          'form',
-	          { onSubmit: this.onSubmit, className: 'col-md-6 col-xs-12 offset-md-3' },
-	          _react2.default.createElement(_StringField2.default, { id: 'username', state: this.onChange }),
-	          _react2.default.createElement(_StringField2.default, { id: 'password', type: 'password', state: this.onChange }),
-	          _react2.default.createElement(
-	            'div',
-	            null,
-	            _react2.default.createElement('input', {
-	              type: 'checkbox',
-	              id: 'storage',
-	              onChange: this.onChange,
-	              placeholder: 'Keep me logged in!' }),
-	            _react2.default.createElement(
-	              'label',
-	              {
-	                htmlFor: 'storage' },
-	              'Keep me logged in!'
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'form-group' },
-	            _react2.default.createElement('input', {
-	              className: 'form-control btn btn-primary',
-	              type: 'submit',
-	              value: 'Login' })
-	          )
-	        )
-	      );
-	    }
-	  }]);
-
-	  return Login;
-	}(_react.Component);
-
-	var _default = (0, _reactRouter.withRouter)(Login);
-
-	exports.default = _default;
-	;
-
-	(function () {
-	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-	    return;
-	  }
-
-	  __REACT_HOT_LOADER__.register(Login, 'Login', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/Login.jsx');
-
-	  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/Login.jsx');
-	})();
-
-	;
-
-/***/ },
-/* 291 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _Field = __webpack_require__(292);
-
-	var _Field2 = _interopRequireDefault(_Field);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var StringField = function StringField(props) {
-	  return _react2.default.createElement(_Field2.default, {
-	    id: props.id,
-	    type: props.type || "text",
-	    state: props.state });
-	};
-
-	StringField.PropTypes = {
-	  id: _react2.default.PropTypes.string.isRequired,
-	  state: _react2.default.PropTypes.func.isRequired
-	};
-
-	var _default = StringField;
-	exports.default = _default;
-	;
-
-	(function () {
-	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-	    return;
-	  }
-
-	  __REACT_HOT_LOADER__.register(StringField, 'StringField', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/StringField.jsx');
-
-	  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/StringField.jsx');
-	})();
-
-	;
-
-/***/ },
-/* 292 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var Field = function Field(props) {
-	  return _react2.default.createElement(
-	    "div",
-	    { className: "form-group" },
-	    _react2.default.createElement(
-	      "label",
-	      { htmlFor: props.id },
-	      props.id
-	    ),
-	    _react2.default.createElement("input", {
-	      type: props.type,
-	      className: "form-control",
-	      id: props.id,
-	      onChange: props.state,
-	      placeholder: "Enter " + props.id })
-	  );
-	};
-
-	Field.PropTypes = {
-	  id: _react2.default.PropTypes.string.isRequired,
-	  type: _react2.default.PropTypes.string.isRequired,
-	  state: _react2.default.PropTypes.func.isRequired
-	};
-
-	var _default = Field;
-	exports.default = _default;
-	;
-
-	(function () {
-	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-	    return;
-	  }
-
-	  __REACT_HOT_LOADER__.register(Field, "Field", "/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/Field.jsx");
-
-	  __REACT_HOT_LOADER__.register(_default, "default", "/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/Field.jsx");
-	})();
-
-	;
-
-/***/ },
-/* 293 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var Home = function (_Component) {
-	  _inherits(Home, _Component);
-
-	  function Home() {
-	    _classCallCheck(this, Home);
-
-	    return _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).apply(this, arguments));
-	  }
-
-	  _createClass(Home, [{
-	    key: "render",
-	    value: function render() {
-	      return _react2.default.createElement(
-	        "div",
-	        null,
-	        _react2.default.createElement(
-	          "p",
-	          null,
-	          "This is the home page"
-	        )
-	      );
-	    }
-	  }]);
-
-	  return Home;
-	}(_react.Component);
-
-	var _default = Home;
-	exports.default = _default;
-	;
-
-	(function () {
-	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-	    return;
-	  }
-
-	  __REACT_HOT_LOADER__.register(Home, "Home", "/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/Home.jsx");
-
-	  __REACT_HOT_LOADER__.register(_default, "default", "/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/Home.jsx");
-	})();
-
-	;
-
-/***/ },
-/* 294 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRouter = __webpack_require__(177);
-
-	var _StringField = __webpack_require__(291);
-
-	var _StringField2 = _interopRequireDefault(_StringField);
-
-	var _Field = __webpack_require__(292);
-
-	var _Field2 = _interopRequireDefault(_Field);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var Register = function (_Component) {
-	  _inherits(Register, _Component);
-
-	  function Register() {
-	    var _ref;
-
-	    var _temp, _this, _ret;
-
-	    _classCallCheck(this, Register);
-
-	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-	      args[_key] = arguments[_key];
-	    }
-
-	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Register.__proto__ || Object.getPrototypeOf(Register)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-	      username: "",
-	      password: "",
-	      email: "",
-	      confirm: "",
-	      storage: true
-	    }, _this.onSubmit = function (e) {
-	      e.preventDefault();
-	      _this.props.authMgr.register(_this.state, function (auth) {
-	        _this.props.router.replace({
-	          pathname: '/profile/' + auth.username
-	        });
-	      });
-	    }, _this.onChange = function (e) {
-	      var id = e.target.id;
-	      var value = void 0;
-	      if (e.target.id == "storage") {
-	        value = !_this.state.storage;
-	      } else {
-	        value = e.target.value;
-	      }
-	      _this.setState(_defineProperty({}, id, value));
-	    }, _temp), _possibleConstructorReturn(_this, _ret);
-	  }
-
-	  // this replaces 'getInitialState'
-
-
-	  _createClass(Register, [{
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'container' },
-	        _react2.default.createElement(
-	          'form',
-	          { onSubmit: this.onSubmit, className: 'col-md-6 col-xs-12 offset-md-3' },
-	          _react2.default.createElement(_StringField2.default, { id: 'username', state: this.onChange }),
-	          _react2.default.createElement(_Field2.default, { id: 'email', type: 'email', state: this.onChange }),
-	          _react2.default.createElement(_StringField2.default, { id: 'password', type: 'password', state: this.onChange }),
-	          _react2.default.createElement(_StringField2.default, { id: 'confirm', type: 'password', state: this.onChange }),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'form-group' },
-	            _react2.default.createElement('input', {
-	              type: 'checkbox',
-	              className: 'form-control',
-	              id: 'storage',
-	              onChange: this.onChange,
-	              placeholder: 'Keep me logged in!' }),
-	            _react2.default.createElement(
-	              'label',
-	              { htmlFor: 'storage' },
-	              'Keep me logged in!'
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'form-group' },
-	            _react2.default.createElement('input', {
-	              className: 'form-control btn btn-primary',
-	              type: 'submit',
-	              value: 'Register' })
-	          )
-	        )
-	      );
-	    }
-	  }]);
-
-	  return Register;
-	}(_react.Component);
-
-	var _default = (0, _reactRouter.withRouter)(Register);
-
-	exports.default = _default;
-	;
-
-	(function () {
-	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-	    return;
-	  }
-
-	  __REACT_HOT_LOADER__.register(Register, 'Register', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/Register.jsx');
-
-	  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/Register.jsx');
-	})();
-
-	;
-
-/***/ },
-/* 295 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRouter = __webpack_require__(177);
-
-	var _GameList = __webpack_require__(296);
-
-	var _GameList2 = _interopRequireDefault(_GameList);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var Profile = function (_Component) {
-	  _inherits(Profile, _Component);
-
-	  function Profile() {
-	    var _ref;
-
-	    var _temp, _this, _ret;
-
-	    _classCallCheck(this, Profile);
-
-	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-	      args[_key] = arguments[_key];
-	    }
-
-	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Profile.__proto__ || Object.getPrototypeOf(Profile)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-	      games: []
-	    }, _this.join = function (id) {
-	      return function () {
-	        _this.socket.emit('disconnect');
-	        _this.props.router.replace('/games/' + id);
-	      };
-	    }, _temp), _possibleConstructorReturn(_this, _ret);
-	  }
-
-	  _createClass(Profile, [{
-	    key: 'componentWillMount',
-	    value: function componentWillMount() {
-	      var _this2 = this;
-
-	      //this.props.ioMgr.initGameListSocket();
-
-	      var auth = this.props.authMgr.getAuth();
-	      this.props.ioMgr.gameListStream(this); //.subscribe(games => .setState({games: games}));;
-	      //this.props.ioMgr.gameListChannel
-	      this.props.apiRequest.getGames(auth.authorization).then(function (games) {
-	        _this2.setState({ games: games });
-	      });
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var _this3 = this;
-
-	      var auth = this.props.authMgr.getAuth();
-	      console.log(auth.currentUser);
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'container-fluid col-xs-12 col-md-12' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'row' },
-	          _react2.default.createElement(
-	            'p',
-	            null,
-	            'This is ',
-	            auth.currentUser,
-	            ' profile page'
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'container-fluid col-xs-12 col-md-12' },
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'row' },
-	              this.state.games.map(function (game, index) {
-	                console.log(game.players);
-	                return game.players.some(function (player) {
-	                  return player.username == auth.currentUser;
-	                }) ? _react2.default.createElement(_GameList2.default, {
-	                  key: index,
-	                  gid: game._id,
-	                  players: game.players }) : _react2.default.createElement(_GameList2.default, {
-	                  key: index,
-	                  gid: game._id,
-	                  players: game.players,
-	                  join: _this3.join });
-	              })
-	            )
-	          )
-	        )
-	      );
-	    }
-	  }]);
-
-	  return Profile;
-	}(_react.Component);
-
-	var _default = (0, _reactRouter.withRouter)(Profile);
-
-	exports.default = _default;
-	;
-
-	(function () {
-	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-	    return;
-	  }
-
-	  __REACT_HOT_LOADER__.register(Profile, 'Profile', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/Profile.jsx');
-
-	  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/Profile.jsx');
-	})();
-
-	;
-
-/***/ },
-/* 296 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRouter = __webpack_require__(177);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var GameList = function GameList(props) {
-	  var show = props.show ? "" : "hidden-xl-down";
-	  var display = 'extend col-md-4 col-xs-12 card card-primary card-inverse';
-	  return _react2.default.createElement(
-	    'div',
-	    { className: display },
-	    _react2.default.createElement(
-	      'div',
-	      { className: 'card-block' },
-	      props.join ? _react2.default.createElement(
-	        _reactRouter.Link,
-	        { className: 'nav-link', to: '/games/' + props.gid },
-	        'Join'
-	      ) : '',
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'card-blockquote' },
-	        props.players.map(function (player, index) {
-	          return _react2.default.createElement(
-	            'p',
-	            { key: index },
-	            player.username
-	          );
-	        })
-	      )
-	    )
-	  );
-	};
-
-	// <h6 className="text-muted">{props.gid}</h6>
-
-	GameList.PropTypes = {
-	  gid: _react2.default.PropTypes.string,
-	  players: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.shape({
-	    _id: _react2.default.PropTypes.string,
-	    username: _react2.default.PropTypes.string
-	  })),
-	  //show: React.PropTypes.bool.isRequired,
-	  join: _react2.default.PropTypes.func
-	};
-
-	var _default = GameList;
-	exports.default = _default;
-	;
-
-	(function () {
-	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-	    return;
-	  }
-
-	  __REACT_HOT_LOADER__.register(GameList, 'GameList', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/GameList.jsx');
-
-	  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/GameList.jsx');
-	})();
-
-	;
-
-/***/ },
-/* 297 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRouter = __webpack_require__(177);
-
-	var _GameCarousel = __webpack_require__(298);
-
-	var _GameCarousel2 = _interopRequireDefault(_GameCarousel);
-
-	var _Dashboard = __webpack_require__(300);
-
-	var _Dashboard2 = _interopRequireDefault(_Dashboard);
-
-	var _CreateGame = __webpack_require__(301);
-
-	var _CreateGame2 = _interopRequireDefault(_CreateGame);
-
-	var _SomeOptions = __webpack_require__(302);
-
-	var _SomeOptions2 = _interopRequireDefault(_SomeOptions);
-
-	var _Stack = __webpack_require__(303);
-
-	var _Stack2 = _interopRequireDefault(_Stack);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var Games = function (_Component) {
-	  _inherits(Games, _Component);
-
-	  function Games() {
-	    var _ref;
-
-	    var _temp, _this, _ret;
-
-	    _classCallCheck(this, Games);
-
-	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-	      args[_key] = arguments[_key];
-	    }
-
-	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Games.__proto__ || Object.getPrototypeOf(Games)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-	      auth: _this.props.authMgr.getAuth().authorization,
-	      gameID: undefined,
-	      options: [],
-	      players: [],
-	      stack: [],
-	      headerContainer: true,
-	      optionType: undefined
-	    }, _this.componentWillMount = function () {}, _this.createNewGame = function () {
-	      _this.props.apiRequest.createGame(_this.state.auth).then(function (data) {
-	        //reqCallback
-	        _this.gameSocket = _this.props.io('/' + data._id);
-	        _this.gameSocket.on("move", function (move) {
-	          _this.state.stack.unshift(move.stack);
-	          var options = move.currentOptions;
-	          var optionType = _this.state.stack[0].entry.type == "actor" ? "movie" : "actor";
-	          _this.setState({ stack: _this.state.stack, options: options, optionType: optionType });
-	        });
-
-	        _this.setState({
-	          optionType: data.stack[0].entry.type == "actor" ? "movie" : "actor",
-	          gameID: data._id,
-	          options: data.currentOptions,
-	          players: data.players,
-	          stack: data.stack
-	        });
-
-	        // this.rollCarousel(0)();
-	      });
-	    }, _this.joinGame = function (id) {
-	      var that = _this;
-
-	      return function () {
-	        _this.props.apiRequest.joinGame(_this.state.auth, id, _this.state.gameID).then(function (data) {
-	          //reqCallback
-	          _this.gameSocket = _this.props.route.io('/' + data._id);
-	          _this.gameSocket.on("move", function (move) {
-	            _this.state.stack.unshift(move.stack);
-	            var options = move.currentOptions;
-	            var optionType = _this.state.stack[0].entry.type == "actor" ? "movie" : "actor";
-	            _this.setState({ stack: _this.state.stack, options: options, optionType: optionType });
-	          });
-
-	          _this.setState({
-	            optionType: data.stack[0].entry.type == "actor" ? "movie" : "actor",
-	            gameID: data._id,
-	            options: data.currentOptions,
-	            players: data.players,
-	            stack: data.stack
-	          });
-	        });
-	      };
-	    }, _this.submitOption = function (option) {
-	      _this.props.apiRequest.makeMove(_this.state.auth, _this.state.gameID, option).then(function (game) {});
-	    }, _this.render = function () {
-	      var type;
-	      var sizing = _this.state.headerContainer ? " extend" : " shrink";
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'container-fluid' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'row' },
-	          _react2.default.createElement(
-	            'div',
-	            { className: "card-deck-wrapper" + sizing },
-	            _react2.default.createElement(_Dashboard2.default, {
-	              createGame: _this.createNewGame,
-	              api: _this.props.apiRequest,
-	              io: _this.props.io,
-	              join: _this.joinGame,
-	              auth: _this.state.auth })
-	          )
-	        ),
-	        _this.props.children
-	      );
-	    }, _temp), _possibleConstructorReturn(_this, _ret);
-	  }
-
-	  return Games;
-	}(_react.Component);
-
-	// headerContainer={this.state.headerContainer}
-	// <div className="row">
-	//   <div className="container-fluid col-md-3">
-	//     <div className="card-deck">
-	//       {this.state.gameLoaded ?
-	//         <Options
-	//           type={this.state.optionType}
-	//           submitOption={this.submitOption}
-	//           options={this.state.options}/>
-	//         : null}
-	//     </div>
-	//   </div>
-	//   <div className="container-fluid col-md-6">
-	//     <Stack stack={this.state.stack}/>
-	//   </div>
-	// </div>
-
-
-	var _default = (0, _reactRouter.withRouter)(Games);
-
-	exports.default = _default;
-	;
-
-	(function () {
-	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-	    return;
-	  }
-
-	  __REACT_HOT_LOADER__.register(Games, 'Games', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/Games.jsx');
-
-	  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/Games.jsx');
-	})();
-
-	;
-
-/***/ },
-/* 298 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _GameList = __webpack_require__(296);
-
-	var _GameList2 = _interopRequireDefault(_GameList);
-
-	var _Arrows = __webpack_require__(299);
-
-	var _Arrows2 = _interopRequireDefault(_Arrows);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var GameCarousel = function (_Component) {
-	  _inherits(GameCarousel, _Component);
-
-	  function GameCarousel() {
-	    var _ref;
-
-	    var _temp, _this, _ret;
-
-	    _classCallCheck(this, GameCarousel);
-
-	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-	      args[_key] = arguments[_key];
-	    }
-
-	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = GameCarousel.__proto__ || Object.getPrototypeOf(GameCarousel)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-	      games: []
-	    }, _this.rollCarousel = function (delta) {
-	      return function () {
-	        // I've got a ball and three cups
-	        var games = _this.state.games.slice(0);
-	        // This cup has the ball, now...
-	        var scroll = delta == 1 ? ['shift', 'push'] : ['pop', 'unshift'];
-	        // watch closely...
-	        games[scroll[1]](games[scroll[0]]());
-
-	        //this.props.games = games;
-	        // alright. Where's the ball?
-	        _this.setState({ games: games });
-	      };
-	    }, _this.render = function () {
-	      var sizing = _this.props.headerContainer ? " extend" : " shrink";
-	      var show = _this.props.headerContainer ? "" : " hidden-xl-down";
-	      return _react2.default.createElement(
-	        'div',
-	        { className: "container-fluid col-xs-12 col-md-10" + sizing },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'row' },
-	          _react2.default.createElement(_Arrows2.default, { headerContainer: _this.props.headerContainer, action: _this.rollCarousel }),
-	          _react2.default.createElement(
-	            'div',
-	            { className: "col-xs-12 col-md-11 card container-fluid" + show },
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'row' },
-	              _this.state.games.map(function (game, index) {
-	                if (index < 3) {
-	                  return _react2.default.createElement(_GameList2.default, {
-	                    key: index,
-	                    gid: game._id,
-	                    players: game.players,
-	                    join: _this.props.join });
-	                }
-	              })
-	            )
-	          )
-	        )
-	      );
-	    }, _temp), _possibleConstructorReturn(_this, _ret);
-	  }
-
-	  _createClass(GameCarousel, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      var _this2 = this;
-
-	      var options = { 'sync disconnect on unload': true };
-
-	      this.socket = this.props.io();
-	      this.socket.on('games', function (games) {
-	        _this2.setState({ games: games });
-	      });
-
-	      this.props.apiRequest.getGames(this.props.auth).then(function (games) {
-	        _this2.setState({ games: games });
-	      });
-	    }
-	  }]);
-
-	  return GameCarousel;
-	}(_react.Component);
-
-	//show={game.show}
-
-
-	GameCarousel.PropTypes = {
-	  io: _react2.default.PropTypes.func.isRequired,
-	  auth: _react2.default.PropTypes.string.isRequired,
-	  join: _react2.default.PropTypes.func.isRequired,
-	  headerContainer: _react2.default.PropTypes.bool.isRequired,
-	  apiRequest: _react2.default.PropTypes.object.isRequired
-	};
-
-	var _default = GameCarousel;
-	exports.default = _default;
-	;
-
-	(function () {
-	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-	    return;
-	  }
-
-	  __REACT_HOT_LOADER__.register(GameCarousel, 'GameCarousel', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/GameCarousel.jsx');
-
-	  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/GameCarousel.jsx');
-	})();
-
-	;
-
-/***/ },
-/* 299 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var Arrows = function Arrows(props) {
-	  var show = props.headerContainer ? "" : " hidden-xl-down";
-	  var display = "col-md-1 col-xs-12 card card-inverse media " + show;
-	  return _react2.default.createElement(
-	    "div",
-	    { className: display },
-	    _react2.default.createElement(
-	      "div",
-	      { className: "media-middle" },
-	      _react2.default.createElement(
-	        "button",
-	        {
-	          onClick: props.action(-1),
-	          className: "arrow btn btn-success col-xs-12" },
-	        "⭅"
-	      )
-	    ),
-	    _react2.default.createElement(
-	      "div",
-	      { className: "media-middle" },
-	      _react2.default.createElement(
-	        "button",
-	        {
-	          onClick: props.action(1),
-	          className: "arrow btn btn-success col-xs-12" },
-	        "⭆"
-	      )
-	    )
-	  );
-	};
-
-	Arrows.PropTypes = {
-	  action: _react2.default.PropTypes.func.isRequired,
-	  headerContainer: _react2.default.PropTypes.bool.isRequired
-	};
-
-	var _default = Arrows;
-	exports.default = _default;
-	;
-
-	(function () {
-	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-	    return;
-	  }
-
-	  __REACT_HOT_LOADER__.register(Arrows, "Arrows", "/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/Arrows.jsx");
-
-	  __REACT_HOT_LOADER__.register(_default, "default", "/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/Arrows.jsx");
-	})();
-
-	;
-
-/***/ },
-/* 300 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRouter = __webpack_require__(177);
-
-	var _GameCarousel = __webpack_require__(298);
-
-	var _GameCarousel2 = _interopRequireDefault(_GameCarousel);
-
-	var _CreateGame = __webpack_require__(301);
-
-	var _CreateGame2 = _interopRequireDefault(_CreateGame);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var Dashboard = function (_Component) {
-	  _inherits(Dashboard, _Component);
-
-	  function Dashboard() {
-	    var _ref;
-
-	    var _temp, _this, _ret;
-
-	    _classCallCheck(this, Dashboard);
-
-	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-	      args[_key] = arguments[_key];
-	    }
-
-	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Dashboard.__proto__ || Object.getPrototypeOf(Dashboard)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-	      headerContainer: true
-	    }, _this.showHeader = function () {
-	      _this.state.headerContainer = !_this.state.headerContainer;
-	      _this.setState({ headerContainer: _this.state.headerContainer });
-	    }, _temp), _possibleConstructorReturn(_this, _ret);
-	  }
-
-	  _createClass(Dashboard, [{
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'card-deck' },
-	        _react2.default.createElement(_CreateGame2.default, {
-	          headerContainer: this.state.headerContainer,
-	          headerControl: this.showHeader,
-	          action: this.props.createGame }),
-	        _react2.default.createElement(_GameCarousel2.default, {
-	          io: this.props.io,
-	          auth: this.props.auth,
-	          apiRequest: this.props.api,
-	          headerContainer: this.state.headerContainer,
-	          join: this.props.join })
-	      );
-	    }
-	  }]);
-
-	  return Dashboard;
-	}(_react.Component);
-
-	Dashboard.defaultProps = {
-	  headerContainer: true
-	};
-	Dashboard.propTypes = {
-	  io: _react2.default.PropTypes.func.isRequired,
-	  api: _react2.default.PropTypes.object.isRequired,
-	  auth: _react2.default.PropTypes.string.isRequired,
-	  createGame: _react2.default.PropTypes.func.isRequired,
-	  join: _react2.default.PropTypes.func.isRequired
-	};
-
-	var _default = (0, _reactRouter.withRouter)(Dashboard);
-
-	exports.default = _default;
-	;
-
-	(function () {
-	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-	    return;
-	  }
-
-	  __REACT_HOT_LOADER__.register(Dashboard, 'Dashboard', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/Dashboard.jsx');
-
-	  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/Dashboard.jsx');
-	})();
-
-	;
-
-/***/ },
-/* 301 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var CreateGame = function CreateGame(props) {
-	  var sizing = props.headerContainer ? " extend" : " shrink";
-	  var show = props.headerContainer ? "" : " hidden-xl-down";
-	  return _react2.default.createElement(
-	    "div",
-	    { className: "col-md-2 col-xs-12 card card-primary card-inverse container-fluid" + sizing },
-	    _react2.default.createElement(
-	      "div",
-	      { className: "card-block row" },
-	      _react2.default.createElement(
-	        "button",
-	        {
-	          type: "button",
-	          className: "btn btn-success col-xs-12 media-middle" + show,
-	          onClick: props.action },
-	        "Create Game"
-	      ),
-	      _react2.default.createElement(
-	        "button",
-	        {
-	          type: "button",
-	          className: "btn btn-success col-xs-12 media-middle",
-	          onClick: props.headerControl },
-	        "Show Header"
-	      )
-	    )
-	  );
-	};
-
-	CreateGame.PropTypes = {
-	  headerControl: _react2.default.PropTypes.func.isRequired,
-	  headerContainer: _react2.default.PropTypes.bool.isRequired,
-	  action: _react2.default.PropTypes.func.isRequired
-	};
-
-	var _default = CreateGame;
-	exports.default = _default;
-	;
-
-	(function () {
-	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-	    return;
-	  }
-
-	  __REACT_HOT_LOADER__.register(CreateGame, "CreateGame", "/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/CreateGame.jsx");
-
-	  __REACT_HOT_LOADER__.register(_default, "default", "/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/CreateGame.jsx");
-	})();
-
-	;
-
-/***/ },
-/* 302 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var Options = function (_Component) {
-	  _inherits(Options, _Component);
-
-	  function Options() {
-	    var _ref;
-
-	    var _temp, _this, _ret;
-
-	    _classCallCheck(this, Options);
-
-	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-	      args[_key] = arguments[_key];
-	    }
-
-	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Options.__proto__ || Object.getPrototypeOf(Options)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-	      id: [],
-	      type: ''
-	    }, _this.onSubmit = function (e) {
-	      e.preventDefault();
-	      var that = _this;
-	      _this.props.submitOption(_this.state.option);
-	    }, _this.onOptionChange = function (e) {
-	      console.log({ id: e.target.value, type: _this.props.type });
-	      _this.setState({ option: { id: e.target.value, type: _this.props.type } });
-	    }, _this.render = function () {
-	      var type = _this.props.type;
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'col-md-12 container-fluid' },
-	        _react2.default.createElement(
-	          'form',
-	          { onSubmit: _this.onSubmit },
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'form-group' },
-	            _react2.default.createElement(
-	              'select',
-	              { className: 'form-control', onChange: _this.onOptionChange },
-	              _this.props.options.map(function (option, index) {
-	                //var value = { id: option.moviedb_id, type: type };
-	                return _react2.default.createElement(
-	                  'option',
-	                  {
-	                    key: index,
-	                    value: option.moviedb_id },
-	                  option.name
-	                );
-	              })
-	            ),
-	            _react2.default.createElement('input', { className: 'form-control', type: 'submit', value: 'Submit Move' })
-	          )
-	        )
-	      );
-	    }, _temp), _possibleConstructorReturn(_this, _ret);
-	  }
-
-	  return Options;
-	}(_react.Component);
-
-	// var Options = React.createClass({
-	//   propTypes: {
-	//     type: React.PropTypes.string.isRequired,
-	//     submitOption: React.PropTypes.func.isRequired,
-	//     options: React.PropTypes.array.isRequired,
-	//     // loaded: React.PropTypes.bool.isRequired,
-	//   },
-	//   getInitialState: function() {
-	//     // return {
-	//     //   option: "id=" + this.props.options[0].moviedb_id + "&type=" + this.props.type
-	//     // };
-	//     return {
-	//       option: {
-	//         id: this.props.options[0].moviedb_id,
-	//         type: this.props.type,
-	//       }
-	//     };
-	//   },
-	//   onSubmit: function(e) {
-	//     e.preventDefault();
-	//     var that = this;
-	//     this.props.submitOption(this.state.option);
-	//   },
-	//   onOptionChange: function(e) {
-	//     console.log({ id: e.target.value, type: this.props.type, });
-	//     this.setState({option: { id: e.target.value, type: this.props.type, }});
-	//   },
-	//   render: function() {
-	//     var type = this.props.type;
-	//     return (
-	//       <div className="col-md-12 container-fluid">
-	//         <form onSubmit={this.onSubmit}>
-	//           <div className="form-group">
-	//             <select className="form-control" onChange={this.onOptionChange}>
-	//               {this.props.options.map(function(option, index) {
-	//                 //var value = { id: option.moviedb_id, type: type };
-	//                 return (
-	//                   <option
-	//                     key={index}
-	//                     value={option.moviedb_id}>
-	//                     {option.name}
-	//                   </option>
-	//                 );
-	//               })}
-	//             </select>
-	//             <input className="form-control" type="submit" value="Submit Move" />
-	//           </div>
-	//         </form>
-	//       </div>
-	//     );
-	//   }
-	// });
-
-
-	var _default = Options;
-	exports.default = _default;
-	;
-
-	(function () {
-	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-	    return;
-	  }
-
-	  __REACT_HOT_LOADER__.register(Options, 'Options', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/SomeOptions.jsx');
-
-	  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/SomeOptions.jsx');
-	})();
-
-	;
-
-/***/ },
-/* 303 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function Card(props) {
-	  var unknown = 'https://upload.wikimedia.org/wikipedia/commons/4/44/Question_mark_(black_on_white).png';
-	  return _react2.default.createElement(
-	    'div',
-	    { className: 'media card card-inverse card-primary', 'data-moviedbid': props.moviedbid },
-	    _react2.default.createElement(
-	      'div',
-	      { className: 'media-left media-middle' },
-	      _react2.default.createElement(
-	        'h1',
-	        null,
-	        props.name
-	      ),
-	      _react2.default.createElement(
-	        'p',
-	        null,
-	        props.type
-	      )
-	    ),
-	    _react2.default.createElement(
-	      'div',
-	      { className: 'media-right' },
-	      _react2.default.createElement('img', { src: props.image == unknown ? props.image : "http://image.tmdb.org/t/p/w92" + props.image })
-	    )
-	  );
-	}
-
-	Card.PropTypes = {
-	  image: _react2.default.PropTypes.string.isRequired,
-	  moviedbid: _react2.default.PropTypes.number.isRequired,
-	  name: _react2.default.PropTypes.string.isRequired,
-	  type: _react2.default.PropTypes.string.isRequired,
-	  user: _react2.default.PropTypes.string.isRequired
-	};
-
-	function Stack(props) {
-	  return _react2.default.createElement(
-	    'div',
-	    { className: 'col-md-8 container-fluid' },
-	    props.stack.map(function (card, index) {
-	      return _react2.default.createElement(Card, {
-	        image: card.entry.image,
-	        moviedbid: card.entry.moviedb_id,
-	        name: card.entry.name,
-	        type: card.entry.type,
-	        user: "start" && card.entry.user && card.entry.user.username,
-	        key: index });
-	    })
-	  );
-	}
-
-	Stack.PropTypes = {
-	  stack: _react2.default.PropTypes.array
-	};
-
-	var _default = Stack;
-	exports.default = _default;
-	;
-
-	(function () {
-	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-	    return;
-	  }
-
-	  __REACT_HOT_LOADER__.register(Card, 'Card', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/Stack.jsx');
-
-	  __REACT_HOT_LOADER__.register(Stack, 'Stack', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/Stack.jsx');
-
-	  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/Stack.jsx');
-	})();
-
-	;
-
-/***/ },
-/* 304 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRouter = __webpack_require__(177);
-
-	var _Stack = __webpack_require__(303);
-
-	var _Stack2 = _interopRequireDefault(_Stack);
-
-	var _SomeOptions = __webpack_require__(302);
-
-	var _SomeOptions2 = _interopRequireDefault(_SomeOptions);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var Game = function (_Component) {
-	  _inherits(Game, _Component);
-
-	  function Game() {
-	    var _ref;
-
-	    var _temp, _this, _ret;
-
-	    _classCallCheck(this, Game);
-
-	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-	      args[_key] = arguments[_key];
-	    }
-
-	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Game.__proto__ || Object.getPrototypeOf(Game)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-	      stack: [],
-	      options: [],
-	      optionType: ''
-	    }, _this.componentWillMount = function () {
-	      var auth = _this.props.authMgr.getAuth().authorization;
-	      console.log(_this.props.sockets);
-
-	      // joining game over and over here!
-	      _this.props.apiRequest.joinGame(auth, _this.props.sockets.game.id, null).then(function (data) {
-	        //reqCallback
-	        _this.setState({
-	          optionType: data.stack[0].entry.type == "actor" ? "movie" : "actor",
-	          //gameID: data._id,
-	          options: data.currentOptions,
-	          //players: data.players,
-	          stack: data.stack
-	        });
-	        // console.log(data);
-	        // this.props.sockets.game.socket = io(`/${this.props.sockets.game.id}`);
-	        // this.props.sockets.game.socket.on("move", (move) => {
-	        //   this.state.stack.unshift(move.stack);
-	        //   var options = move.currentOptions;
-	        //   var optionType = this.state.stack[0].entry.type == "actor" ? "movie" : "actor";
-	        //   this.setState({ stack: this.state.stack, options: options, optionType: optionType});
-	        // });
-
-	      });
-	    }, _this.submitOption = function (option) {
-	      var auth = _this.props.authMgr.getAuth().authorization;
-	      var id = _this.props.sockets.game.id;
-	      _this.props.apiRequest.makeMove(auth, id, option).then(function (game) {});
-	    }, _temp), _possibleConstructorReturn(_this, _ret);
-	  }
-	  // Needs work
-
-
-	  _createClass(Game, [{
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'row' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'container-fluid col-md-3' },
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'card-deck' },
-	            _react2.default.createElement(_SomeOptions2.default, {
-	              type: this.state.optionType,
-	              submitOption: this.submitOption,
-	              options: this.state.options })
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'container-fluid col-md-6' },
-	          _react2.default.createElement(_Stack2.default, { stack: this.state.stack })
-	        )
-	      );
-	    }
-	  }]);
-
-	  return Game;
-	}(_react.Component);
-
-	var _default = (0, _reactRouter.withRouter)(Game);
-
-	exports.default = _default;
-	;
-
-	(function () {
-	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-	    return;
-	  }
-
-	  __REACT_HOT_LOADER__.register(Game, 'Game', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/Game.jsx');
-
-	  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/components/Game.jsx');
-	})();
-
-	;
-
-/***/ },
-/* 305 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRouter = __webpack_require__(177);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	var AuthManager = function () {
-	  function AuthManager(config) {
-	    var _this = this;
-
-	    _classCallCheck(this, AuthManager);
-
-	    this.setAuth = function (token, user, storage) {
-	      _this.storage = storage ? _this.primaryStoreKey : _this.secondaryStoreKey;
-	      _this.store[_this.storage].setItem(_this.tokenProp, token);
-	      _this.store[_this.storage].setItem(_this.userProp, user);
-	    };
-
-	    this.deleteAuth = function () {
-	      _this.store[_this.storage].setItem(_this.tokenProp, '');
-	      _this.store[_this.storage].setItem(_this.userProp, '');
-	      _this.storage = _this.primaryStoreKey;
-	    };
-
-	    this.attachAuthMgr = function (Component, props) {
-	      props.authMgr = _this;
-	      return _react2.default.createElement(Component, props);
-	    };
-
-	    this.initAuth = function (nextState, replace) {
-	      if (_this.store[_this.primaryStoreKey].hasOwnProperty(_this.tokenProp) && _this.store[_this.primaryStoreKey].hasOwnProperty(_this.userProp)) {
-	        _this.storage = _this.primaryStoreKey;
-	      } else if (_this.store[_this.secondaryStoreKey].hasOwnProperty(_this.tokenProp) && _this.store[_this.secondaryStoreKey].hasOwnProperty(_this.userProp)) {
-	        _this.storage = _this.secondaryStoreKey;
-	      } else {
-	        _this.storage = _this.primaryStoreKey;
-	        _this.store[_this.storage].setItem(_this.tokenProp, '');
-	        _this.store[_this.storage].setItem(_this.userProp, '');
-	      }
-	    };
-
-	    this.loggedIn = function (nextState, replace) {
-	      var auth = _this.getAuth();
-	      if (!auth.authorization) replace('/login');
-	    };
-
-	    this.loggedOut = function (nextState, replace) {
-	      var auth = _this.getAuth();
-	      if (auth.authorization) replace('/profile/' + auth.currentUser);
-	    };
-
-	    this.store = config.store || window;
-	    this.primaryStoreKey = config.primaryStoreKey || "sessionStorage";
-	    this.secondaryStoreKey = config.secondaryStoreKey || "localStorage";
-	    this.storage = this.primaryStoreKey;
-	    this.tokenProp = config.tokenProp || "authorization";
-	    this.userProp = config.userProp || "user";
-	    this.tokenStrategy = config.tokenStrategy;
-	    this.getUser = config.getUser;
-	    this.createUser = config.createUser;
-	  }
-
-	  _createClass(AuthManager, [{
-	    key: 'getAuth',
-	    value: function getAuth() {
-	      return {
-	        authorization: this.store[this.storage].getItem(this.tokenProp) || '',
-	        currentUser: this.store[this.storage].getItem(this.userProp) || ''
-	      };
-	    }
-	  }, {
-	    key: 'login',
-	    value: function login(auth, callback) {
-	      var _this2 = this;
-
-	      var token = this.tokenStrategy(auth);
-	      this.getUser(token).then(function (data) {
-	        _this2.setAuth(token, data.username, auth.storage);
-	        return callback(data);
-	      });
-	    }
-	  }, {
-	    key: 'register',
-	    value: function register(profile, callback) {
-	      var _this3 = this;
-
-	      var token = this.tokenStrategy(profile);
-	      this.createUser(profile).then(function (data) {
-	        _this3.setAuth(token, data.username, profile.storage);
-	        return callback(data);
-	      });
-	    }
-	  }]);
-
-	  return AuthManager;
-	}();
-
-	var _default = AuthManager;
-	exports.default = _default;
-	;
-
-	(function () {
-	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-	    return;
-	  }
-
-	  __REACT_HOT_LOADER__.register(AuthManager, 'AuthManager', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/authorize/auth_manager.jsx');
-
-	  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/nicolasjhampton/code/bacon-project-12/frontapp/authorize/auth_manager.jsx');
-	})();
-
-	;
-
-/***/ },
-/* 306 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	var apiRequest = {
-	  request: function request(method, path, auth, body) {
-	    return new Promise(function (resolve, reject) {
-	      var req = new XMLHttpRequest();
-	      req.open(method, "http://localhost:3000/api" + path);
-	      req.setRequestHeader("authorization", auth);
-	      if (body) {
-	        req.setRequestHeader("Content-type", "application/json");
-	      } else {
-	        req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	      }
-
-	      req.addEventListener("load", function () {
-	        if (this.readyState == 4 && this.status == 200) {
-	          var data = this.responseText ? JSON.parse(this.responseText) : '';
-	          return resolve(data);
-	        } else {
-	          return reject(this.statusText);
-	        }
-	      });
-	      req.send(JSON.stringify(body));
-	    });
-	  },
-	  login: function login(auth) {
-	    return this.request("POST", "/players/login", auth, null);
-	  },
-	  register: function register(body) {
-	    return this.request("POST", "/players", null, body);
-	  },
-	  getGames: function getGames(auth) {
-	    return this.request("GET", "/games", auth);
-	  },
-	  createGame: function createGame(auth) {
-	    return this.request("POST", "/games", auth);
-	  },
-	  joinGame: function joinGame(auth, nextGame, previousGame) {
-	    return this.request("POST", "/games/" + nextGame, auth, { "previousGame": previousGame });
-	  },
-	  makeMove: function makeMove(auth, game, body) {
-	    return this.request("POST", "/games/" + game + "/move", auth, body);
-	  }
-	};
-
-	var _default = apiRequest;
-	exports.default = _default;
-	;
-
-	(function () {
-	  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-	    return;
-	  }
-
-	  __REACT_HOT_LOADER__.register(apiRequest, "apiRequest", "/Users/nicolasjhampton/code/bacon-project-12/frontapp/api/api_request.jsx");
-
-	  __REACT_HOT_LOADER__.register(_default, "default", "/Users/nicolasjhampton/code/bacon-project-12/frontapp/api/api_request.jsx");
-	})();
-
-	;
-
-/***/ },
-/* 307 */
+/* 308 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37198,11 +37035,11 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _root = __webpack_require__(308);
+	var _root = __webpack_require__(309);
 
-	var _toSubscriber = __webpack_require__(309);
+	var _toSubscriber = __webpack_require__(310);
 
-	var _observable = __webpack_require__(320);
+	var _observable = __webpack_require__(321);
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -37374,7 +37211,7 @@
 	;
 
 /***/ },
-/* 308 */
+/* 309 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
@@ -37418,7 +37255,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 309 */
+/* 310 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37428,9 +37265,9 @@
 	});
 	exports.toSubscriber = toSubscriber;
 
-	var _Subscriber = __webpack_require__(310);
+	var _Subscriber = __webpack_require__(311);
 
-	var _rxSubscriber = __webpack_require__(319);
+	var _rxSubscriber = __webpack_require__(320);
 
 	function toSubscriber(nextOrObserver, error, complete) {
 	    if (nextOrObserver) {
@@ -37461,7 +37298,7 @@
 	;
 
 /***/ },
-/* 310 */
+/* 311 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37477,13 +37314,13 @@
 
 	var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 
-	var _isFunction = __webpack_require__(311);
+	var _isFunction = __webpack_require__(312);
 
-	var _Subscription2 = __webpack_require__(312);
+	var _Subscription2 = __webpack_require__(313);
 
-	var _Observer = __webpack_require__(318);
+	var _Observer = __webpack_require__(319);
 
-	var _rxSubscriber = __webpack_require__(319);
+	var _rxSubscriber = __webpack_require__(320);
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -37794,7 +37631,7 @@
 	;
 
 /***/ },
-/* 311 */
+/* 312 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -37821,7 +37658,7 @@
 	;
 
 /***/ },
-/* 312 */
+/* 313 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37835,17 +37672,17 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _isArray = __webpack_require__(313);
+	var _isArray = __webpack_require__(314);
 
-	var _isObject = __webpack_require__(314);
+	var _isObject = __webpack_require__(315);
 
-	var _isFunction = __webpack_require__(311);
+	var _isFunction = __webpack_require__(312);
 
-	var _tryCatch = __webpack_require__(315);
+	var _tryCatch = __webpack_require__(316);
 
-	var _errorObject = __webpack_require__(316);
+	var _errorObject = __webpack_require__(317);
 
-	var _UnsubscriptionError = __webpack_require__(317);
+	var _UnsubscriptionError = __webpack_require__(318);
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -38022,7 +37859,7 @@
 	;
 
 /***/ },
-/* 313 */
+/* 314 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -38048,7 +37885,7 @@
 	;
 
 /***/ },
-/* 314 */
+/* 315 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -38078,7 +37915,7 @@
 	;
 
 /***/ },
-/* 315 */
+/* 316 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38088,7 +37925,7 @@
 	});
 	exports.tryCatch = tryCatch;
 
-	var _errorObject = __webpack_require__(316);
+	var _errorObject = __webpack_require__(317);
 
 	var tryCatchTarget = void 0;
 	function tryCatcher() {
@@ -38123,7 +37960,7 @@
 	;
 
 /***/ },
-/* 316 */
+/* 317 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -38148,7 +37985,7 @@
 	;
 
 /***/ },
-/* 317 */
+/* 318 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -38203,7 +38040,7 @@
 	;
 
 /***/ },
-/* 318 */
+/* 319 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -38234,7 +38071,7 @@
 	;
 
 /***/ },
-/* 319 */
+/* 320 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38244,7 +38081,7 @@
 	});
 	exports.$$rxSubscriber = undefined;
 
-	var _root = __webpack_require__(308);
+	var _root = __webpack_require__(309);
 
 	var _Symbol = _root.root.Symbol;
 	var $$rxSubscriber = exports.$$rxSubscriber = typeof _Symbol === 'function' && typeof _Symbol.for === 'function' ? _Symbol.for('rxSubscriber') : '@@rxSubscriber';
@@ -38265,7 +38102,7 @@
 	;
 
 /***/ },
-/* 320 */
+/* 321 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38276,7 +38113,7 @@
 	exports.$$observable = undefined;
 	exports.getSymbolObservable = getSymbolObservable;
 
-	var _root = __webpack_require__(308);
+	var _root = __webpack_require__(309);
 
 	function getSymbolObservable(context) {
 	    var $$observable = void 0;

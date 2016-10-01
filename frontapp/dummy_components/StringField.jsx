@@ -14,6 +14,7 @@ const StringField = props => {
 
 StringField.PropTypes = {
   id: React.PropTypes.string.isRequired,
+  type: React.PropTypes.string.isRequired,
   state: React.PropTypes.func.isRequired,
 }
 

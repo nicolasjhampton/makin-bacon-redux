@@ -1,26 +1,26 @@
 "use strict";
 
 import React from 'react';
+import {Link} from 'react-router';
 
 
 const CreateGame = props => {
   let sizing = props.headerContainer ? " extend" : " shrink";
   let show = props.headerContainer ? "" : " hidden-xl-down";
   return (
-    <div className={"col-md-2 col-xs-12 card card-primary card-inverse container-fluid" + sizing}>
-      <div className="card-block row">
-        <button
-          type="button"
-          className={"btn btn-success col-xs-12 media-middle" + show}
-          onClick={props.action}>
+    <div className={"col-md-2 create-game col-xs-12 card card-inverse card-primary container-fluid" + sizing}>
+      <div className="card-block action-block row">
+        <Link
+          className={"btn action-button btn-success col-xs-12 media-middle" + show}
+          to="/games/create">
             Create Game
-          </button>
+        </Link>
         <button
           type="button"
-          className="btn btn-success col-xs-12 media-middle"
+          className="btn action-button btn-success col-xs-12 media-middle"
           onClick={props.headerControl}>
             Show Header
-          </button>
+        </button>
       </div>
     </div>
   );
@@ -29,7 +29,6 @@ const CreateGame = props => {
 CreateGame.PropTypes = {
   headerControl: React.PropTypes.func.isRequired,
   headerContainer: React.PropTypes.bool.isRequired,
-  action: React.PropTypes.func.isRequired,
 };
 
 export default CreateGame;

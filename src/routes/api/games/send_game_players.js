@@ -9,8 +9,7 @@ module.exports = (req, res, next) => {
       .populate('players', 'username')
       .exec((err, game) => {
         if(err) return next(err);
-        // needs to be refined to a namespaced room
-        req.gameIo.emit('game players', game);
+        req.io.emit('game players', game);
         next();
       });
 };

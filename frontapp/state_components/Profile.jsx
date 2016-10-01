@@ -2,7 +2,7 @@
 
 import React, {Component} from 'react';
 import {withRouter} from 'react-router';
-import GameList from './GameList.jsx';
+import GameList from '../dummy_components/GameList.jsx';
 
 
 class Profile extends Component {
@@ -13,17 +13,7 @@ class Profile extends Component {
 
   componentWillMount() {
     let auth = this.props.authMgr.getAuth().authorization;
-    this.props.ioMgr.gameListStream(this);
-    this.props.apiRequest.getGames(auth).then(games => {
-      this.setState({ games: games });
-    });
-  }
-
-  join = (id) => {
-    return () => {
-      this.socket.emit('disconnect');
-      this.props.router.replace(`/games/${id}`);
-    }
+    this.props.apiRequest.getGames(this, auth);
   }
 
   render() {
@@ -36,21 +26,12 @@ class Profile extends Component {
           <div className="container-fluid col-xs-12 col-md-12">
             <div className="row">
               {this.state.games.map((game, index) => {
-                console.log(game.players);
-                return game.players.some(player => player.username == auth.currentUser) ?
-                (
-                  <GameList
-                    key={index}
-                    gid={game._id}
-                    players={game.players}/>
-                )
-                :
-                (
+                return (
                   <GameList
                     key={index}
                     gid={game._id}
                     players={game.players}
-                    join={this.join}/>
+                    bg={false}/>
                 )
               })}
             </div>

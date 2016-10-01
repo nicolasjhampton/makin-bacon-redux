@@ -48,15 +48,27 @@ var db = require('./database.js');
  * provides initial socket connection
  */
 var io = require('socket.io')(server, { cookie: false });
-app.use(function(req, res, next) {
-  req.io = io;
-  console.log('general io attached to req');
-  req.io.on("connection", (socket) => {
 
+// var holdSocket;
+
+var rooms = [];
+
+app.use('/api',function(req, res, next) {
+  req.io = io;
+  //req.io.set('transports', ['websocket']);
+  //console.log("general io attached to req");
+  req.io.on("connection", (socket) => {
+    Object.keys(req.io.sockets.server.eio.clients).map(key => console.log(key));
+    console.log(socket.client.conn.id);
+    // console.log(req.io.sockets.server.eio.clients);
+    // holdSocket = socket;
     // Inform console that connection has been made
-    console.log('Initial socket connection made');
-    req.socket = socket;
-    socket.on("disconnect", () => console.log('Initial socket disconnected'));
+    console.log("Initial socket connection made");
+    // req.socket = socket;
+
+
+    req.io.on("disconnect", () => console.log('Initial socket disconnected'));
+
   });
 
   next();
