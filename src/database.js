@@ -25,7 +25,7 @@ switch(process.env.MODE) {
     break;
 }
 
-mongoose.connect(`mongodb://localhost:${dbport}/${database}`);
+mongoose.connect(process.env.MONGODB_URI || `mongodb://localhost:${dbport}/${database}`);
 
 var db = mongoose.connection;
 
