@@ -8,6 +8,7 @@ const apiRequest = {
   request: function(method, path, auth, body) {
     return new Promise(function(resolve, reject) {
       let req = new XMLHttpRequest();
+      req.withCredentials = true;
       req.open(method, `https://localhost:3000/api${path}`);
       req.setRequestHeader("authorization", auth);
       if(body) {
